@@ -1,0 +1,8 @@
+syntax on
+filetype plugin on
+
+colorscheme delek
+
+set tags+=./tags
+set nowrap
+set nonumber
