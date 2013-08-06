@@ -52,3 +52,5 @@ export PATH
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+
+unsetopt CORRECT CORRECT_ALL
