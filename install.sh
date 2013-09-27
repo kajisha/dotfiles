@@ -1,4 +1,5 @@
 #!/bin/sh
 
-install -c vimrc.local ~/.vimrc.local
-install -c zshrc.local ~/.zshrc.local
+ln -sf vimrc.local ~/.vimrc.local
+ln -sf zshrc.local ~/.zshrc.local
+ln -sf tmux.conf.local ~/.tmux.conf.local

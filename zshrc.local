@@ -1,19 +1,14 @@
 bindkey -e
 
-# rbenv
-PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$HOME/bin:$PATH
+PATH=/usr/local/bin:$HOME/.anyenv/bin:$PATH
 
-# pyenv
-PATH=$HOME/.pyenv/bin:$HOME/.pyenv/shims:$PATH
-
-# nvm
-[[ -s "$HOME/.nvm/nvm.sh" ]] && source $HOME/.nvm/nvm.sh
+eval "$(anyenv init -)"
 
 autoload colors
 colors
 PS1="
- %{${fg[green]}%}%~%{${reset_color}%}
-[%n@%{${fg_bold[red]}%}%m%{${reset_color}%}]$ "
+%{${fg_bold[red]}%}%m%{${reset_color}%}:%{${fg[green]}%}%~%{${reset_color}%}
+%n$ "
 
 # git
 #${fg[...]} や $reset_color をロード
