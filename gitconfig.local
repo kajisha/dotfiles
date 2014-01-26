@@ -1,0 +1,9 @@
+[user]
+  name = kajisha
+  email = h-kajisha@esm.co.jp
+[alias]
+  lo = log --oneline --decorate --graph --branches --tags --remotes
+  di = diff
+  dc = diff --cached
+  br = branch
+  bra = branch -a

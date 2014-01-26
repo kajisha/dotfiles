@@ -6,3 +6,14 @@ colorscheme delek
 set tags+=./tags
 set nowrap
 set nonumber
+
+" NERDTree
+nmap <C-e> :NERDTree<cr>
+
+" vim-rspec mappings
+let g:rspec_command = "!rspec {spec}"
+nnoremap <C-c> :call RunCurrentSpecFile()<CR>
+nnoremap <C-n> :call RunNearestSpec()<CR>
+nnoremap <C-l> :call RunLastSpec()<CR>
+
+autocmd BufWritePre * :%s/\s\+$//ge

@@ -1,51 +1,25 @@
 bindkey -e
 
-PATH=/usr/local/bin:$HOME/.anyenv/bin:$PATH
+setopt complete_aliases
 
-eval "$(anyenv init -)"
+PATH=/usr/local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$HOME/.pyenv/bin:$PATH
+eval "$(rbenv init -)"
+eval "$(pyenv init -)"
 
 autoload colors
 colors
-PS1="
-%{${fg_bold[red]}%}%m%{${reset_color}%}:%{${fg[green]}%}%~%{${reset_color}%}
-%n$ "
 
-# git
-#${fg[...]} や $reset_color をロード
 autoload -U colors; colors
 
-function rprompt-git-current-branch {
-  local name st color
+local git_branch='`git-current-branch`'
+local dir_name="%F{green}%~%f"
+local machine_name="%n@%B%F{red}%m%f%b"
+export PROMPT=$'\n'"$git_branch"$'\n'"$dir_name"$'\n'"$machine_name"$'\n'"$ "
 
-  if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
-    return
-  fi
-  name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
-  if [[ -z $name ]]; then
-    return
-  fi
-  st=`git status 2> /dev/null`
-  if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-    color=${fg[green]}
-  elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-    color=${fg[yellow]}
-  elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
-    color=${fg_bold[red]}
-  else
-    color=${fg[red]}
-  fi
-
-  # %{...%} は囲まれた文字列がエスケープシーケンスであることを明示する
-  # これをしないと右プロンプトの位置がずれる
-  echo "%{$color%}$name%{$reset_color%}"
-}
-
-RPROMPT='[`rprompt-git-current-branch`]'
-
-export PS1
 export PATH
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 unsetopt CORRECT CORRECT_ALL
+export ANDROID_HOME=/usr/local/opt/android-sdk
