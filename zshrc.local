@@ -10,11 +10,21 @@ autoload colors
 colors
 
 autoload -U colors; colors
+autoload -Uz vcs_info
+setopt prompt_subst
 
-local git_branch='`git-current-branch`'
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats "[%b|%a]"
+
+precmd() { vcs_info }
+
 local dir_name="%F{green}%~%f"
 local machine_name="%n@%B%F{red}%m%f%b"
-export PROMPT=$'\n'"$git_branch"$'\n'"$dir_name"$'\n'"$machine_name"$'\n'"$ "
+PROMPT=$'\n'"$dir_name"$'\n'"$machine_name"$'\n'"$ "
+RPROMPT='${vcs_info_msg_0_}'
 
 export PATH
 
