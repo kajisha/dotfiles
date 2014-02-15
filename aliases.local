@@ -1,4 +1,4 @@
-alias ls='ls -aF'
+alias ls='LC_ALL=C ls -aF'
 alias bi='bundle install'
 alias be='bundle exec'
 alias gn='python $HOME/src/geeknote/geeknote.py'
