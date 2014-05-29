@@ -1,7 +1,7 @@
 alias ls='LC_ALL=C ls -aF'
 alias bi='bundle install'
 alias be='bundle exec'
-alias gn='python $HOME/src/geeknote/geeknote.py'
 alias vi=vim
 alias e='emacs -Q'
 alias rmm='git pull --prune && git br --merged | grep -v '\*' | xargs -n 1 git br -d'
+alias s='bundle exec rspec'
