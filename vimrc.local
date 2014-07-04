@@ -7,6 +7,9 @@ set tags+=./tags
 set nowrap
 set nonumber
 
+let mapleader = ","
+noremap \ ,
+
 " NERDTree
 nmap <C-e> :NERDTree<cr>
 
@@ -21,3 +24,6 @@ autocmd BufWritePre * :%s/\s\+$//ge
 " StatusLine
 hi StatusLine ctermfg=black ctermbg=blue
 hi StatusLineNC ctermfg=black ctermbg=gray
+
+" beautify xml...
+map <Leader>x !$HOME/.pyenv/shims/python -m BeautifulSoup<CR>

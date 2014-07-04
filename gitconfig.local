@@ -1,9 +1,9 @@
 [user]
 	name = kajisha
-	email = h-kajisha@esm.co.jp
+	email = kajisha@gmail.com
 [alias]
 	co = checkout
-	st = status
+	st = status --short
 	di = diff -b
 	lo = log --oneline --decorate --graph --branches --tags --remotes
 	lp = log -p
