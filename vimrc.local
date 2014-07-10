@@ -12,10 +12,6 @@ noremap \ ,
 
 autocmd BufWritePre * :%s/\s\+$//ge
 
-" powerline
-let g:Powerline_symbols = 'fancy'
-set noshowmode
-
 " NERDTree
 nmap <C-e> :NERDTree<cr>
 
