@@ -10,20 +10,49 @@ set nonumber
 let mapleader = ","
 noremap \ ,
 
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" powerline
+let g:Powerline_symbols = 'fancy'
+set noshowmode
+
 " NERDTree
 nmap <C-e> :NERDTree<cr>
 
-" vim-rspec mappings
-let g:rspec_command = "!rspec {spec}"
-nnoremap <C-c> :call RunCurrentSpecFile()<CR>
-nnoremap <C-n> :call RunNearestSpec()<CR>
-nnoremap <C-l> :call RunLastSpec()<CR>
+" unite
+" The prefix key.
+nnoremap [unite] <Nop>
+nmap <Leader>f [unite]
 
-autocmd BufWritePre * :%s/\s\+$//ge
+let g:unite_enable_start_insert = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
-" StatusLine
-hi StatusLine ctermfg=black ctermbg=blue
-hi StatusLineNC ctermfg=black ctermbg=gray
+" vinarise
+let g:vinarise_enable_auto_detect = 1
 
-" beautify xml...
-map <Leader>x !$HOME/.pyenv/shims/python -m BeautifulSoup<CR>
+" unite.vim keymap
+nnoremap [unite]U  :<C-u>Unite -no-split<Space>
+nnoremap [unite]u  :<C-u>Unite<Space>
+nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
+nnoremap <silent> [unite]ur :UniteResume<CR>
+
+nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> [unite]r :<C-u>UniteResume search-buffer<CR>
+
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" unite-rails
+nnoremap [unite]x :<C-u>Unite rails/
+nnoremap [unite]xm :<C-u>Unite rails/model<CR>
+nnoremap [unite]xs :<C-u>Unite rails/spec<CR>
+nnoremap [unite]xc :<C-u>Unite rails/controller<CR>
+nnoremap [unite]xv :<C-u>Unite rails/view<CR>
