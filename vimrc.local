@@ -6,6 +6,7 @@ colorscheme delek
 set tags+=./tags
 set nowrap
 set nonumber
+set textwidth=0
 
 let mapleader = ","
 noremap \ ,
@@ -53,7 +54,7 @@ nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
 nnoremap <silent> [unite]ur :UniteResume<CR>
 
 nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> [unite]gg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> [unite]gg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 nnoremap <silent> [unite]sb :<C-u>UniteResume search-buffer<CR>
 
 if executable('ag')
