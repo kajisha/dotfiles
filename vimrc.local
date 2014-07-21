@@ -7,6 +7,10 @@ set tags+=./tags
 set nowrap
 set nonumber
 set textwidth=0
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set fileformat=unix
 
 let mapleader = ","
 noremap \ ,
