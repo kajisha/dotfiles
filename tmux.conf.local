@@ -1,1 +1,21 @@
+# vim: ft=conf
+
 set-option -g prefix C-t
+
+set-window-option -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-pipe "xclip -i -selection clipboard"
+bind-key C-b kill-session
+unbind -t vi-copy Space
+
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set -g mouse-select-window on
+
+setw -g window-status-current-fg white
+setw -g window-status-current-bg red
+setw -g window-status-current-attr bright
+
+set -g pane-active-border-fg white
+set -g pane-active-border-bg yellow

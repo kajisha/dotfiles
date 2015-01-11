@@ -11,11 +11,32 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
 set fileformat=unix
+set nolist
+set nu
+
+noremap ; :
+nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
 
 let mapleader = ","
 noremap \ ,
 
 autocmd BufWritePre * :%s/\s\+$//ge
+
+" highlight
+"" Diff
+highlight DiffDelete ctermbg=darkgrey
+highlight DiffAdd ctermbg=darkgrey
+highlight DiffChange ctermbg=darkgrey
+highlight DiffText ctermbg=darkgrey
+
+" gitgutter
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_max_signs = 500
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
 
 " quickrun for rspec
 let g:quickrun_config = {}

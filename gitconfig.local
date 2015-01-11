@@ -1,28 +1,29 @@
 [user]
-	name = kajisha
-	email = kajisha@gmail.com
+  name = kajisha
+  email = kajisha@gmail.com
 [alias]
-	co = checkout
-	st = status --short
-	di = diff -b
-	lo = log --oneline --decorate --graph --branches --tags --remotes
-	lp = log -p
-	br = branch
+  co = checkout
+  st = status --short
+  di = diff -b
+  lo = log --oneline --decorate --graph --branches --tags --remotes
+  lp = log -p
+  br = branch
   bra = branch -a
   brd = branch -d
   brm = branch --merged
-	ci = commit
-	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-	dc = diff --cached -b
+  ci = commit
+  graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+  dc = diff --cached -b
   lsd = ls-files --delete
   ls = ls-files
   gr = grep -n
   todo = grep -nw -E 'TODO|XXX|FIXME|BUG'
 [core]
-	excludesfile = /Users/hiroshi/.gitignore
-	quotepath = false
+  excludesfile = ~/.gitignore.local
+  quotepath = false
+  commentchar = !
 [color]
-	ui = true
+  ui = true
 [pager]
   log = diff-highlight | lv -c
   show = diff-highlight | lv -c
