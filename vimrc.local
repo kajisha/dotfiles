@@ -14,6 +14,7 @@ set fileformat=unix
 set nolist
 set nu
 
+imap <C-[> <Esc>
 noremap ; :
 nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
 
