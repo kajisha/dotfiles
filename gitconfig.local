@@ -1,6 +1,8 @@
 [user]
   name = kajisha
   email = kajisha@gmail.com
+[fetch]
+  prune = true
 [alias]
   co = checkout
   st = status --short
@@ -28,3 +30,5 @@
   log = diff-highlight | lv -c
   show = diff-highlight | lv -c
   diff = diff-highlight | lv -c
+[ghq]
+  root = ~/workspace/src

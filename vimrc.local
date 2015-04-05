@@ -12,7 +12,6 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
 set fileformat=unix
 set nolist
-set nu
 
 imap <C-[> <Esc>
 noremap ; :
@@ -58,6 +57,11 @@ fun! QRunRspecCurrentLine()
   exe ":QuickRun -exec '$HOME/.rbenv/shims/bundle exec %c %s%o' -cmdopt ':" . line . " -cfp --fail-fast'"
 endfun
 
+" vim-tags
+let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/bin/ctags -f Gemfile.lock.tags -R `bundle show --paths` 2>/dev/null"
+set tags+=tags,Gemfile.lock.tags
+
 " unite
 " The prefix key.
 nnoremap [unite] <Nop>
@@ -91,6 +95,9 @@ endif
 
 " unite-rails
 nnoremap [unite]x :<C-u>Unite rails/
+nnoremap [unite]xa :<C-u>Unite rails/asset<CR>
+nnoremap [unite]xd :<C-u>Unite rails/db<CR>
+nnoremap [unite]xj :<C-u>Unite rails/javascript<CR>
 nnoremap [unite]xm :<C-u>Unite rails/model<CR>
 nnoremap [unite]xs :<C-u>Unite rails/spec<CR>
 nnoremap [unite]xc :<C-u>Unite rails/controller<CR>
