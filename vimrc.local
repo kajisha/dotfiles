@@ -12,6 +12,7 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
 set fileformat=unix
 set nolist
+set tw=0
 
 imap <C-[> <Esc>
 noremap ; :
