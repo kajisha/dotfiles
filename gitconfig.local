@@ -21,7 +21,7 @@
   gr = grep -n
   todo = grep -nw -E 'TODO|XXX|FIXME|BUG'
 [core]
-  excludesfile = ~/.gitignore.local
+  excludesfile = ~/.gitignore
   quotepath = false
   commentchar = !
 [color]

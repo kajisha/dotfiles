@@ -14,5 +14,5 @@ Plug 'thinca/vim-ref'
 Plug 'szw/vim-tags'
 Plug 'lambdatoast/elm.vim'
 
-let g:plug_url_format = 'git@github.com:%s.git'
-Plug 'tyru/skk.vim'
+"let g:plug_url_format = 'git@github.com:%s.git'
+"Plug 'tyru/eskk.vim'
