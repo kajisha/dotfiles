@@ -1,16 +1,27 @@
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc'
-Plug 'airblade/vim-gitgutter'
-Plug 'basyura/unite-rails'
 Plug 'bling/vim-airline'
 Plug 'bogado/file-line'
-Plug 'kana/vim-filetype-haskell'
 Plug 'kana/vim-smartinput'
-Plug 'kmnk/vim-unite-giti'
-Plug 'lambdatoast/elm.vim'
 Plug 's3rvac/AutoFenc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'szw/vim-tags'
 Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
+
+" git
+Plug 'airblade/vim-gitgutter'
+Plug 'kmnk/vim-unite-giti'
+
+" Haskell
+Plug 'kana/vim-filetype-haskell'
+
+" elm
+Plug 'lambdatoast/elm.vim'
+
+" ruby
+Plug 'basyura/unite-rails'
+
+" elixir
+Plug 'elixir-lang/vim-elixir'
