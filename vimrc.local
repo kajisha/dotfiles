@@ -14,6 +14,8 @@ set fileformat=unix
 set nolist
 set tw=0
 
+set rtp+=~/.fzf
+
 imap <C-[> <Esc>
 noremap ; :
 nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
@@ -131,3 +133,16 @@ let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%31:%-2v'
 
 " tag jump
 nnoremap <C-k> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+" platicboy/vim-markdown
+let g:vim_markdown_folding_disabled=1
+
+" pencil
+set background=dark
+let g:pencil_higher_contrast_ui=0
+let g:airline_theme='pencil'
+
+" hylang
+let g:python3_host_prog = '$HOME/.pyenv/shims/python'
+let g:python3_host_skip_check = 1
+let g:hy_enable_conceal = 1

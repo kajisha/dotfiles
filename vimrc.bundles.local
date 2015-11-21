@@ -4,15 +4,20 @@ Plug 'Shougo/vimproc'
 Plug 'bling/vim-airline'
 Plug 'bogado/file-line'
 Plug 'kana/vim-smartinput'
+Plug 'plasticboy/vim-markdown'
+Plug 'reedes/vim-colors-pencil'
 Plug 's3rvac/AutoFenc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'szw/vim-tags'
 Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
 " git
 Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'
 Plug 'kmnk/vim-unite-giti'
+Plug 'rhysd/committia.vim'
 
 " Haskell
 Plug 'kana/vim-filetype-haskell'
@@ -25,3 +30,6 @@ Plug 'basyura/unite-rails'
 
 " elixir
 Plug 'elixir-lang/vim-elixir'
+
+" hylang
+Plug 'hylang/vim-hy'
