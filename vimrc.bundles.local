@@ -33,3 +33,6 @@ Plug 'elixir-lang/vim-elixir'
 
 " hylang
 Plug 'hylang/vim-hy'
+
+" lisp
+Plug 'slimv.vim'
