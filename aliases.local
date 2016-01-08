@@ -3,7 +3,7 @@ alias bi='bundle install'
 alias be='bundle exec'
 alias vim=nvim
 alias vi=nvim
-alias e='emacs -Q'
+alias e='emacs'
 alias rmm='git pull --prune && git br --merged | grep -v '\*' | xargs -n 1 git br -d'
 alias s='bundle exec rspec'
 alias open='xdg-open'
@@ -18,4 +18,3 @@ alias eix-sync='sudo eix-sync'
 alias flaggie='sudo flaggie'
 alias c='pygmentize -O style=monokai -f console256 -g'
 alias bcd='`bundle list $@`'
-alias sbcl='rlwrap sbcl'

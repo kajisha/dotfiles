@@ -7,7 +7,6 @@ Plug 'kana/vim-smartinput'
 Plug 'plasticboy/vim-markdown'
 Plug 'reedes/vim-colors-pencil'
 Plug 's3rvac/AutoFenc'
-Plug 'scrooloose/nerdcommenter'
 Plug 'szw/vim-tags'
 Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
@@ -35,4 +34,4 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'hylang/vim-hy'
 
 " lisp
-Plug 'slimv.vim'
+Plug 'kovisoft/slimv', {'branch': 'master'}
