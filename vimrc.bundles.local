@@ -35,3 +35,6 @@ Plug 'hylang/vim-hy'
 
 " lisp
 Plug 'kovisoft/slimv', {'branch': 'master'}
+
+" jscx
+Plug 'mtscout6/vim-cjsx'
