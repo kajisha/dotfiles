@@ -7,8 +7,10 @@ log/*.log
 rerun.txt
 tags
 Gemfile.lock.tags
+composer.lock.tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
 .rake_tasks
 *.ipynb
+.ruby-version

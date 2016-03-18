@@ -11,12 +11,22 @@ Plug 'szw/vim-tags'
 Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'tpope/vim-abolish'
+
+" colorscheme
+Plug 'w0ng/vim-hybrid'
+Plug 'vim-scripts/twilight'
+Plug 'easysid/mod8.vim'
+Plug 'the31k/vim-colors-tayra'
+Plug 'mhartington/oceanic-next'
+Plug 'marcopaganini/termschool-vim-theme'
 
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
 Plug 'kmnk/vim-unite-giti'
 Plug 'rhysd/committia.vim'
+Plug 'idanarye/vim-merginal'
 
 " Haskell
 Plug 'kana/vim-filetype-haskell'
@@ -38,3 +48,7 @@ Plug 'kovisoft/slimv', {'branch': 'master'}
 
 " jscx
 Plug 'mtscout6/vim-cjsx'
+
+" php
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'vim-php/vim-composer'

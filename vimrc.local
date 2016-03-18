@@ -1,7 +1,7 @@
 syntax on
 filetype plugin on
 
-colorscheme delek
+colorscheme termschool
 
 set tags+=./tags
 set nowrap
@@ -22,35 +22,36 @@ let mapleader = ","
 noremap \ ,
 
 augroup vimrcEx
-  autocmd BufWritePre * :%s/\s\+$//ge
+  "autocmd BufWritePre * :%s/\s\+$//ge
   autocmd FileType gitcommit setlocal textwidth=0
   autocmd FileType vim setlocal textwidth=0
 augroup END
 
-" highlight
-"" Diff
-highlight DiffDelete ctermbg=darkgrey
-highlight DiffAdd ctermbg=darkgrey
-highlight DiffChange ctermbg=darkgrey
-highlight DiffText ctermbg=darkgrey
+" syntasitic
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"v-", " proprietary attribute \"debounce"]
+
+" fugitive
+nnoremap [fugitive] <Nop>
+nmap <Leader>g [fugitive]
+
+nnoremap <silent> [fugitive]s  :Gstatus<CR>
+nnoremap <silent> [fugitive]ca :Gcommit --ammend<CR>
+nnoremap <silent> [fugitive]c  :Gcommit -v -q<CR>
+nnoremap <silent> [fugitive]d  :Gdiff<CR>
+nnoremap <silent> [fugitive]a  :Gwrite<CR>
+nnoremap <silent> [fugitive]r  :Gread<CR>
+nnoremap <silent> [fugitive]p  :Gpush<CR>
+nnoremap <silent> [fugitive]l  :Glog -- %<CR>
 
 " gitgutter
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_max_signs = 500
 highlight clear SignColumn
-highlight GitGutterAdd ctermfg=green
-highlight GitGutterChange ctermfg=yellow
-highlight GitGutterDelete ctermfg=red
-highlight GitGutterChangeDelete ctermfg=yellow
 
 " vim-tags
 let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
 
 " unite
-" The prefix key.
-nnoremap [unite] <Nop>
-nmap <Leader>f [unite]
-
 let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
@@ -58,22 +59,26 @@ let g:unite_enable_smart_case = 1
 " vinarise
 let g:vinarise_enable_auto_detect = 1
 
+" The prefix key.
+nnoremap [unite] <Nop>
+nmap <Leader>f [unite]
+
 " unite.vim keymap
-nnoremap [unite]U  :<C-u>Unite -no-split<Space>
-nnoremap [unite]u  :<C-u>Unite<Space>
-nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
+nnoremap [unite]U :<C-u>Unite -no-split<Space>
+nnoremap [unite]u :<C-u>Unite<Space>
+nnoremap <silent> [unite]f  :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]m  :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]r  :<C-u>UniteWithBufferDir file<CR>
 nnoremap <silent> [unite]ur :UniteResume<CR>
 
-nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> [unite]gg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
 nnoremap <silent> [unite]sb :<C-u>UniteResume search-buffer<CR>
 
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_default_opts = '-w --nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -111,6 +116,7 @@ set background=dark
 let g:pencil_higher_contrast_ui = 0
 let g:airline_theme = 'pencil'
 
-source ~/.vimrc.ruby
-source ~/.vimrc.markdown
-source ~/.vimrc.lisp
+autocmd BufNewFile,BufRead *.rb   source ~/.vimrc.ruby
+autocmd BufNewFile,BufRead *.md   source ~/.vimrc.markdown
+autocmd BufNewFile,BufRead *.lisp source ~/.vimrc.lisp
+autocmd BufNewFile,BufRead *.php  source ~/.vimrc.php

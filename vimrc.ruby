@@ -30,4 +30,4 @@ nnoremap [unite]xv :<C-u>Unite rails/view<CR>
 
 " vim-tags
 let g:vim_tags_gems_tags_command = "/usr/bin/ctags -f Gemfile.lock.tags -R `bundle show --paths` 2>/dev/null"
-set tags+=Gemfile.lock.tags
+set tags+=Gemfile.lock.tags,composer.lock.tags
