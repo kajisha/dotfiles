@@ -22,7 +22,7 @@ let mapleader = ","
 noremap \ ,
 
 augroup vimrcEx
-  "autocmd BufWritePre * :%s/\s\+$//ge
+  autocmd BufWritePre * :%s/\s\+$//ge
   autocmd FileType gitcommit setlocal textwidth=0
   autocmd FileType vim setlocal textwidth=0
 augroup END
@@ -116,7 +116,8 @@ set background=dark
 let g:pencil_higher_contrast_ui = 0
 let g:airline_theme = 'pencil'
 
-autocmd BufNewFile,BufRead *.rb   source ~/.vimrc.ruby
-autocmd BufNewFile,BufRead *.md   source ~/.vimrc.markdown
-autocmd BufNewFile,BufRead *.lisp source ~/.vimrc.lisp
-autocmd BufNewFile,BufRead *.php  source ~/.vimrc.php
+autocmd BufNewFile,BufRead *.rb   source ~/.vimrc_ruby
+autocmd BufNewFile,BufRead *.md   source ~/.vimrc_markdown
+autocmd BufNewFile,BufRead *.lisp source ~/.vimrc_lisp
+autocmd BufNewFile,BufRead *.php  source ~/.vimrc_php
+autocmd BufNewFile,BufRead *.haml.blade set filetype=haml
