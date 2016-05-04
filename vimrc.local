@@ -121,3 +121,7 @@ autocmd BufNewFile,BufRead *.md   source ~/.vimrc_markdown
 autocmd BufNewFile,BufRead *.lisp source ~/.vimrc_lisp
 autocmd BufNewFile,BufRead *.php  source ~/.vimrc_php
 autocmd BufNewFile,BufRead *.haml.blade set filetype=haml
+
+" indentLine
+set list lcs=tab:\|\
+let g:indentLine_enabled = 1

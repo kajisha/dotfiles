@@ -12,6 +12,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'tpope/vim-abolish'
+Plug 'Yggdroot/indentLine'
 
 " colorscheme
 Plug 'w0ng/vim-hybrid'
