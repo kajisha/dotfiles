@@ -7,7 +7,7 @@
 	tool = vimdiff
 [alias]
   st = status --short
-  di = diff -b
+  di = diff -b -w
   lo = log --oneline --decorate --graph --branches --tags --remotes
   lp = log -p
   br = branch
@@ -16,7 +16,7 @@
   brm = branch --merged
   ci = commit
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-  dc = diff --cached -b
+  dc = diff --cached -b -w
   lsd = ls-files --delete
   ls = ls-files
   gr = grep -n
@@ -34,6 +34,6 @@
 [ghq]
   root = ~/workspace/src
 [url "git@github.com:"]
-	pushinsteadof = https://github.com/
+  pushinsteadof = https://github.com/
 [rerere]
-	enabled = true
+  enabled = true
