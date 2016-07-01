@@ -14,3 +14,4 @@ tmp/**/*
 .rake_tasks
 *.ipynb
 .ruby-version
+.python-version
