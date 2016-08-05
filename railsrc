@@ -1,0 +1,3 @@
+--skip-bundle
+--database=postgresql
+--skip-turbolinks
