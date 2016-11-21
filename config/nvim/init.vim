@@ -30,11 +30,6 @@ imap <C-[> <Esc>
 noremap ; :
 nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-"if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-"  runtime! macros/matchit.vim
-"endif
-
 syntax on
 filetype plugin indent on
 
