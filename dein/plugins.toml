@@ -1,0 +1,225 @@
+[[plugins]]
+repo = 'christoomey/vim-run-interactive'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_post_source = '''
+  let g:ctrlp_use_caching = 0
+'''
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
+
+[[plugins]]
+repo = 'janko-m/vim-test'
+hook_post_source = '''
+  nnoremap <silent> <Leader>t :TestFile<CR>
+  nnoremap <silent> <Leader>s :TestNearest<CR>
+  nnoremap <silent> <Leader>l :TestLast<CR>
+  nnoremap <silent> <Leader>a :TestSuite<CR>
+  nnoremap <silent> <leader>gt :TestVisit<CR>
+'''
+
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = ['coffee']
+
+[[plugins]]
+repo = 'pbrisbin/vim-mkdir'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+hook_post_source = '''
+  " configure syntastic syntax checking to check on open as well as save
+  let g:syntastic_check_on_open=1
+  let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietray attribute \"v-", " proprietary attribute \"debounce"]
+  let g:syntastic_eruby_ruby_quiet_messages =
+      \ {"regex": "possibly useless use of a variable in void context"}
+'''
+
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
+
+[[plugins]]
+repo = 'tpope/vim-bundler'
+on_ft = ['ruby']
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_post_source = '''
+  nnoremap [fugitive] <Nop>
+  nmap <Leader>g [fugitive]
+
+  nnoremap <silent> [fugitive]s  :Gstatus<CR>
+  nnoremap <silent> [fugitive]ca :Gcommit --ammend<CR>
+  nnoremap <silent> [fugitive]c  :Gcommit -v -q<CR>
+  nnoremap <silent> [fugitive]d  :Gdiff<CR>
+  nnoremap <silent> [fugitive]a  :Gwrite<CR>
+  nnoremap <silent> [fugitive]r  :Gread<CR>
+  nnoremap <silent> [fugitive]p  :Gpush<CR>
+  nnoremap <silent> [fugitive]l  :Glog -- %<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-projectionist'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = ['ruby']
+
+[[plugins]]
+repo = 'tpope/vim-rake'
+on_ft = ['ruby']
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-rhubarb'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+on_ft = ['ruby']
+
+[[plugins]]
+repo = 'vim-scripts/tComment'
+
+[[plugins]]
+repo = 'bogado/file-line'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = '~/.fzf/install --all'
+rtp = ''
+hook_post_source = '''
+  set rtp+=~/.fzf
+'''
+
+[[plugins]]
+repo = 'kana/vim-smartinput'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
+
+[[plugins]]
+repo = 's3rvac/AutoFenc'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_post_source = '''
+  let g:unite_enable_start_insert = 1
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+
+  nmap <Leader>f [unite]
+
+  nnoremap [unite]U :<C-u>Unite -no-split<Space>
+  nnoremap [unite]u :<C-u>Unite<Space>
+  nnoremap <silent> [unite]f  :<C-u>Unite<Space>buffer<CR>
+  nnoremap <silent> [unite]b  :<C-u>Unite<Space>bookmark<CR>
+  nnoremap <silent> [unite]m  :<C-u>Unite<Space>file_mru<CR>
+  nnoremap <silent> [unite]r  :<C-u>UniteWithBufferDir file<CR>
+  nnoremap <silent> [unite]ur :UniteResume<CR>
+
+  nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+  nnoremap <silent> [unite]gg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
+  nnoremap <silent> [unite]sb :<C-u>UniteResume search-buffer<CR>
+
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '-w --nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+  endif
+'''
+
+[[plugins]]
+repo =  'Shougo/vimproc'
+
+[[plugins]]
+repo = 'szw/vim-tags'
+hook_post_source = '''
+  let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'thinca/vim-ref'
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_post_source = '''
+  set list lcs=tab:\|\
+  let g:indentLine_enabled = 1
+'''
+
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'mhartington/oceanic-next'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_post_source = '''
+  let g:gitgutter_sign_column_always = 1
+  let g:gitgutter_max_signs = 500
+  highlight clear SignColumn
+'''
+
+[[plugins]]
+repo = 'cohama/agit.vim'
+
+#[[plugins]]
+#repo = 'kmnk/vim-unite-giti'
+
+[[plugins]]
+repo = 'rhysd/committia.vim'
+
+[[plugins]]
+repo = 'idanarye/vim-merginal'
+
+[[plugins]]
+repo = 'kana/vim-filetype-haskell'
+on_ft = ['haskell']
+
+[[plugins]]
+repo = 'elixir-lang/vim-elixir'
+on_ft = ['elixir']
+
+[[plugins]]
+repo = 'kovisoft/slimv'
+on_ft = ['lisp']
+
+[[plugins]]
+repo = 'mtscout6/vim-cjsx'
+on_ft = ['jsx']
+
+[[plugins]]
+repo = 'stephpy/vim-php-cs-fixer'
+on_ft = ['php']
+
+[[plugins]]
+repo = 'vim-php/vim-composer'
+on_ft = ['php']
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']

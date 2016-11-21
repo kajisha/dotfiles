@@ -1,0 +1,21 @@
+[[plugins]]
+repo = 'freeo/vim-kalisi'
+
+[[plugins]]
+repo = 'easysid/mod8.vim'
+
+[[plugins]]
+repo = 'vim-scripts/twilight'
+
+[[plugins]]
+repo = 'the31k/vim-colors-tayra'
+
+[[plugins]]
+repo = 'marcopaganini/termschool-vim-theme'
+
+[[plugins]]
+repo = 'reedes/vim-colors-pencil'
+hook_post_source = '''
+  set background=dark
+  let g:pencil_higher_contrast_ui = 0
+'''
