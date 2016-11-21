@@ -284,3 +284,6 @@ on_ft = ['php']
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'freeo/vim-kalisi'
