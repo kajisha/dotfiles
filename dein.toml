@@ -48,6 +48,7 @@ repo = 'tpope/vim-eunuch'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+depends = ['idanarye/vim-merginal']
 hook_post_source = '''
   nnoremap [fugitive] <Nop>
   nmap <Leader>g [fugitive]
@@ -89,10 +90,10 @@ repo = 'vim-scripts/tComment'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-depends = ['vim-airline/vim-airline']
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
+depends = ['/vim-airline-themes']
 hook_post_source = '''
   let g:airline#extensions#whitespace#enabled = 0
   let g:airline#extensions#branch#enabled = 0
@@ -148,14 +149,16 @@ hook_post_source = '''
 [[plugins]]
 repo = 's3rvac/AutoFenc'
 
-[[plugins]]
-repo = 'Shougo/denite.nvim'
+#[[plugins]]
+#repo = 'Shougo/denite.nvim'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
+on_source = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
+depends = ['kmnk/vim-unite-giti', 'basyura/unite-rails']
 hook_post_source = '''
   let g:unite_enable_start_insert = 1
   let g:unite_enable_ignore_case = 1
@@ -239,14 +242,12 @@ repo = 'cohama/agit.vim'
 
 [[plugins]]
 repo = 'kmnk/vim-unite-giti'
-depends = ['Shougo/unite.vim']
 
 [[plugins]]
 repo = 'rhysd/committia.vim'
 
 [[plugins]]
 repo = 'idanarye/vim-merginal'
-depends = ['tpope/fugitive']
 
 [[plugins]]
 repo = 'kana/vim-filetype-haskell'
@@ -255,11 +256,6 @@ on_ft = ['haskell']
 [[plugins]]
 repo = 'lambdatoast/elm.vim'
 on_ft = ['elm']
-
-[[plugins]]
-repo = 'basyura/unite-rails'
-depends = ['Shougo/unite.vim']
-on_ft = ['ruby']
 
 [[plugins]]
 repo = 'elixir-lang/vim-elixir'
