@@ -42,7 +42,7 @@ set nowrap
 set nowritebackup
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
-set tags+=./tags
+set tags+=./tags,Gemfile.lock.tags,composer.lock.tags
 set textwidth=0
 
 imap <C-[> <Esc>
