@@ -157,4 +157,5 @@ set diffopt+=vertical
 " tag jump
 nnoremap <C-k> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 
-colorscheme termschool
+colorscheme kalisi
+set background=dark

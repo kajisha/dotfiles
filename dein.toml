@@ -143,7 +143,7 @@ repo = 'reedes/vim-colors-pencil'
 hook_post_source = '''
   set background=dark
   let g:pencil_higher_contrast_ui = 0
-  let g:airline_theme = 'pencil'
+  let g:airline_theme = 'kalisi'
 '''
 
 [[plugins]]
