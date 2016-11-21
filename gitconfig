@@ -1,0 +1,56 @@
+[user]
+  name = kajisha
+  email = kajisha@gmail.com
+[init]
+  templatedir = ~/.git_template
+[fetch]
+  prune = true
+[merge]
+  ff = only
+	tool = vimdiff
+[alias]
+  aa = add --all
+  ap = add --patch
+  bra = branch -a
+  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+  br = branch
+  brd = branch -d
+  brm = branch --merged
+  ci = commit
+  ci = commit -v
+  co = checkout
+  dc = diff --cached -b -w
+  di = diff -b -w
+  graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+  gr = grep -n
+  lo = log --oneline --decorate --graph --branches --tags --remotes
+  lp = log -p
+  lsd = ls-files --delete
+  ls = ls-files
+  pf = push --force-with-lease
+  st = status
+  st = status --short
+  todo = grep -nw -E 'TODO|XXX|FIXME|BUG'
+[core]
+  autocrlf = input
+  excludesfile = ~/.gitignore
+  quotepath = false
+  commentchar = !
+[color]
+  ui = true
+[pager]
+  log = diff-highlight | lv -c
+  show = diff-highlight | lv -c
+  diff = diff-highlight | lv -c
+[ghq]
+  root = ~/workspace/src
+[url "git@github.com:"]
+  pushinsteadof = https://github.com/
+[rerere]
+  enabled = true
+[push]
+  default = current
+[commit]
+  template = ~/.gitmessage
+[rebase]
+  autosquash = true
