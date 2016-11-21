@@ -1,3 +1,5 @@
+set termguicolors
+
 " Leader
 let mapleader = ","
 noremap \ ,
