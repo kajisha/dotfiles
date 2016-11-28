@@ -187,9 +187,6 @@ hook_post_source = '''
 [[plugins]]
 repo = 'cohama/agit.vim'
 
-#[[plugins]]
-#repo = 'kmnk/vim-unite-giti'
-
 [[plugins]]
 repo = 'rhysd/committia.vim'
 
