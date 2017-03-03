@@ -18,7 +18,7 @@ hook_post_source = '''
   nnoremap <silent> <Leader>s :TestNearest<CR>
   nnoremap <silent> <Leader>l :TestLast<CR>
   nnoremap <silent> <Leader>a :TestSuite<CR>
-  nnoremap <silent> <leader>gt :TestVisit<CR>
+  nnoremap <silent> <Leader>gt :TestVisit<CR>
 '''
 
 [[plugins]]
@@ -112,6 +112,17 @@ on_ft = ['markdown']
 
 [[plugins]]
 repo = 's3rvac/AutoFenc'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['/deoplete-ruby']
+hook_post_source = '''
+  let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo = 'fishbullet/deoplete-ruby'
+on_ft = ['ruby']
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
@@ -220,3 +231,34 @@ on_ft = ['php']
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'jparise/vim-graphql'
+
+[[plugins]]
+repo = 'kannokanno/previm'
+hook_post_source = '''
+  let g:previm_open_cmd = 'open'
+'''
+
+[[plugins]]
+repo = 'pmsorhaindo/syntastic-local-eslint.vim'
+hook_post_source = '''
+  let g:syntastic_javascript_checkers = ['eslint']
+'''
+
+[[plugins]]
+repo = 'ternjs/tern_for_vim'
+
+[[plugins]]
+repo = 'carlitux/deoplete-ternjs'
+build = 'npm install -g tern'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
