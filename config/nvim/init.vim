@@ -117,3 +117,6 @@ nnoremap <C-k> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 
 colorscheme kalisi
 set background=dark
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
