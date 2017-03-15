@@ -120,3 +120,11 @@ set background=dark
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+
+" NERDTree
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" merlin(ocaml)
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
