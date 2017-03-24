@@ -81,18 +81,6 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
-
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -100,31 +88,56 @@ let g:html_indent_tags = 'li\|p'
 set splitbelow
 set splitright
 
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 
 " Always use vertical diffs
 set diffopt+=vertical
 
-" tag jump
-nnoremap <C-k> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
-
 colorscheme kalisi
 set background=dark
+
+" syntastic
+" configure syntastic syntax checking to check on open as well as save
+let g:syntastic_check_on_open=1
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietray attribute \"v-", " proprietary attribute \"debounce"]
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {"regex": "possibly useless use of a variable in void context"}
+let g:syntastic_ocaml_checkers = ['merlin']
+let g:syntastic_javascript_checkers = ['eslint'] " syntastic-local-eslint.vim
+
+" fzf
+set rtp+=~/.fzf
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
-" NERDTree
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" unite.vim
+let g:unite_enable_start_insert = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '-w --nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" vim-tags
+let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
+
+" indentLine
+set list lcs=tab:\|\
+let g:indentLine_enabled = 1
+
+" vim-gitgutter
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_max_signs = 500
+highlight clear SignColumn
 
 " merlin(ocaml)
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
+
+source $HOME/.config/nvim/keymaps.vim
