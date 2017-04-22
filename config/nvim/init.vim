@@ -26,10 +26,6 @@ set showcmd       " display incomplete commands
 set tags+=./tags,Gemfile.lock.tags,composer.lock.tags
 set textwidth=0
 
-imap <C-[> <Esc>
-noremap ; :
-nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
-
 syntax on
 filetype plugin indent on
 

@@ -1,6 +1,10 @@
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-n>
 
+imap <C-[> <Esc>
+noremap ; :
+nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
+
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
