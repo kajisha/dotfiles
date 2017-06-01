@@ -136,4 +136,10 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
 
+" vim-erlang-runtime
+set rtp+=~/.cache/dein/repos/github.com/vim-erlang/vim-erlang-runtime/
+
+" vim-erlang-compiler
+set rtp+=~/.cache/dein/repos/github.com/vim-erlang/vim-erlang-compiler/
+
 source $HOME/.config/nvim/keymaps.vim
