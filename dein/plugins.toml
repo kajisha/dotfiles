@@ -194,3 +194,15 @@ repo = 'chemzqm/vim-jsx-improve'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-runtime'
+on_ft = ['erlang']
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-compiler'
+on_ft = ['erlang']
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-tags'
+on_ft = ['erlang']
