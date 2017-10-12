@@ -11,7 +11,6 @@ function! config#initializers#dein#load()
 
   if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
-    call dein#load_toml('~/.dein/airline.toml')
     call dein#load_toml('~/.dein/colorschemes.toml')
     call dein#load_toml('~/.dein/plugins.toml')
     call dein#end()

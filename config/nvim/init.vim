@@ -42,6 +42,7 @@ augroup vimrcEx
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile Schemafile set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufWritePre * :%s/\s\+$//ge
@@ -77,6 +78,7 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
+
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -93,53 +95,27 @@ set diffopt+=vertical
 colorscheme kalisi
 set background=dark
 
-" syntastic
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietray attribute \"v-", " proprietary attribute \"debounce"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-let g:syntastic_ocaml_checkers = ['merlin']
-let g:syntastic_javascript_checkers = ['eslint'] " syntastic-local-eslint.vim
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <S-Tab> <c-n>
 
-" fzf
-set rtp+=~/.fzf
+imap <C-[> <Esc>
+noremap ; :
+nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
 
-" unite.vim
-let g:unite_enable_start_insert = 1
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '-w --nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
+" tag jump
+nnoremap <C-k> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 
-" vim-tags
-let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
-
-" indentLine
-set list lcs=tab:\|\
-let g:indentLine_enabled = 1
-
-" vim-gitgutter
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_max_signs = 500
-highlight clear SignColumn
-
-" merlin(ocaml)
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
-
-" vim-erlang-runtime
-set rtp+=~/.cache/dein/repos/github.com/vim-erlang/vim-erlang-runtime/
-
-" vim-erlang-compiler
-set rtp+=~/.cache/dein/repos/github.com/vim-erlang/vim-erlang-compiler/
-
-source $HOME/.config/nvim/keymaps.vim
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
