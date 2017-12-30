@@ -238,6 +238,15 @@ repo = 'hashivim/vim-terraform'
 repo = 'janko-m/vim-test'
 hook_add = '''
   let test#strategy = 'basic'
+  let test#ruby#rspec#executable = 'bin/rspec'
+
+  " ref: https://github.com/janko-m/vim-test/issues/254#issuecomment-350406653
+  function! DockerTransform(cmd) abort
+    return 'docker-compose exec spring ' . a:cmd
+  endfunction
+
+  let g:test#custom_transformations = {'docker': function('DockerTransform')}
+  let g:test#transformation = 'docker'
 
   nnoremap [vim-test] <Nop>
   nmap <Leader>t [vim-test]
