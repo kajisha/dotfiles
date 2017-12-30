@@ -7,7 +7,7 @@
   prune = true
 [merge]
   ff = only
-	tool = vimdiff
+  tool = vimdiff
 [alias]
   aa = add --all
   ap = add --patch
@@ -36,6 +36,7 @@
   excludesfile = ~/.gitignore
   quotepath = false
   commentchar = !
+  pager = diff-so-fancy | less --tabs=2 -RFX
 [color]
   ui = true
 [pager]
