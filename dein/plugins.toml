@@ -233,3 +233,18 @@ hook_add = '''
 
 [[plugins]]
 repo = 'hashivim/vim-terraform'
+
+[[plugins]]
+repo = 'janko-m/vim-test'
+hook_add = '''
+  let test#strategy = 'basic'
+
+  nnoremap [vim-test] <Nop>
+  nmap <Leader>t [vim-test]
+
+  nnoremap <silent> [vim-test]t :TestNearest<CR>
+  nnoremap <silent> [vim-test]>T :TestFile<CR>
+  nnoremap <silent> [vim-test]a :TestSuite<CR>
+  nnoremap <silent> [vim-test]l :TestLast<CR>
+  nnoremap <silent> [vim-test]g :TestVisit<CR>
+'''
