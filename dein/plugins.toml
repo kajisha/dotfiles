@@ -233,6 +233,3 @@ hook_add = '''
 
 [[plugins]]
 repo = 'hashivim/vim-terraform'
-
-[[plugins]]
-repo = 'vim-scripts/AnsiEsc.vim'
