@@ -144,9 +144,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'mhartington/oceanic-next'
-
-[[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
   set signcolumn=yes
