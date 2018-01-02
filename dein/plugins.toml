@@ -35,10 +35,6 @@ hook_add = '''
 repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
-repo = 'kchmck/vim-coffee-script'
-on_ft = ['coffee']
-
-[[plugins]]
 repo = 'pbrisbin/vim-mkdir'
 
 [[plugins]]
