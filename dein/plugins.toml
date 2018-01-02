@@ -244,7 +244,7 @@ hook_add = '''
   nmap <Leader>t [vim-test]
 
   nnoremap <silent> [vim-test]t :TestNearest<CR>
-  nnoremap <silent> [vim-test]>T :TestFile<CR>
+  nnoremap <silent> [vim-test]T :TestFile<CR>
   nnoremap <silent> [vim-test]a :TestSuite<CR>
   nnoremap <silent> [vim-test]l :TestLast<CR>
   nnoremap <silent> [vim-test]g :TestVisit<CR>
