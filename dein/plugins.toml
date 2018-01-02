@@ -228,10 +228,22 @@ hook_add = '''
 repo = 'hashivim/vim-terraform'
 
 [[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+  nnoremap [neoterm] <Nop>
+  nmap <Leader>n [neoterm]
+
+  nnoremap <silent> [neoterm]h :call neoterm#close()<CR>
+  nnoremap <silent> [neoterm]l :call neoterm#clear()<CR>
+  nnoremap <silent> [neoterm]k :call neoterm#kill()<CR>
+'''
+
+[[plugins]]
 repo = 'janko-m/vim-test'
 hook_add = '''
-  let test#strategy = 'basic'
+  let test#strategy = 'neoterm'
   let test#ruby#rspec#executable = 'bin/rspec'
+  let g:test#preserve_screen = 1
 
   nnoremap [vim-test] <Nop>
   nmap <Leader>t [vim-test]
