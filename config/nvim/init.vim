@@ -26,6 +26,7 @@ set showcmd       " display incomplete commands
 set tags+=./tags,Gemfile.lock.tags,composer.lock.tags
 set textwidth=0
 set exrc
+set showtabline=2
 
 syntax on
 filetype plugin indent on
