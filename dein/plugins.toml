@@ -184,10 +184,10 @@ repo = 'leafgarland/typescript-vim'
 repo = 'jparise/vim-graphql'
 
 [[plugins]]
-repo = 'kannokanno/previm'
-hook_post_source = '''
-  let g:previm_open_cmd = 'open'
-'''
+repo = 'tukiyo/previm'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
