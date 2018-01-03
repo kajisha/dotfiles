@@ -122,9 +122,8 @@ repo =  'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'szw/vim-tags'
+repo = 'c0r73x/neotags.nvim'
 hook_add = '''
-  let g:vim_tags_project_tags_command = "/usr/bin/ctags -f tags -R . 2>/dev/null"
 '''
 
 [[plugins]]
