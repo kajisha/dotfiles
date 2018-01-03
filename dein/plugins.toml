@@ -229,12 +229,19 @@ repo = 'hashivim/vim-terraform'
 [[plugins]]
 repo = 'kassio/neoterm'
 hook_add = '''
+  let g:neoterm_autoscoll = '1'
+  let g:neoterm_size = 16
+  let g:neoterm_automap_keys = '<F5>'
+
+  let g:neoterm_repl_ruby = 'pry'
+
   nnoremap [neoterm] <Nop>
   nmap <Leader>n [neoterm]
 
-  nnoremap <silent> [neoterm]h :call neoterm#close()<CR>
-  nnoremap <silent> [neoterm]l :call neoterm#clear()<CR>
-  nnoremap <silent> [neoterm]k :call neoterm#kill()<CR>
+  vnoremap [neoterm]e :TREPLSendSelection<CR>
+  nnoremap [neoterm]f :TREPLSendFile<CR>
+  nnoremap [neoterm]e :TREPLSendLine<CR>
+  nnoremap [neoterm]t :Ttoggle<CR>
 '''
 
 [[plugins]]

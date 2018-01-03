@@ -7,6 +7,10 @@ if defined?(PryByebug)
   Pry.commands.alias_command 's', 'step'
 end
 
+if ENV['VIM']
+  Pry.config.pager = false
+end
+
 Pry.commands.alias_command 'vi', 'edit'
 Pry.commands.alias_command 'bt', 'pry-backtrace'
 Pry.commands.alias_command 'w', 'whereami'
