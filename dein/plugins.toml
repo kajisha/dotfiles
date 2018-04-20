@@ -32,9 +32,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
 repo = 'pbrisbin/vim-mkdir'
 
 [[plugins]]
