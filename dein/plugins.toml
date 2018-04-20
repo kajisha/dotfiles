@@ -141,11 +141,6 @@ repo =  'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'c0r73x/neotags.nvim'
-hook_add = '''
-'''
-
-[[plugins]]
 repo = 'tpope/vim-bundler'
 ft = ['ruby']
 
