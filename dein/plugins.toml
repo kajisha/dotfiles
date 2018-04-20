@@ -95,6 +95,9 @@ rtp = '~/.fzf'
 repo = 'kana/vim-smartinput'
 
 [[plugins]]
+repo = 'dag/vim-fish'
+
+[[plugins]]
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 
