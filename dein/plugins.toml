@@ -87,9 +87,6 @@ on_ft = ['ruby']
 repo = 'vim-scripts/tComment'
 
 [[plugins]]
-repo = 'bogado/file-line'
-
-[[plugins]]
 repo = 'junegunn/fzf'
 build = '~/.fzf/install --all'
 rtp = '~/.fzf'
