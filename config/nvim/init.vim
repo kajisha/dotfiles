@@ -87,6 +87,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufWritePre * :%s/\s\+$//ge
+  " Set filetype $HOME/.dein/*.toml to vim, so do highlight syntax on hook_*
+  autocmd BufNewFile,BufRead $HOME/.dein/*.toml set ft=vim
 augroup END
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
