@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'freeo/vim-kalisi'
+depends = ['vim-airline/vim-airline']
 
 [[plugins]]
 repo = 'easysid/mod8.vim'
