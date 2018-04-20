@@ -107,6 +107,12 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'mileszs/ack.vim'
+hook_add = '''
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+'''
+
+[[plugins]]
 repo = 'kana/vim-smartinput'
 
 [[plugins]]
