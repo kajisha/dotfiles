@@ -276,3 +276,6 @@ hook_add = '''
   nnoremap <silent> [vim-test]l :TestLast<CR>
   nnoremap <silent> [vim-test]g :TestVisit<CR>
 '''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
