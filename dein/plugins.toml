@@ -264,7 +264,7 @@ hook_add = '''
 repo = 'janko-m/vim-test'
 hook_add = '''
   let test#strategy = 'neoterm'
-  let test#ruby#rspec#executable = 'bin/rspec'
+  let test#ruby#rspec#executable = 'bundle exec rspec'
   let g:test#preserve_screen = 1
 
   nnoremap [vim-test] <Nop>
