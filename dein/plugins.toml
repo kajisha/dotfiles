@@ -129,12 +129,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-hook_add = '''
-  nnoremap <silent><C-e> :NERDTreeToggle<CR>
-'''
-
-[[plugins]]
 repo = 'kassio/neoterm'
 hook_add = '''
   let g:neoterm_autoscoll = '1'
