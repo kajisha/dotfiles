@@ -83,10 +83,6 @@ hook_add = '''
 repo = 'Shougo/neomru.vim'
 
 [[plugins]]
-repo =  'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'thinca/vim-ref'
 
 [[plugins]]
