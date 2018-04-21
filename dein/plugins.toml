@@ -35,56 +35,10 @@ hook_add = '''
 repo = 'pbrisbin/vim-mkdir'
 
 [[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-  let g:ale_echo_msg_error_str = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-  let g:ale_set_loclist = 0
-  let g:ale_set_quickfix = 1
-  let g:ale_open_list = 0
-  let g:ale_keep_list_window_open = 0
-'''
-
-[[plugins]]
-repo = 'tpope/vim-endwise'
-
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-hook_add = '''
-  nnoremap [fugitive] <Nop>
-  nmap <Leader>g [fugitive]
-
-  nnoremap <silent> [fugitive]s  :Gstatus<CR>
-  nnoremap <silent> [fugitive]b  :Gblame<CR>
-  nnoremap <silent> [fugitive]ca :Gcommit --ammend<CR>
-  nnoremap <silent> [fugitive]c  :Gcommit -v -q<CR>
-  nnoremap <silent> [fugitive]d  :Gdiff<CR>
-  nnoremap <silent> [fugitive]a  :Gwrite<CR>
-  nnoremap <silent> [fugitive]r  :Gread<CR>
-  nnoremap <silent> [fugitive]p  :Gpush<CR>
-  nnoremap <silent> [fugitive]l  :Glog -- %<CR>
-'''
-
-[[plugins]]
-repo = 'tpope/vim-rails'
-on_ft = ['ruby']
-
-[[plugins]]
 repo = 'tpope/vim-repeat'
 
 [[plugins]]
-repo = 'tpope/vim-rhubarb'
-
-[[plugins]]
 repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'vim-ruby/vim-ruby'
-on_ft = ['ruby']
-
-[[plugins]]
-repo = 'vim-scripts/tComment'
 
 [[plugins]]
 repo = 'junegunn/fzf'
@@ -119,10 +73,6 @@ repo = 'kana/vim-smartinput'
 repo = 'dag/vim-fish'
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-
-[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 depends = ['/deoplete-ruby']
 hook_add = '''
@@ -130,19 +80,11 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'fishbullet/deoplete-ruby'
-on_ft = ['ruby']
-
-[[plugins]]
 repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo =  'Shougo/vimproc.vim'
 build = 'make'
-
-[[plugins]]
-repo = 'tpope/vim-bundler'
-ft = ['ruby']
 
 [[plugins]]
 repo = 'thinca/vim-ref'
@@ -156,45 +98,6 @@ hook_add = '''
   set list lcs=tab:\|\
   let g:indentLine_enabled = 1
 '''
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-  set signcolumn=yes
-  let g:gitgutter_max_signs = 500
-  highlight clear SignColumn
-'''
-
-[[plugins]]
-repo = 'rhysd/committia.vim'
-
-[[plugins]]
-repo = 'idanarye/vim-merginal'
-
-[[plugins]]
-repo = 'kana/vim-filetype-haskell'
-on_ft = ['haskell']
-
-[[plugins]]
-repo = 'elixir-lang/vim-elixir'
-on_ft = ['elixir']
-
-[[plugins]]
-repo = 'slashmili/alchemist.vim'
-
-[[plugins]]
-repo = 'mtscout6/vim-cjsx'
-on_ft = ['jsx']
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
-
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-
-[[plugins]]
-repo = 'jparise/vim-graphql'
 
 [[plugins]]
 repo = 'tukiyo/previm'
@@ -226,19 +129,10 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'pangloss/vim-javascript'
-
-[[plugins]]
-repo = 'chemzqm/vim-jsx-improve'
-
-[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   nnoremap <silent><C-e> :NERDTreeToggle<CR>
 '''
-
-[[plugins]]
-repo = 'hashivim/vim-terraform'
 
 [[plugins]]
 repo = 'kassio/neoterm'
@@ -258,23 +152,6 @@ hook_add = '''
   nnoremap [neoterm]f :TREPLSendFile<CR>
   nnoremap [neoterm]e :TREPLSendLine<CR>
   nnoremap [neoterm]t :Ttoggle<CR>
-'''
-
-[[plugins]]
-repo = 'janko-m/vim-test'
-hook_add = '''
-  let test#strategy = 'neoterm'
-  let test#ruby#rspec#executable = 'bundle exec rspec'
-  let g:test#preserve_screen = 1
-
-  nnoremap [vim-test] <Nop>
-  nmap <Leader>t [vim-test]
-
-  nnoremap <silent> [vim-test]t :TestNearest<CR>
-  nnoremap <silent> [vim-test]T :TestFile<CR>
-  nnoremap <silent> [vim-test]a :TestSuite<CR>
-  nnoremap <silent> [vim-test]l :TestLast<CR>
-  nnoremap <silent> [vim-test]g :TestVisit<CR>
 '''
 
 [[plugins]]
