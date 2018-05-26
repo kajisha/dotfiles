@@ -95,3 +95,23 @@ hook_add = '''
   nnoremap <silent> [vim-test]l :TestLast<CR>
   nnoremap <silent> [vim-test]g :TestVisit<CR>
 '''
+
+[[plugins]]
+repo = 'vim-erlang/vim-rebar'
+on_ft = 'erlang'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-runtime'
+on_ft = 'erlang'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-compiler'
+on_ft = 'erlang'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-tags'
+on_ft = 'erlang'
+
+[[plugins]]
+repo = 'vim-erlang/vim-dialyzer'
+on_ft = 'erlang'
