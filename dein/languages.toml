@@ -67,6 +67,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'tpope/vim-apathy'
+
+[[plugins]]
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
