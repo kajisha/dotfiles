@@ -58,6 +58,13 @@ on_ft = ['ruby']
 [[plugins]]
 repo = 'tpope/vim-rails'
 on_ft = ['ruby']
+hook_add = '''
+  nnoremap [vim-rails] <Nop>
+  nmap <Leader>r [vim-rails]
+
+  nnoremap <silent> [vim-rails]a :AV<CR>
+  nnoremap <silent> [vim-rails]r :RV<CR>
+'''
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
