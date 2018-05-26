@@ -80,8 +80,9 @@ repo = 'chemzqm/vim-jsx-improve'
 
 [[plugins]]
 repo = 'janko-m/vim-test'
+depends = ['kassio/neoterm']
 hook_add = '''
-  let test#strategy = 'neoterm'
+  let test#strategy = 'neovim'
   let test#ruby#rspec#executable = 'bundle exec rspec'
   let g:test#preserve_screen = 1
 
