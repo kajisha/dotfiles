@@ -107,8 +107,6 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-call config#initializers#grep#setup()
-
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
