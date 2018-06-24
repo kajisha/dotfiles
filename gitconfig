@@ -55,3 +55,8 @@
   template = ~/.gitmessage
 [rebase]
   autosquash = true
+[tig "bind"]
+  diff = F ?!git commit --fixup %(commit)
+  diff = S ?!git commit --squash %(commit)
+  main = F ?!git commit --fixup %(commit)
+  main = S ?!git commit --squash %(commit)
