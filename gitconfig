@@ -60,3 +60,5 @@
   diff = S ?!git commit --squash %(commit)
   main = F ?!git commit --fixup %(commit)
   main = S ?!git commit --squash %(commit)
+[credential]
+  helper = /usr/bin/git-credential-libsecret
