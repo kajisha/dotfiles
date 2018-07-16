@@ -64,3 +64,5 @@
   main = S ?!git commit --squash %(commit)
 [credential]
   helper = /usr/bin/git-credential-libsecret
+[log]
+  showSignature = true
