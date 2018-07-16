@@ -106,6 +106,9 @@ on_ft = 'erlang'
 [[plugins]]
 repo = 'vim-erlang/vim-erlang-runtime'
 on_ft = 'erlang'
+hook_add = '''
+  setlocal errorformat=%f:%l\ %m
+'''
 
 [[plugins]]
 repo = 'vim-erlang/vim-erlang-compiler'
