@@ -1,6 +1,7 @@
 [user]
   name = kajisha
   email = kajisha@gmail.com
+  signingkey = 629E58FE01F044BE
 [init]
   templatedir = ~/.git_template
 [fetch]
@@ -53,6 +54,7 @@
   default = current
 [commit]
   template = ~/.gitmessage
+  gpgsign = true
 [rebase]
   autosquash = true
 [tig "bind"]
