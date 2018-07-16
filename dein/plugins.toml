@@ -147,3 +147,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
