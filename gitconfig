@@ -37,13 +37,13 @@
   excludesfile = ~/.gitignore
   quotepath = false
   commentchar = !
-  pager = diff-so-fancy | less --tabs=2 -RFX
+  pager = bat
 [color]
   ui = true
 [pager]
-  log = diff-highlight | lv -c
-  show = diff-highlight | lv -c
-  diff = diff-highlight | lv -c
+  log = bat
+  show = bat
+  diff = bat
 [ghq]
   root = ~/workspace/src
 [url "git@github.com:"]
