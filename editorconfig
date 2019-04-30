@@ -8,6 +8,9 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
+[*.fish]
+indent_size = 4
+
 [*.{erl,hrl}]
 indent_size = 4
 
