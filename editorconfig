@@ -21,5 +21,9 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
+[*.{php,tpl}]
+indent_size = 4
+charset = euc-jp
+
 [Makefile]
 indent_style = tab
