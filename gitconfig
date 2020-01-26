@@ -32,6 +32,9 @@
   st = status
   st = status --short
   todo = grep -nw -E 'TODO|XXX|FIXME|BUG'
+  wa = worktree add
+  wl = worktree list
+  wrm = worktree remove
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
