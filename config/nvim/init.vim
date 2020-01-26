@@ -4,7 +4,40 @@ set termguicolors
 let mapleader = ","
 noremap \ ,
 
-call config#initializers#dein#load()
+call plug#begin('~/.local/share/nvim/plugged')
+Plug 'freeo/vim-kalisi'
+Plug 'rhysd/committia.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'idanarye/vim-merginal'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'kana/vim-smartinput'
+Plug 'tpope/vim-abolish'
+Plug 'Yggdroot/indentLine'
+Plug 'kassio/neoterm'
+Plug 'junegunn/vim-easy-align'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'w0rp/ale'
+Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/tComment'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-apathy'
+Plug 'janko-m/vim-test'
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+call plug#end()
 
 set autowrite     " Automatically :write before running commands
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -161,3 +194,5 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+
+runtime! plugins/*.vim
