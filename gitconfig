@@ -29,6 +29,7 @@
   lsd = ls-files --delete
   ls = ls-files
   pf = push --force-with-lease
+  pr = browse-remote --pr
   st = status
   st = status --short
   todo = grep -nw -E 'TODO|XXX|FIXME|BUG'
@@ -71,3 +72,5 @@
   showSignature = true
 [branch]
   sort = -authordate
+[web]
+  browser = xdg-open
