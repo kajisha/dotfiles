@@ -18,3 +18,4 @@ tmp/**/*
 .python-version
 .tool-versions
 .nvimrc
+.solargraph.yml
