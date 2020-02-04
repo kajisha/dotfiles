@@ -112,17 +112,6 @@ augroup vimrcEx
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile Dangerfile set filetype=ruby
-  autocmd BufRead,BufNewFile Schemafile set filetype=ruby
-  autocmd BufRead,BufNewFile *.json.jb set filetype=ruby
-  autocmd BufRead,BufNewFile *.vue set filetype=javascript
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  " Set filetype $HOME/.dein/*.toml to vim, so do highlight syntax on hook_*
-  autocmd BufNewFile,BufRead $HOME/.dein/*.toml set ft=vim
 augroup END
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
