@@ -1,2 +1,5 @@
-bind main    B !git rebase -i %(commit)
-bind diff    B !git rebase -i %(commit)
+bind main B !git rebase -i %(commit)
+bind diff B !git rebase -i %(commit)
+bind main o !git browse-remote --rev %(commit)
+bind diff o !git browse-remote --rev %(commit)
+bind log  o !git browse-remote --rev %(commit)
