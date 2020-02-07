@@ -14,7 +14,6 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
 
 Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-abolish'
