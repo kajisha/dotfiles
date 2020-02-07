@@ -15,6 +15,7 @@ set nowritebackup
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set textwidth=0
+set hidden
 
 syntax on
 filetype plugin indent on
