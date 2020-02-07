@@ -1,7 +1,5 @@
 let g:fzf_buffers_jump = 1
 
-nnoremap <silent> <C-p> :Files<CR>
-
 command! -bang Colors
 \ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'}, <bang>0)
 

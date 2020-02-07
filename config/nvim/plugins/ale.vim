@@ -15,8 +15,3 @@ let g:ale_fixers = {
 \}
 
 let g:ale_ruby_rubocop_executable = 'bundle'
-
-nnoremap [ale] <Nop>
-nmap <Leader>a [ale]
-
-nnoremap <silent> [ale]f :ALEFix<CR>

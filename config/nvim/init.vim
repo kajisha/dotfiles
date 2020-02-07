@@ -1,9 +1,5 @@
 set termguicolors
 
-" Leader
-let mapleader = ","
-noremap \ ,
-
 set autowrite     " Automatically :write before running commands
 set backspace=2   " Backspace deletes like most programs in insert mode
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
@@ -56,9 +52,5 @@ set diffopt+=vertical
 colorscheme kalisi
 set background=dark
 
-imap <C-[> <Esc>
-noremap ; :
-nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
+" Show keybingins
+command Keybind vsp ~/.config/nvim/plugins/keybindings.vim

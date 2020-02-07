@@ -1,9 +1,3 @@
-nnoremap [vim-rails] <Nop>
-nmap <Leader>r [vim-rails]
-
-nnoremap <silent> [vim-rails]a :AV<CR>
-nnoremap <silent> [vim-rails]r :RV<CR>
-
 let g:rails_projections = {
     \  "app/controllers/*_controller.rb": {
     \      "test": [
