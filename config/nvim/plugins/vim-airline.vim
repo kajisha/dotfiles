@@ -1,7 +1,7 @@
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#enabled = 0
-let g:airline_theme = 'luna'
+let g:airline_theme = 'minimalist'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
