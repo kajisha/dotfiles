@@ -1,3 +1,4 @@
-" Automatically wrap at 72 characters and spell check commit messages
-" setlocal textwidth=72
+" Disable word wrapping and spell check commit messages
+setlocal textwidth=0
 setlocal spell
+setlocal noruler
