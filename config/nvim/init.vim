@@ -37,7 +37,7 @@ set splitright
 " Always use vertical diffs
 set diffopt+=vertical
 
-colorscheme kalisi
+colorscheme gruvbox
 set background=dark
 
 " Show keybingins

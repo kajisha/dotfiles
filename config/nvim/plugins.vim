@@ -1,5 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'freeo/vim-kalisi'
+Plug 'flazz/vim-colorschemes'
+
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
 Plug 'rhysd/committia.vim'
