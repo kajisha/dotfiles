@@ -36,6 +36,7 @@ charset = euc-jp
 
 [Makefile]
 indent_style = tab
+indent_size = 4
 
 [*.rs]
 end_of_line = lf
