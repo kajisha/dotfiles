@@ -1,5 +1,8 @@
-let g:asynccomplete_auto_popup = 0
-set completeopt-=preview
+" set completeopt-=preview
+
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
 
 function! asyncomplete#check_back_space() abort
   let col = col('.') - 1
