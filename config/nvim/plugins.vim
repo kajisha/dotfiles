@@ -27,7 +27,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'dense-analysis/ale'
 
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 Plug 'janko-m/vim-test'
 
 Plug 'prabirshrestha/async.vim'
