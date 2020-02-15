@@ -5,3 +5,5 @@ typescript
 vls
 webpack
 yarn
+prettier
+stylelint
