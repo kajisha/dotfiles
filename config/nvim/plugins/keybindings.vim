@@ -4,7 +4,7 @@ noremap \ ,
 
 imap <C-[> <Esc>
 noremap ; :
-nnoremap <C-c><C-c> :<C-u>nohlsearch<cr><Esc>
+nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -15,18 +15,23 @@ nmap <Leader>a [ale]
 nnoremap <silent> [ale]f :ALEFix<CR>
 
 " asyncomplete
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ asyncomplete#check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? "\<C-n>" :
+"   \ asyncomplete#check_back_space() ? "\<TAB>" :
+"   \ asyncomplete#force_refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
 
 " fzf <Leader>f
 nnoremap [fzf] <Nop>
 nmap <Leader>f [fzf]
-nnoremap <silent> <C-p>  :GFiles<CR>
+nnoremap <silent> [fzf]f  :GFiles<CR>
 nnoremap <silent> [fzf]b :Buffers<CR>
 nnoremap <silent> [fzf]c :Colors<CR>
 nnoremap <silent> [fzf]g :Ag <C-R><C-W><CR>
