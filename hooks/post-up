@@ -1,0 +1,46 @@
+#!/usr/bin/env fish
+
+# intall vim-plug
+if not test -e ~/.local/share/nvim/site/autoload/plug.vim
+  echo 'Install vim-plug...'
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+end
+
+# install asdf-vm
+if not test -d ~/.asdf
+  echo 'Install asdf-vm...'
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+
+  echo 'source ~/.asdf/asdf.fish' >> ~/.config/fish/config.fish
+
+  mkdir -p ~/.config/fish/completions; and cp ~/.asdf/completions/asdf.fish ~/.config/fish/completions
+end
+
+# fish
+abbr -a -U -- cat bat
+abbr -a -U -- dc docker-compose
+abbr -a -U -- dce 'docker-compose exec $APP_NAME'
+abbr -a -U -- dcr 'docker-compose run --rm $APP_NAME'
+abbr -a -U -- rc 'docker-compose run --rm $APP_NAME bin/rails c'
+abbr -a -U -- rcs 'docker-compose run --rm $APP_NAME bin/rails c --sandbox'
+abbr -a -U -- r 'docker-compose run --rm $APP_NAME bin/rails'
+abbr -a -U -- s 'docker-compose run --rm $APP_NAME bin/rspec'
+abbr -a -U -- e 'sudo emerge'
+abbr -a -U -- mr 'sudo emerge @module-rebuild'
+abbr -a -U -- lr 'sudo emerge -q @live-rebuild'
+abbr -a -U -- pr 'sudo emerge -q @preserved-rebuild'
+abbr -a -U -- es 'sudo eix-sync'
+abbr -a -U -- udon 'sudo emerge -quDN world'
+abbr -a -U -- g git
+abbr -a -U -- gcan 'git ci --amend --no-edit'
+abbr -a -U -- gfo 'git fetch origin'
+abbr -a -U -- gp 'git pull --rebase --prune'
+abbr -a -U -- grbm 'git rebase -i origin/master'
+abbr -a -U -- grm 'git rebase origin/master'
+abbr -a -U -- pbcopy 'xclip -selection c'
+abbr -a -U -- sc-disable 'sudo systemctl disable'
+abbr -a -U -- sc-enable 'sudo systemctl enable'
+abbr -a -U -- sc-restart 'sudo systemctl restart'
+abbr -a -U -- sc-start 'sudo systemctl start'
+abbr -a -U -- sc-stop 'sudo systemctl stop'
+abbr -a -U -- sc-status 'systemctl status'
