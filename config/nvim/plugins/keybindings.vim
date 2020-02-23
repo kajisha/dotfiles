@@ -5,6 +5,7 @@ noremap \ ,
 imap <C-[> <Esc>
 noremap ; :
 nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
+nnoremap <C-s> :w<CR>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
