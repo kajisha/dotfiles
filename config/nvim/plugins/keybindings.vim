@@ -23,12 +23,13 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 " fzf <Leader>f
 nnoremap [fzf] <Nop>
 nmap <Leader>f [fzf]
-nnoremap <silent> [fzf]f  :GFiles<CR>
+nnoremap <silent> [fzf]f :GFiles<CR>
 nnoremap <silent> [fzf]b :Buffers<CR>
 nnoremap <silent> [fzf]c :Colors<CR>
 nnoremap <silent> [fzf]g :Ag <C-R><C-W><CR>
 nnoremap <silent> [fzf]l :BLines<CR>
 nnoremap <silent> [fzf]L :Lines<CR>
+nnoremap <silent> [fzf]h :History<CR>
 
 " neoterm <Leader>n
 nnoremap [neoterm] <Nop>
