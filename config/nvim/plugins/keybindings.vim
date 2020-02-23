@@ -14,13 +14,6 @@ nnoremap [ale] <Nop>
 nmap <Leader>a [ale]
 nnoremap <silent> [ale]f :ALEFix<CR>
 
-" asyncomplete
-" inoremap <silent><expr> <TAB>
-"   \ pumvisible() ? "\<C-n>" :
-"   \ asyncomplete#check_back_space() ? "\<TAB>" :
-"   \ asyncomplete#force_refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
