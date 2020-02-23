@@ -20,7 +20,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-
 " fzf <Leader>f
 nnoremap [fzf] <Nop>
 nmap <Leader>f [fzf]
