@@ -14,6 +14,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap [ale] <Nop>
 nmap <Leader>a [ale]
 nnoremap <silent> [ale]f :ALEFix<CR>
+nnoremap <silent> [ale]s :ALEFixSuggest<CR>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
