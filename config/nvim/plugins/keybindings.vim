@@ -58,18 +58,32 @@ nnoremap <silent> [fugitive]l  :Glog -- %<CR>
 " vim-lsp <Leader>l
 nnoremap [vim-lsp] <Nop>
 nmap <Leader>l [vim-lsp]
-nnoremap <silent> [vim-lsp]c :LspCodeAction<CR>
-nnoremap <silent> [vim-lsp]d :LspDefinition<CR>
-nnoremap <silent> [vim-lsp]p :LspPeekDefinition<CR>
-nnoremap <silent> [vim-lsp]D :LspDeclaration<CR>
-nnoremap <silent> [vim-lsp]P :LspPeekDeclaration<CR>
-nnoremap <silent> [vim-lsp]f :LspDocumentFormat<CR>
-nnoremap <silent> [vim-lsp]h :LspHover<CR>
-nnoremap <silent> [vim-lsp]i :LspImplementation<CR>
-nnoremap <silent> [vim-lsp]r :LspReferences<CR>
-nnoremap <silent> [vim-lsp]R :LspRename<CR>
-nnoremap <silent> [vim-lsp]t :LspTypeDefinition<CR>
-nnoremap <silent> [vim-lsp]T :LspTypeHierarchy<CR>
+nnoremap <silent> [vim-lsp]a  :LspCodeAction<CR>
+nnoremap <silent> [vim-lsp]d  :LspDeclaration<CR>
+nnoremap <silent> [vim-lsp]D  :LspDefinition<CR>
+nnoremap <silent> [vim-lsp]dd :LspDocumentDiagnostics<CR>
+nnoremap <silent> [vim-lsp]df :LspDocumentFormat<CR>
+nnoremap <silent> [vim-lsp]rf :LspDocumentRangeFormat<CR>
+nnoremap <silent> [vim-lsp]ds :LspDocumentSymbol<CR>
+nnoremap <silent> [vim-lsp]h  :LspHover<CR>
+nnoremap <silent> [vim-lsp]i  :LspImplementation<CR>
+nnoremap <silent> [vim-lsp]nd :LspNextDiagnostic<CR>
+nnoremap <silent> [vim-lsp]ne :LspNextError<CR>
+nnoremap <silent> [vim-lsp]nr :LspNextReference<CR>
+nnoremap <silent> [vim-lsp]nw :LspNextWarning<CR>
+nnoremap <silent> [vim-lsp]Pd :LspPeekDeclaration<CR>
+nnoremap <silent> [vim-lsp]PD :LspPeekDefinition<CR>
+nnoremap <silent> [vim-lsp]Pi :LspPeekImplementation<CR>
+nnoremap <silent> [vim-lsp]Pt :LspPeekTypeDefinition<CR>
+nnoremap <silent> [vim-lsp]pd :LspPreviousDiagnostic<CR>
+nnoremap <silent> [vim-lsp]pe :LspPreviousError<CR>
+nnoremap <silent> [vim-lsp]pr :LspPreviousReference<CR>
+nnoremap <silent> [vim-lsp]pw :LspPreviousWarning<CR>
+nnoremap <silent> [vim-lsp]r  :LspReferences<CR>
+nnoremap <silent> [vim-lsp]R  :LspRename<CR>
+nnoremap <silent> [vim-lsp]td :LspTypeDefinition<CR>
+nnoremap <silent> [vim-lsp]th :LspTypeHierarchy<CR>
+nnoremap <silent> [vim-lsp]ws :LspWorkspaceSymbol<CR>
 
 " vim-rails <Leader>r
 nnoremap [vim-rails] <Nop>
