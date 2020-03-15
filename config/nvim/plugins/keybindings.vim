@@ -36,10 +36,10 @@ nnoremap <silent> [fzf]h :History<CR>
 " neoterm <Leader>n
 nnoremap [neoterm] <Nop>
 nmap <Leader>n [neoterm]
-vnoremap [neoterm]e :TREPLSendSelection<CR>
-nnoremap [neoterm]f :TREPLSendFile<CR>
-nnoremap [neoterm]e :TREPLSendLine<CR>
-nnoremap [neoterm]t :Ttoggle<CR>
+vnoremap <silent> [neoterm]e :TREPLSendSelection<CR>
+nnoremap <silent> [neoterm]f :TREPLSendFile<CR>
+nnoremap <silent> [neoterm]e :TREPLSendLine<CR>
+nnoremap <silent> [neoterm]t :Ttoggle<CR>
 
 " fugitive <Leader>g
 nnoremap [fugitive] <Nop>
