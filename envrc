@@ -1,0 +1,2 @@
+export GOPATH=$HOME/workspace
+export XDG_CURRENT_DESKTOP=GNOME
