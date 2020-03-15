@@ -1,8 +1,0 @@
-#!/bin/sh
-
-dir="$(git rev-parse --git-dir)"
-trap 'rm -f "$dir/$$.tags"' EXIT
-
-git ls-files | ctags --tag-relative --sort=yes -L - -f "$dir/$$.tags" --languages=-sql
-
-mv "$dir/$$.tags" $dir/tags
