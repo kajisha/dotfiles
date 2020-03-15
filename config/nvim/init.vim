@@ -28,9 +28,6 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
