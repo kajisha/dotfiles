@@ -22,6 +22,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'kassio/neoterm'
 
 Plug 'godlygeek/tabular' | Plug 'sheerun/vim-polyglot'
+Plug 'gentoo/gentoo-syntax'
 Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 
