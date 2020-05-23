@@ -1,0 +1,12 @@
+remove mod1 = Alt_L
+keycode 64 = Mode_switch
+
+keycode 66 = Control_L NoSymbol Control_L
+
+keycode 43 = h H Left Left
+keycode 44 = j J Down Down
+keycode 45 = k K Up Up
+keycode 46 = l L Right Right
+
+clear Lock
+add Control = Control_L
