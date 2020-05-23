@@ -10,6 +10,25 @@ nnoremap <C-s> :w<CR>
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+" netrw
+" j     下に移動
+" k     上に移動
+" Enter ディレクトリの場合は移動、ファイルの場合はカレントバッファに開く
+" o     水平分割で開く
+" v     垂直分割で開く
+" -     一つ上のディレクトリに移動
+" u     undo、１つ前のディレクトリに戻る
+" U     redo、uで戻る前のディレクトリに戻る
+" d     ディレクトリを作成する
+" D     ディレクトリ・ファイルを削除する
+" mf    ファイルをマークする
+" mt    コピー・移動先のディレクトリをマークする
+" mc    mfしたファイルをmtしたディレクトリにコピーする
+" mm    mfしたファイルをmtしたディレクトリに移動する
+" I     ヘッダの表示トグル
+" i     ファイルツリーの表示形式を変更
+" p     ファイルをプレビューする
+
 " ale <Leader>a
 nnoremap [ale] <Nop>
 nmap <Leader>a [ale]
