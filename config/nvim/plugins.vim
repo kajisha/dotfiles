@@ -29,7 +29,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
-Plug 'janko-m/vim-test'
+Plug 'vim-test/vim-test'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
