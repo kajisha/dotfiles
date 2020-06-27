@@ -10,3 +10,5 @@ keycode 46 = l L Right Right
 
 clear Lock
 add Control = Control_L
+
+keysym Control_R = Multi_key
