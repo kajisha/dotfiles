@@ -1,4 +1,4 @@
-" Leader
+" leader
 let mapleader = ","
 noremap \ ,
 
@@ -31,9 +31,9 @@ nnoremap gF :e <cfile><CR>
 " i     ファイルツリーの表示形式を変更
 " p     ファイルをプレビューする
 
-" ale <Leader>a
+" ale <leader>a
 nnoremap [ale] <Nop>
-nmap <Leader>a [ale]
+nmap <leader>a [ale]
 nnoremap <silent> [ale]f :ALEFix<CR>
 nnoremap <silent> [ale]s :ALEFixSuggest<CR>
 
@@ -43,9 +43,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-" fzf <Leader>f
+" fzf <leader>f
 nnoremap [fzf] <Nop>
-nmap <Leader>f [fzf]
+nmap <leader>f [fzf]
 nnoremap <silent> [fzf]f :GFiles<CR>
 nnoremap <silent> [fzf]b :Buffers<CR>
 nnoremap <silent> [fzf]c :Colors<CR>
@@ -54,17 +54,17 @@ nnoremap <silent> [fzf]l :BLines<CR>
 nnoremap <silent> [fzf]L :Lines<CR>
 nnoremap <silent> [fzf]h :History<CR>
 
-" neoterm <Leader>n
+" neoterm <leader>n
 nnoremap [neoterm] <Nop>
-nmap <Leader>n [neoterm]
+nmap <leader>n [neoterm]
 vnoremap <silent> [neoterm]e :TREPLSendSelection<CR>
 nnoremap <silent> [neoterm]f :TREPLSendFile<CR>
 nnoremap <silent> [neoterm]e :TREPLSendLine<CR>
 nnoremap <silent> [neoterm]t :Ttoggle<CR>
 
-" fugitive <Leader>g
+" fugitive <leader>g
 nnoremap [fugitive] <Nop>
-nmap <Leader>g [fugitive]
+nmap <leader>g [fugitive]
 nnoremap <silent> [fugitive]s  :Gstatus<CR>
 nnoremap <silent> [fugitive]b  :Gblame<CR>
 nnoremap <silent> [fugitive]B  :Gbrowse<CR>
@@ -76,15 +76,15 @@ nnoremap <silent> [fugitive]r  :Gread<CR>
 nnoremap <silent> [fugitive]p  :Gpush<CR>
 nnoremap <silent> [fugitive]l  :Glog -- %<CR>
 
-" vim-rails <Leader>r
+" vim-rails <leader>r
 nnoremap [vim-rails] <Nop>
-nmap <Leader>r [vim-rails]
+nmap <leader>r [vim-rails]
 nnoremap <silent> [vim-rails]a :AV<CR>
-nnoremap <silent> [vim-rails]r :RV<CR>
+nnoremap <silent> [vim-rail]r :RV<CR>
 
-" vim-test <Leader>t
+" vim-test <leader>t
 nnoremap [vim-test] <Nop>
-nmap <Leader>t [vim-test]
+nmap <leader>t [vim-test]
 nnoremap <silent> [vim-test]t :TestNearest<CR>
 nnoremap <silent> [vim-test]T :TestFile<CR>
 nnoremap <silent> [vim-test]a :TestSuite<CR>
@@ -93,7 +93,7 @@ nnoremap <silent> [vim-test]g :TestVisit<CR>
 
 " vim-plug <leader>p
 nnoremap [vim-plug] <Nop>
-nmap <Leader>p [vim-plug]
+nmap <leader>p [vim-plug]
 nnoremap <silent> [vim-plug]u :PlugUpdate<CR>
 nnoremap <silent> [vim-plug]U :PlugUpgrade<CR>
 
@@ -116,8 +116,8 @@ endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -156,8 +156,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -176,7 +176,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-nmap <leader>ac  <Plug>(coc-codeaction)
+" nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
