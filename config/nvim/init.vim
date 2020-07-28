@@ -1,5 +1,6 @@
 set termguicolors
 
+set autochdir
 set autowrite     " Automatically :write before running commands
 set backspace=2   " Backspace deletes like most programs in insert mode
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
