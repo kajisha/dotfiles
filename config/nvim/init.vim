@@ -18,9 +18,6 @@ set showcmd       " display incomplete commands
 set textwidth=0
 set hidden
 
-syntax on
-filetype plugin indent on
-
 runtime! plugins.vim
 
 " Display extra whitespace
