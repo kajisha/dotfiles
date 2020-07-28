@@ -10,6 +10,8 @@ nnoremap <C-s> :w<CR>
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+nnoremap gF :e <cfile><CR>
+
 " netrw
 " j     下に移動
 " k     上に移動
