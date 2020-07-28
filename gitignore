@@ -19,3 +19,4 @@ tmp/**/*
 .tool-versions
 .nvimrc
 .solargraph.yml
+tmux*.log
