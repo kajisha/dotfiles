@@ -29,6 +29,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
+Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
 Plug 'vim-test/vim-test'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
