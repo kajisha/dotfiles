@@ -53,6 +53,8 @@
   pushinsteadof = https://github.com/
 [rerere]
   enabled = true
+[gpg]
+  program = gpg
 [push]
   default = current
 [commit]
