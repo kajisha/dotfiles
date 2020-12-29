@@ -67,8 +67,6 @@
   diff = S ?!git commit --squash %(commit)
   main = F ?!git commit --fixup %(commit)
   main = S ?!git commit --squash %(commit)
-[credential]
-  helper = /usr/bin/git-credential-libsecret
 [log]
   showSignature = true
 [branch]
@@ -80,3 +78,5 @@
   process = git-lfs filter-process
 [web]
   browser = xdg-open
+[credential]
+  helper = /usr/bin/git-credential-manager
