@@ -30,7 +30,7 @@
     }
   },
   "solargraph.commandPath": "solargraph",
-  "solargraph.useBundler": false,
+  "solargraph.useBundler": true,
   "solargraph.completion": true,
   "solargraph.diagnostics": true,
   "solargraph.definitions": true,
