@@ -61,19 +61,20 @@ vnoremap <silent> [neoterm]e :TREPLSendSelection<CR>
 nnoremap <silent> [neoterm]f :TREPLSendFile<CR>
 nnoremap <silent> [neoterm]e :TREPLSendLine<CR>
 nnoremap <silent> [neoterm]t :Ttoggle<CR>
+tnoremap <silent> <ESC> <C-\><C-n>
 
 " fugitive <leader>g
 nnoremap [fugitive] <Nop>
 nmap <leader>g [fugitive]
 nnoremap <silent> [fugitive]s  :Gstatus<CR>
-nnoremap <silent> [fugitive]b  :Gblame<CR>
-nnoremap <silent> [fugitive]B  :Gbrowse<CR>
-nnoremap <silent> [fugitive]ca :Gcommit --ammend<CR>
-nnoremap <silent> [fugitive]c  :Gcommit -v -q<CR>
-nnoremap <silent> [fugitive]d  :Gdiff<CR>
+nnoremap <silent> [fugitive]b  :Git blame<CR>
+nnoremap <silent> [fugitive]B  :GBrowse<CR>
+nnoremap <silent> [fugitive]ca :Git commit --ammend<CR>
+nnoremap <silent> [fugitive]c  :Git commit -v -q<CR>
+nnoremap <silent> [fugitive]d  :Gdiffsplit<CR>
 nnoremap <silent> [fugitive]a  :Gwrite<CR>
 nnoremap <silent> [fugitive]r  :Gread<CR>
-nnoremap <silent> [fugitive]p  :Gpush<CR>
+nnoremap <silent> [fugitive]p  :Git push<CR>
 nnoremap <silent> [fugitive]l  :Glog -- %<CR>
 
 " vim-rails <leader>r

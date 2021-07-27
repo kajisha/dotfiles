@@ -3,6 +3,8 @@ Plug 'flazz/vim-colorschemes'
 
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
+Plug 'Pocco81/AbbrevMan.nvim', { 'branch': 'main' }
+
 Plug 'rhysd/committia.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -31,6 +33,8 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
 Plug 'vim-test/vim-test'
+
+Plug 'mattn/vim-sqlfmt'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()

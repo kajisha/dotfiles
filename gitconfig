@@ -80,3 +80,5 @@
   browser = xdg-open
 [credential]
   helper = /usr/bin/git-credential-manager
+[pull]
+  rebase = preserve
