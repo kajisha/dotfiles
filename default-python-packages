@@ -1,3 +1,5 @@
 docker-compose
 neovim
 git+https://github.com/cpbotha/xdg-open-wsl.git
+sqlparse
+awscli

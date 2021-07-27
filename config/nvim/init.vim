@@ -1,6 +1,6 @@
 set termguicolors
 
-set autochdir
+" set autochdir
 set autowrite     " Automatically :write before running commands
 set backspace=2   " Backspace deletes like most programs in insert mode
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
@@ -54,3 +54,9 @@ endif
 
 " Show keybingins
 command Keybind vsp ~/.config/nvim/plugins/keybindings.vim
+
+" folding
+set foldmethod=syntax " syntax highlighting items specify folds
+set foldcolumn=1 " defines 1 col at window left, to indicate folding
+let javaScript_fold=1 " activate folding by JS syntax
+set foldlevelstart=99 " start file with all folds opened
