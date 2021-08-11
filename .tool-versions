@@ -13,7 +13,7 @@ erlang 24.0.3
 golang 1.16.5
 haskell 9.0.1
 rust 1.53.0
-tmux 3.1b
+tmux 3.2a
 logtalk 3.00.0
 sbcl 2.1.6
 sqlite 3.36.0
