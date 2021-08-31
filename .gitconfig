@@ -81,4 +81,4 @@
 [credential]
   helper = /usr/bin/git-credential-manager
 [pull]
-  rebase = preserve
+  rebase = merges
