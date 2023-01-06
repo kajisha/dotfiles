@@ -1,1 +1,1 @@
-let b:ale_fixers = ['stylelint', 'prettier', 'eslint']
+let b:ale_fixers = ['eslint']

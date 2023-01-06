@@ -1,48 +1,53 @@
-" download vim-plug if missing
-if empty(glob("~/.vim/autoload/plug.vim"))
-  silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * silent! PlugInstall
+let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
 endif
 
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'flazz/vim-colorschemes'
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack 'flazz/vim-colorschemes'
 
-Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Jetpack 'vim-airline/vim-airline' | Jetpack 'vim-airline/vim-airline-themes'
 
-Plug 'Pocco81/AbbrevMan.nvim', { 'branch': 'main' }
+Jetpack 'lambdalisue/fern.vim'
+Jetpack 'lambdalisue/nerdfont.vim'
+Jetpack 'lambdalisue/fern-renderer-nerdfont.vim'
+Jetpack 'lambdalisue/fern-git-status.vim'
+Jetpack 'lambdalisue/fern-hijack.vim'
+Jetpack 'yuki-yano/fern-preview.vim'
+Jetpack 'pbrisbin/vim-mkdir'
 
-Plug 'rhysd/committia.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'idanarye/vim-merginal'
+Jetpack 'Pocco81/AbbrevMan.nvim', { 'branch': 'main' }
 
-Plug 'pbrisbin/vim-mkdir'
+" Git plugins
+Jetpack 'rhysd/committia.vim'
+Jetpack 'airblade/vim-gitgutter'
+Jetpack 'tpope/vim-fugitive'
+Jetpack 'tpope/vim-rhubarb'
+Jetpack 'idanarye/vim-merginal'
 
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Jetpack 'tpope/vim-repeat'
+Jetpack 'tpope/vim-surround'
+Jetpack 'junegunn/fzf.vim'
+Jetpack 'junegunn/fzf', { 'do': {-> fzf#install()} }
+Jetpack 'brooth/far.vim'
 
-Plug 'cohama/lexima.vim'
-Plug 'tpope/vim-abolish'
-Plug 'Yggdroot/indentLine'
+Jetpack 'cohama/lexima.vim'
+Jetpack 'tpope/vim-abolish'
+Jetpack 'lukas-reineke/indent-blankline.nvim'
 
-Plug 'kassio/neoterm'
+Jetpack 'godlygeek/tabular' | Jetpack 'sheerun/vim-polyglot'
+Jetpack 'tomtom/tcomment_vim'
+Jetpack 'editorconfig/editorconfig-vim'
 
-Plug 'godlygeek/tabular' | Plug 'sheerun/vim-polyglot'
-Plug 'gentoo/gentoo-syntax'
-Plug 'tomtom/tcomment_vim'
-Plug 'editorconfig/editorconfig-vim'
+Jetpack 'tpope/vim-rails', { 'for': ['ruby'] }
+Jetpack 'vim-test/vim-test'
 
-Plug 'dense-analysis/ale'
-
-Plug 'tpope/vim-rails', { 'for': ['ruby'] }
-Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
-Plug 'vim-test/vim-test'
-
-Plug 'mattn/vim-sqlfmt'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
+" LSP, Linter, Formatter, etc.
+Jetpack 'neoclide/coc.nvim', {'branch': 'release'}
+Jetpack 'dense-analysis/ale'
+Jetpack 'mattn/vim-sqlfmt'
+call jetpack#end()
 
 runtime! plugins/*.vim

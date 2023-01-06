@@ -1,4 +1,4 @@
-" leader
+""" leader
 let mapleader = ","
 noremap \ ,
 
@@ -7,7 +7,15 @@ noremap ; :
 nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
 nnoremap <C-s> :w<CR>
 
-" Switch between the last two files
+" Buffers
+nnoremap [buffer] <Nop>
+nmap <leader>b [buffer]
+nnoremap <silent> [buffer]n :bnext<CR>
+nnoremap <silent> [buffer]p :bprev<CR>
+nnoremap <silent> [buffer]d :bdelete<CR>
+nnoremap <silent> [buffer]l :ls<CR>
+
+""" Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
 nnoremap gF :e <cfile><CR>
@@ -31,19 +39,19 @@ nnoremap gF :e <cfile><CR>
 " i     ファイルツリーの表示形式を変更
 " p     ファイルをプレビューする
 
-" ale <leader>a
+""" ale <leader>a
 nnoremap [ale] <Nop>
 nmap <leader>a [ale]
 nnoremap <silent> [ale]f :ALEFix<CR>
 nnoremap <silent> [ale]s :ALEFixSuggest<CR>
 
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-" fzf <leader>f
+""" fzf <leader>f
 nnoremap [fzf] <Nop>
 nmap <leader>f [fzf]
 nnoremap <silent> [fzf]f :GFiles<CR>
@@ -54,7 +62,7 @@ nnoremap <silent> [fzf]l :BLines<CR>
 nnoremap <silent> [fzf]L :Lines<CR>
 nnoremap <silent> [fzf]h :History<CR>
 
-" neoterm <leader>n
+""" neoterm <leader>n
 nnoremap [neoterm] <Nop>
 nmap <leader>n [neoterm]
 vnoremap <silent> [neoterm]e :TREPLSendSelection<CR>
@@ -63,7 +71,47 @@ nnoremap <silent> [neoterm]e :TREPLSendLine<CR>
 nnoremap <silent> [neoterm]t :Ttoggle<CR>
 tnoremap <silent> <ESC> <C-\><C-n>
 
-" fugitive <leader>g
+""" barbar.nvim
+" Move to previous/next
+nnoremap <silent>    <A-,> :BufferPrevious<CR>
+nnoremap <silent>    <A-.> :BufferNext<CR>
+" Re-order to previous/next
+nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
+nnoremap <silent>    <A->> :BufferMoveNext<CR>
+" Goto buffer in position...
+nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+nnoremap <silent>    <A-9> :BufferLast<CR>
+" Pin/unpin buffer
+nnoremap <silent>    <A-p> :BufferPin<CR>
+" Close buffer
+nnoremap <silent>    <A-c> :BufferClose<CR>
+" Wipeout buffer
+"                          :BufferWipeout<CR>
+" Close commands
+"                          :BufferCloseAllButCurrent<CR>
+"                          :BufferCloseAllButPinned<CR>
+"                          :BufferCloseBuffersLeft<CR>
+"                          :BufferCloseBuffersRight<CR>
+" Magic buffer-picking mode
+nnoremap <silent> <C-s>    :BufferPick<CR>
+" Sort automatically by...
+nnoremap <silent> <Space>bb :BufferOrderByBufferNumber<CR>
+nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
+
+" Other:
+" :BarbarEnable - enables barbar (enabled by default)
+" :BarbarDisable - very bad command, should never be used
+
+""" fugitive <leader>g
 nnoremap [fugitive] <Nop>
 nmap <leader>g [fugitive]
 nnoremap <silent> [fugitive]s  :Gstatus<CR>
@@ -77,13 +125,13 @@ nnoremap <silent> [fugitive]r  :Gread<CR>
 nnoremap <silent> [fugitive]p  :Git push<CR>
 nnoremap <silent> [fugitive]l  :Glog -- %<CR>
 
-" vim-rails <leader>r
+""" vim-rails <leader>r
 nnoremap [vim-rails] <Nop>
 nmap <leader>r [vim-rails]
 nnoremap <silent> [vim-rails]a :AV<CR>
 nnoremap <silent> [vim-rail]r :RV<CR>
 
-" vim-test <leader>t
+""" vim-test <leader>t
 nnoremap [vim-test] <Nop>
 nmap <leader>t [vim-test]
 nnoremap <silent> [vim-test]t :TestNearest<CR>
@@ -92,13 +140,7 @@ nnoremap <silent> [vim-test]a :TestSuite<CR>
 nnoremap <silent> [vim-test]l :TestLast<CR>
 nnoremap <silent> [vim-test]g :TestVisit<CR>
 
-" vim-plug <leader>p
-nnoremap [vim-plug] <Nop>
-nmap <leader>p [vim-plug]
-nnoremap <silent> [vim-plug]u :PlugUpdate<CR>
-nnoremap <silent> [vim-plug]U :PlugUpgrade<CR>
-
-" coc.nvim
+""" coc.nvim
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -135,11 +177,16 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1] =~ '\s'
+" endfunction
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
 " Use `[g` and `]g` to navigate diagnostics

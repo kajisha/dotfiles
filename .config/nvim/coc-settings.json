@@ -1,5 +1,5 @@
 {
-  "suggest.noselect": true,
+  "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
   "languageserver": {
     "clangd": {
@@ -27,7 +27,7 @@
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
-    }
+    },
   },
   "solargraph.commandPath": "solargraph",
   "solargraph.useBundler": false,
@@ -37,7 +37,8 @@
   "solargraph.hover": true,
   "solargraph.autoformat": true,
 
-  "eslint.autoFixOnSave": true,
-
+  "eslint.filetypes": ["javascript", "vue"],
+  "eslint.autoFixOnSave": false,
   "vetur.ignoreProjectWarning": true,
+  "tsserver.enable": false,
 }

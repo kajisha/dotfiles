@@ -20,4 +20,4 @@ let g:airline_section_x =
       \ "%{strlen(&fenc)?&fenc:&enc}".s:rsep.
       \ "%{strlen(&filetype)?&filetype:'no ft'}"
 let g:airline_section_y = '%3p%%'
-let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%31:%-2v'
+" let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%31:%-2v'

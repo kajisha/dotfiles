@@ -3,7 +3,7 @@
   email = kajisha@gmail.com
   signingkey = 629E58FE01F044BE
 [fetch]
-  prune = true
+	prune = true
 [merge]
   ff = only
   tool = vimdiff
@@ -39,7 +39,6 @@
   autocrlf = input
   excludesfile = ~/.gitignore
   quotepath = false
-  commentchar = !
   pager = bat
 [color]
   ui = true
@@ -82,3 +81,7 @@
   helper = /usr/bin/git-credential-manager
 [pull]
   rebase = merges
+[remote "origin"]
+	prune = true
+[init]
+	defaultBranch = main
