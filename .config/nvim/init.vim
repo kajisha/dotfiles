@@ -58,5 +58,11 @@ command Keybind vsp ~/.config/nvim/plugins/keybindings.vim
 " folding
 set foldmethod=syntax " syntax highlighting items specify folds
 set foldcolumn=1 " defines 1 col at window left, to indicate folding
+
+" neoterm
+let g:neoterm_automap_keys = '<F5>'
+let g:neoterm_autoscoll = '1'
+let g:neoterm_size = 24
+let g:neoterm_default_mod = 'botright'
 let javaScript_fold=1 " activate folding by JS syntax
 set foldlevelstart=99 " start file with all folds opened

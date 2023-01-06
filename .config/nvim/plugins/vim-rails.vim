@@ -1,9 +1,14 @@
 let g:rails_projections = {
+    \  "lib/tasks/*.thor": {
+    \      "test": [
+    \        "spec/tasks/{}_spec.rb",
+    \      ],
+    \  },
     \  "app/controllers/*_controller.rb": {
     \      "test": [
     \        "spec/requests/{}_spec.rb",
     \        "spec/controllers/{}_controller_spec.rb",
-    \        "test/controllers/{}_controller_test.rb"
+    \        "test/controllers/{}_controller_test.rb",
     \      ],
     \      "alternate": [
     \        "spec/requests/{}_spec.rb",
