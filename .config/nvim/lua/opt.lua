@@ -24,9 +24,6 @@ vim.opt.splitright = true
 
 vim.opt.diffopt:append{'vertical'}
 
--- vim.opt.foldmethod = 'syntax'
--- vim.opt.foldcolumn = '1'
-
 vim.g.clipboard = {
   name = "win32yank",
   copy = {
