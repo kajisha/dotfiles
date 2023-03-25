@@ -1,3 +1,4 @@
 ripgrep
 cargo-edit
 fd-find
+tree-sitter-cli
