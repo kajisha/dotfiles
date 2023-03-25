@@ -5,13 +5,10 @@ ghq 1.4.1
 github-cli 2.25.0
 golang 1.20.2
 lua 5.4.4
-mysql 8.0.32
-neovim nightly
-nodejs lts
-postgres 14.1
 python 3.10.7
 ruby 3.2.1
 rust 1.68.0
 starship 1.13.1
 terraform 1.4.2
 tmux 3.3a
+neovim nightly
