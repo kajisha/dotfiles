@@ -269,6 +269,7 @@ require('lazy').setup {
           vim.keymap.set('n', 'gn', vim.diagnostic.goto_next, { noremap = true, silent = true })
 
           require('lspconfig')[server_name].setup {
+            capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
             on_attach = function(_, bufnr)
               local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -278,6 +279,8 @@ require('lazy').setup {
               vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
               vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
               vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, bufopts)
+              vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
+              vim.keymap.set('n', 'gm', vim.lsp.buf.rename, bufopts)
             end
           }
         end
@@ -358,7 +361,7 @@ require('lazy').setup {
         mapping = cmp.mapping.preset.insert {
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-y>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
@@ -386,6 +389,7 @@ require('lazy').setup {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
       'otavioschwanck/telescope-alternate.nvim',
+      'nvim-telescope/telescope-ghq.nvim',
     },
     config = function()
       require('telescope').setup {
@@ -402,6 +406,7 @@ require('lazy').setup {
 
       require('telescope').load_extension 'file_browser'
       require('telescope').load_extension 'telescope-alternate'
+      require('telescope').load_extension 'ghq'
     end,
     cmd = {
       'Telescope',
@@ -413,8 +418,24 @@ require('lazy').setup {
       { mode = 'n', '<leader>fb', ':Telescope file_browser<CR>',                       noremap = true },
       { mode = 'n', '<leader>fa', ':Telescope telescope-alternate alternate_file<CR>', noremap = true },
       { mode = 'n', '<leader>fk', ':Telescope keymaps<CR>',                            noremap = true },
+      { mode = 'n', '<C-g>', ':Telescope ghq list<CR>',                                noremap = true },
     },
   },
+
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons', },
+    config = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
+      require('nvim-tree').setup {}
+    end,
+    keys = {
+      { mode = 'n', '<leader>ft', ':NvimTreeToggle', noremap = true },
+    },
+  },
+
   {
     'nvim-neotest/neotest',
     event = 'VeryLazy',
