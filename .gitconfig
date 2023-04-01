@@ -1,8 +1,8 @@
 [user]
   name = Hiroshi Kajisha
   email = kajisha@gmail.com
-  ; signingkey = 629E58FE01F044BE
-	signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMKD9Dh6+kVSJ+euxKgd4PdZTmFl0BEAgf8OvlrDYEE"
+  signingkey = 629E58FE01F044BE
+	; signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMKD9Dh6+kVSJ+euxKgd4PdZTmFl0BEAgf8OvlrDYEE"
 [fetch]
 	prune = true
 [merge]
@@ -54,8 +54,8 @@
 [rerere]
   enabled = true
 [gpg]
-  ; program = gpg
-  format = ssh
+  program = gpg
+  ; format = ssh
 [push]
   default = current
 [tag]
