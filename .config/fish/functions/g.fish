@@ -1,0 +1,1 @@
+/home/hiroshi/.dotfiles/config/fish/functions/g.fish
