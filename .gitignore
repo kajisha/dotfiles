@@ -16,3 +16,4 @@ rerun.txt
 tmp/**/*
 tmux*.log
 mise.toml
+.config/github-copilot/
