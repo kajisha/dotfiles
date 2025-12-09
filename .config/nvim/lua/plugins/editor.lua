@@ -16,6 +16,11 @@ return {
   },
 
   {
+    'nvim-mini/mini.diff',
+    version = false,
+  },
+
+  {
     'editorconfig/editorconfig-vim',
     event = 'InsertEnter',
   },
@@ -34,5 +39,25 @@ return {
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = 'popup' }
     end,
+  },
+
+  {
+    'stevearc/aerial.nvim',
+    opts = {
+      backends = { 'lsp', 'treesitter', 'markdown', 'asciidoc', 'man' },
+    },
+    -- Optional dependencies
+    dependencies = {
+       'nvim-treesitter/nvim-treesitter',
+       'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('aerial').setup({
+      })
+    end,
+    keys = {
+      { mode = 'n', '<leader>ot', '<cmd>AerialToggle<CR>' },
+      { mode = 'n', '<leader>on', '<cmd>AerialNavToggle<CR>' },
+    },
   },
 }

@@ -1,7 +1,7 @@
 [user]
-  name = Hiroshi Kajisha
-  email = kajisha@gmail.com
-  signingkey = 629E58FE01F044BE
+	name = kajisha
+	email = kajisha@users.noreply.github.com
+	signingkey = 4909B9EB8B387859
 	; signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMKD9Dh6+kVSJ+euxKgd4PdZTmFl0BEAgf8OvlrDYEE"
 [fetch]
 	prune = true
@@ -36,6 +36,7 @@
   wa = worktree add
   wl = worktree list
   wrm = worktree remove
+	pl = !git pull --rebase --prune origin \"$(git branch --show-current)\"
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
@@ -58,11 +59,12 @@
   ; format = ssh
 [push]
   default = current
+	autoSetupRemote = true
 [tag]
-  gpgsign = true
+	gpgSign = true
 [commit]
   template = ~/.gitmessage
-  gpgsign = true
+	gpgsign = true
 [rebase]
   autosquash = true
 [tig "bind"]
@@ -82,7 +84,9 @@
 [web]
   browser = xdg-open
 [credential]
-  helper = /usr/bin/git-credential-manager
+  helper = git-credential-manager
+	helper =
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [pull]
   rebase = merges
 [remote "origin"]
@@ -91,3 +95,5 @@
 	defaultBranch = main
 [gpg "ssh"]
 	allowedSignersFile = /home/hiroshi/.ssh/allowed_signers
+[credential "https://dev.azure.com"]
+	useHttpPath = true

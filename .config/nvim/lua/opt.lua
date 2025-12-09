@@ -24,6 +24,8 @@ vim.opt.splitright = true
 
 vim.opt.diffopt:append{'vertical'}
 
+vim.g.python3_host_prog = 'python3'
+
 vim.filetype.add {
   pattern = {
     ['openapi.*%.ya?ml'] = 'yaml.openapi',

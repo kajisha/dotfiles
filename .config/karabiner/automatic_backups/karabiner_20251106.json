@@ -1,0 +1,27 @@
+{
+  "description": "Disable Ctrl-J in Warp Terminal",
+  "manipulators": [
+    {
+      "type": "basic",
+      "conditions": [
+        {
+          "type": "frontmost_application_if",
+          "bundle_identifiers": [
+            "^dev\\.warp\\.Warp-Stable$"
+          ]
+        }
+      ],
+      "from": {
+        "key_code": "j",
+        "modifiers": {
+          "mandatory": ["control"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "vk_none"
+        }
+      ]
+    }
+  ]
+}

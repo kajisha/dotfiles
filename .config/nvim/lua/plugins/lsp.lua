@@ -9,17 +9,22 @@ return {
     },
     config = function()
       local lspconfig = require('lspconfig')
+      -- Properly integrate nvim-cmp capabilities
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
-      lspconfig.ruby_lsp.setup {
+      vim.lspconfig('ruby_lsp', {
+        capabilities = capabilities,
         init_options = {
-          formatter = 'standard',
+          formatter = 'rubocop',
           linters = { 'rubocop' },
         }
-      }
+      })
+      vim.lsp.enable('ruby_lsp')
 
-      lspconfig.ts_ls.setup {
+      vim.lspconfig('ts_ls', {
+        capabilities = capabilities,
         on_init = function(client)
           client.notify('workspace/didChangeConfiguration', {
             settings = {
@@ -40,9 +45,11 @@ return {
             },
           })
         end,
-      }
+      })
+      vim.lsp.enable('ts_ls')
 
-      lspconfig.biome.setup {
+      vim.lspconfig('biome', {
+        capabilities = capabilities,
         cmd = { 'biome', 'lsp' },
         on_new_config = function(new_config)
           local pnpm = lspconfig.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
@@ -52,9 +59,11 @@ return {
           end
           new_config.cmd = cmd
         end,
-      }
+      })
+      vim.lsp.enable('biome')
 
-      lspconfig.yamlls.setup {
+      vim.lspconfig('yamlls', {
+        capabilities = capabilities,
         settings = {
           yamlls = {
             schemas = {
@@ -62,9 +71,11 @@ return {
             }
           }
         }
-      }
+      })
+      vim.lsp.enable('yamlls')
 
-      lspconfig.lua_ls.setup {
+      vim.lspconfig('lua_ls', {
+        capabilities = capabilities,
         settings = {
           Lua = {
             diagnostics = {
@@ -73,7 +84,33 @@ return {
             hint = { enable = true },
           },
         }
-      }
+      })
+      vim.lsp.enable('lua_ls')
+
+      -- Fixed Python LSP configuration
+      vim.lspconfig('pyright', {
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = 'openFilesOnly',
+              typeCheckingMode = 'basic',
+              autoImportCompletions = true,
+              stubPath = '',
+              extraPaths = {},
+            },
+            venvPath = '',
+            pythonPath = 'python',
+          },
+        },
+        on_attach = function(client, bufnr)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        end,
+      })
+      vim.lsp.enable('pyright')
     end,
   },
   {
@@ -100,14 +137,16 @@ return {
           'docker_compose_language_service',
           -- Lua
           'lua_ls',
+          -- Python
+          'pyright',
+          'black',
+          'isort',
           -- Ruby
           'ruby_lsp',
-          -- 'rubocop',
+          'rubocop',
           -- 'standardrb',
           -- TypeScript
-          'sorbet',
           'biome',
-          'prismals',
           -- Go
           'gopls',
           -- YAML
@@ -219,6 +258,9 @@ return {
           end
         end,
         sources = {
+          -- Python formatters
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.isort,
         },
       }
     end,

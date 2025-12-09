@@ -6,7 +6,8 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
       'antoinemadec/FixCursorHold.nvim',
-      { 'olimorris/neotest-rspec', lazy = true, commit = 'a7910019d723a214d95400dd59317cf15561dba1' },
+      { 'olimorris/neotest-rspec', lazy = true, commit = 'a7910019d723a214d95400dd59317cf15561dba1', ft = 'ruby' },
+      { 'nvim-neotest/neotest-python', lazy = true, ft = 'python' },
       'marilari88/neotest-vitest',
     },
     config = function()
@@ -14,26 +15,28 @@ return {
 
       neotest.setup {
         adapters = {
-          require('neotest-rspec') {
-            rspec_cmd = function()
-              return vim.tbl_flatten {
+          require('neotest-python') {
+            dap = { justMyCode = false },
+            runner = 'pytest',
+            pytest_discover_instances = true,
+            -- Override the command to run tests in Docker
+            pytest_cmd = function(path)
+              -- Convert absolute path to relative path from project root
+              local cwd = vim.fn.getcwd()
+              local relative_path = path:gsub("^" .. cwd .. "/", "")
+              -- Remove 'app/' prefix for Docker container
+              relative_path = relative_path:gsub("^app/", "")
+              
+              return vim.tbl_flatten({
                 'docker',
                 'compose',
                 'exec',
-                'app',
-                'bin/rspec',
-              }
+                'fastapi',
+                'pytest',
+                relative_path,
+                '-v',
+              })
             end,
-            transform_spec_path = function(path)
-              local prefix = require('neotest-rspec').root(path)
-              return string.sub(path, string.len(prefix) + 2, -1)
-            end,
-            results_path = function()
-              return 'tmp/rspec.output'
-            end,
-          },
-          require('neotest-vitest') {
-            vitestCommand = 'npx vitest -w',
           },
         },
         quickfix = {

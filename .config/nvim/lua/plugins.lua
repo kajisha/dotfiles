@@ -43,4 +43,6 @@ require('lazy').setup {
   require('plugins.filetype.ruby'),
 
   require('plugins.copilot'),
+  require('plugins.claude_code'),
+  require('plugins.markdown'),
 }

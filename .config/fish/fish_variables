@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3800
 SETUVAR _fish_abbr_ai:sudo\x20apt\x20install\x20\x2dy
 SETUVAR _fish_abbr_cat:bat
 SETUVAR _fish_abbr_dc:docker\x20compose
@@ -29,10 +29,11 @@ SETUVAR _fish_abbr_update_2D_nvim_2D_master:asdf\x20uninstall\x20neovim\x20ref\x
 SETUVAR _fish_abbr_vi:nvim
 SETUVAR _fish_abbr_view:nvim\x20\x2dR
 SETUVAR _fish_abbr_y:yadm
-SETUVAR _fisher_decors_2F_fish_2D_ghq_files:/home/hiroshi/\x2econfig/fish/functions/__ghq_repository_search\x2efish\x1e/home/hiroshi/\x2econfig/fish/conf\x2ed/ghq_key_bindings\x2efish\x1e/home/hiroshi/\x2econfig/fish/completions/ghq\x2efish
-SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/hiroshi/\x2econfig/fish/functions/fisher\x2efish\x1e/home/hiroshi/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_decors_2F_fish_2D_ghq_files:\x7e/\x2econfig/fish/functions/__ghq_repository_search\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/ghq_key_bindings\x2efish\x1e\x7e/\x2econfig/fish/completions/ghq\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_lilyball_2F_nix_2D_env_2E_fish_files:/home/hiroshi/\x2econfig/fish/conf\x2ed/nix\x2denv\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1edecors/fish\x2dghq\x1elilyball/nix\x2denv\x2efish
+SETUVAR _fisher_plugins:decors/fish\x2dghq\x1elilyball/nix\x2denv\x2efish\x1ejorgebucaran/fisher
+SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:005fd7
@@ -51,7 +52,7 @@ SETUVAR fish_color_operator:00a6b2
 SETUVAR fish_color_param:00afff
 SETUVAR fish_color_quote:999900
 SETUVAR fish_color_redirection:00afff
-SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
@@ -62,4 +63,5 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/home/hiroshi/\x2epack/bin\x1e/home/hiroshi/workspace/bin\x1e/home/hiroshi/\x2efzf/bin
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/opt/homebrew/opt/llvm/bin\x3a/opt/homebrew/bin\x1e/opt/homebrew/opt/llvm/bin\x3a/Users/h\x2ekajisha/workspace/bin

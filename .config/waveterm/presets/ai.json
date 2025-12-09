@@ -1,0 +1,11 @@
+{
+  "ai@gpt-oss": {
+    "display:name": "Ollama - gpt-oss:20B",
+    "display:order": 3,
+    "ai:*": true,
+    "ai:baseurl": "http://localhost:11434/v1",
+    "ai:name": "gpt-oss",
+    "ai:model": "gpt-oss",
+    "ai:apitoken": "ollama"
+  }
+}
