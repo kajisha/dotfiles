@@ -233,6 +233,19 @@ return {
             --   --   modified_format = function(seconds) return require('neo-tree.utils').relative_date(seconds) end
             --   -- }
             -- },
+            ["Y"] = function(state)
+              local success, node = pcall(function()
+              if not state.tree then return nil end
+                return state.tree:get_node()
+              end)
+              if success and node then
+                local relpath = vim.fn.fnamemodify(node:get_id(), ":.")
+                vim.fn.setreg('+', relpath)
+                vim.notify("Copied: " .. relpath, vim.log.levels.INFO)
+              else
+                vim.notify("No valid node under cursor", vim.log.levels.WARN)
+              end
+            end,
           },
         },
         nesting_rules = {},
