@@ -1,11 +1,12 @@
 [tools]
 awscli = "latest"
+ghq = "latest"
 github-cli = "latest"
 go = "latest"
-neovim = "ref:master"
+neovim = "latest"
 node = "lts"
 python = "latest"
-ruby = "3.3.5"
+ruby = "latest"
 rust = "latest"
 starship = "latest"
 uv = "latest"
@@ -13,6 +14,3 @@ uv = "latest"
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
 experimental = true
-
-[env]
-TAVILY_API_KEY = "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"
