@@ -1,4 +1,5 @@
 vim.opt.termguicolors = true
+vim.g.have_nerd_font = true
 vim.opt.autowrite = true
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.fileencodings = 'ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin'

@@ -4,7 +4,8 @@ return {
     event = 'InsertEnter',
     build = ':TSUpdate',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- Disabled for now: incompatible with current nvim-treesitter version
+      -- 'nvim-treesitter/nvim-treesitter-textobjects',
       'RRethy/nvim-treesitter-endwise',
     },
     config = function()

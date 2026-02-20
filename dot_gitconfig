@@ -1,13 +1,13 @@
 [user]
 	name = kajisha
 	email = kajisha@users.noreply.github.com
-	signingkey = 4909B9EB8B387859
+	signingkey = 07F5FCE5399E821B
 	; signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMKD9Dh6+kVSJ+euxKgd4PdZTmFl0BEAgf8OvlrDYEE"
 [fetch]
 	prune = true
 [merge]
   ff = only
-  tool = vimdiff
+  conflictStyle = zdiff3
 [alias]
   aa = add --all
   ap = add --patch
@@ -41,13 +41,17 @@
   autocrlf = input
   excludesfile = ~/.gitignore
   quotepath = false
-  pager = bat
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
 [color]
   ui = true
 [pager]
   log = bat
   show = bat
-  diff = bat
 [ghq]
   root = ~/workspace/src
 [url "git@github.com:"]
@@ -83,10 +87,6 @@
   process = git-lfs filter-process
 [web]
   browser = xdg-open
-[credential]
-  helper = git-credential-manager
-	helper =
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [pull]
   rebase = merges
 [remote "origin"]
@@ -97,3 +97,9 @@
 	allowedSignersFile = /home/hiroshi/.ssh/allowed_signers
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[split-diffs]
+	min-line-width = 40
+[coderabbit]
+	machineId = cli/505d61c1134b410495d24548cb0063e2
+[credential]
+	helper = store

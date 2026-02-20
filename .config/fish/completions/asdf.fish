@@ -1,1 +1,0 @@
-/home/hiroshi/.asdf/completions/asdf.fish

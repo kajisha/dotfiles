@@ -8,22 +8,24 @@ return {
       }
     },
     config = function()
-      local lspconfig = require('lspconfig')
+      local util = require('lspconfig.util')
       -- Properly integrate nvim-cmp capabilities
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+      -- See :help lspconfig-nvim-0.11 for the new vim.lsp.config API
 
-      vim.lspconfig('ruby_lsp', {
+      -- ruby_lsp
+      vim.lsp.config('ruby_lsp', {
         capabilities = capabilities,
         init_options = {
           formatter = 'rubocop',
           linters = { 'rubocop' },
-        }
+        },
       })
       vim.lsp.enable('ruby_lsp')
 
-      vim.lspconfig('ts_ls', {
+      -- TypeScript (ts_ls)
+      vim.lsp.config('ts_ls', {
         capabilities = capabilities,
         on_init = function(client)
           client.notify('workspace/didChangeConfiguration', {
@@ -48,33 +50,36 @@ return {
       })
       vim.lsp.enable('ts_ls')
 
-      vim.lspconfig('biome', {
+      -- Biome (JavaScript/TypeScript)
+      vim.lsp.config('biome', {
         capabilities = capabilities,
         cmd = { 'biome', 'lsp' },
         on_new_config = function(new_config)
-          local pnpm = lspconfig.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
-          local cmd = { "npx", "biome", "lsp-proxy" }
+          local pnpm = util.root_pattern('pnpm-lock.yml', 'pnpm-lock.yaml')(vim.api.nvim_buf_get_name(0))
+          local cmd = { 'npx', 'biome', 'lsp-proxy' }
           if pnpm then
-            cmd = { "pnpm", "biome", "lsp-proxy" }
+            cmd = { 'pnpm', 'biome', 'lsp-proxy' }
           end
           new_config.cmd = cmd
         end,
       })
       vim.lsp.enable('biome')
 
-      vim.lspconfig('yamlls', {
+      -- YAML
+      vim.lsp.config('yamlls', {
         capabilities = capabilities,
         settings = {
           yamlls = {
             schemas = {
-              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*'
-            }
-          }
-        }
+              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+            },
+          },
+        },
       })
       vim.lsp.enable('yamlls')
 
-      vim.lspconfig('lua_ls', {
+      -- Lua
+      vim.lsp.config('lua_ls', {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -83,12 +88,12 @@ return {
             },
             hint = { enable = true },
           },
-        }
+        },
       })
       vim.lsp.enable('lua_ls')
 
-      -- Fixed Python LSP configuration
-      vim.lspconfig('pyright', {
+      -- Python (pyright)
+      vim.lsp.config('pyright', {
         capabilities = capabilities,
         settings = {
           python = {
@@ -124,9 +129,9 @@ return {
           icons = {
             package_installed = '✓',
             package_pending = '➜',
-            package_uninstalled = '✗'
-          }
-        }
+            package_uninstalled = '✗',
+          },
+        },
       }
 
       require('mason-lspconfig').setup {
@@ -137,10 +142,8 @@ return {
           'docker_compose_language_service',
           -- Lua
           'lua_ls',
-          -- Python
+          -- Python (LSP server only; formatters are handled separately)
           'pyright',
-          'black',
-          'isort',
           -- Ruby
           'ruby_lsp',
           'rubocop',
@@ -155,7 +158,7 @@ return {
           'graphql',
           -- OpenAPI
           'vacuum',
-        }
+        },
       }
 
       -- require('mason-lspconfig').setup_handlers {
@@ -173,10 +176,10 @@ return {
       --         scope = 'line',
       --         format = function(diagnostic)
       --           if diagnostic.severity == vim.diagnostic.severity.ERROR then
-      --             return string.format("%s (%s: s)", diagnostic.message, diagnostic.source, diagnostic.code)
+      --             return string.format('%s (%s: s)', diagnostic.message, diagnostic.source, diagnostic.code)
       --           end
       --           return diagnostic.message
-      --         end
+      --         end,
       --       },
       --     })
       --
@@ -186,7 +189,7 @@ return {
       --         local bufopts = { noremap = true, silent = true, buffer = bufnr }
       --
       --         vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, bufopts)
-      --       end
+      --       end,
       --     }
       --   end
       -- }
@@ -227,17 +230,17 @@ return {
       vim.keymap.set('n', 'gt', '<cmd>Lspsaga term_toggle<CR>')
       vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>')
       vim.keymap.set('n', '<leader>to', '<cmd>Lspsaga outline<CR>')
-    end
+    end,
   },
   {
     'nvimtools/none-ls.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = function(_, opts)
-      local biome = require('null-ls').builtins.formatting.biome.with({
+      local biome = require('null-ls').builtins.formatting.biome.with {
         command = 'biome',
-      })
+      }
       opts.sources = vim.list_extend(opts.sources or {}, {
-        biome
+        biome,
       })
     end,
     config = function()
@@ -253,7 +256,7 @@ return {
               buffer = bufnr,
               callback = function()
                 vim.lsp.buf.format { bufnr = bufnr }
-              end
+              end,
             })
           end
         end,
