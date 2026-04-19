@@ -1,32 +1,22 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    opts = {
-      servers = {
-        biome = {},
-        prismals = {},
-      }
-    },
     config = function()
-      local util = require('lspconfig.util')
-      -- Properly integrate nvim-cmp capabilities
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      -- See :help lspconfig-nvim-0.11 for the new vim.lsp.config API
-
-      -- ruby_lsp
-      vim.lsp.config('ruby_lsp', {
-        capabilities = capabilities,
-        init_options = {
-          formatter = 'rubocop',
-          linters = { 'rubocop' },
-        },
+      -- blink.cmp capabilities を全サーバーに適用 (Neovim 0.11+)
+      vim.lsp.config('*', {
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
       })
-      vim.lsp.enable('ruby_lsp')
 
-      -- TypeScript (ts_ls)
+      -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+
+      vim.lsp.config('ruby_lsp', {
+        init_options = {
+          formatter = 'standard',
+          linters = { 'rubocop' },
+        }
+      })
+
       vim.lsp.config('ts_ls', {
-        capabilities = capabilities,
         on_init = function(client)
           client.notify('workspace/didChangeConfiguration', {
             settings = {
@@ -48,39 +38,18 @@ return {
           })
         end,
       })
-      vim.lsp.enable('ts_ls')
 
-      -- Biome (JavaScript/TypeScript)
-      vim.lsp.config('biome', {
-        capabilities = capabilities,
-        cmd = { 'biome', 'lsp' },
-        on_new_config = function(new_config)
-          local pnpm = util.root_pattern('pnpm-lock.yml', 'pnpm-lock.yaml')(vim.api.nvim_buf_get_name(0))
-          local cmd = { 'npx', 'biome', 'lsp-proxy' }
-          if pnpm then
-            cmd = { 'pnpm', 'biome', 'lsp-proxy' }
-          end
-          new_config.cmd = cmd
-        end,
-      })
-      vim.lsp.enable('biome')
-
-      -- YAML
       vim.lsp.config('yamlls', {
-        capabilities = capabilities,
         settings = {
           yamlls = {
             schemas = {
-              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
-            },
-          },
-        },
+              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*'
+            }
+          }
+        }
       })
-      vim.lsp.enable('yamlls')
 
-      -- Lua
       vim.lsp.config('lua_ls', {
-        capabilities = capabilities,
         settings = {
           Lua = {
             diagnostics = {
@@ -88,34 +57,41 @@ return {
             },
             hint = { enable = true },
           },
+        }
+      })
+
+      -- mason-lspconfig が ensure_installed サーバーを自動 enable するが、
+      -- ts_ls は ensure_installed に含まれていないため手動で enable する
+      vim.lsp.enable('ts_ls')
+
+      -- diagnostic 表示設定
+      vim.diagnostic.config({
+        virtual_text = false,
+        signs = true,
+        underline = true,
+        float = {
+          border = 'rounded',
+          source = true,
         },
       })
-      vim.lsp.enable('lua_ls')
 
-      -- Python (pyright)
-      vim.lsp.config('pyright', {
-        capabilities = capabilities,
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'openFilesOnly',
-              typeCheckingMode = 'basic',
-              autoImportCompletions = true,
-              stubPath = '',
-              extraPaths = {},
-            },
-            venvPath = '',
-            pythonPath = 'python',
-          },
-        },
-        on_attach = function(client, bufnr)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      -- LSP keymaps (LspAttach で設定)
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(ev)
+          local opts = { noremap = true, silent = true, buffer = ev.buf }
+          vim.keymap.set('n', 'K',           vim.lsp.buf.hover,                                    opts)
+          vim.keymap.set('n', 'gr',          vim.lsp.buf.references,                               opts)
+          vim.keymap.set('n', 'gi',          vim.lsp.buf.implementation,                           opts)
+          vim.keymap.set('n', 'gd',          vim.lsp.buf.definition,                               opts)
+          vim.keymap.set('n', 'gD',          function() vim.cmd('split') vim.lsp.buf.definition() end, opts)
+          vim.keymap.set('n', 'ga',          vim.lsp.buf.code_action,                              opts)
+          vim.keymap.set('n', 'ge',          vim.diagnostic.open_float,                            opts)
+          vim.keymap.set('n', 'gn',          function() vim.diagnostic.jump({ count = 1,  float = true }) end, opts)
+          vim.keymap.set('n', 'gp',          function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+          vim.keymap.set('n', '<leader>rn',  vim.lsp.buf.rename,                                   opts)
+          vim.keymap.set('n', '<leader>to',  '<cmd>AerialToggle<CR>',                              opts)
         end,
       })
-      vim.lsp.enable('pyright')
     end,
   },
   {
@@ -129,9 +105,9 @@ return {
           icons = {
             package_installed = '✓',
             package_pending = '➜',
-            package_uninstalled = '✗',
-          },
-        },
+            package_uninstalled = '✗'
+          }
+        }
       }
 
       require('mason-lspconfig').setup {
@@ -142,14 +118,11 @@ return {
           'docker_compose_language_service',
           -- Lua
           'lua_ls',
-          -- Python (LSP server only; formatters are handled separately)
-          'pyright',
           -- Ruby
           'ruby_lsp',
-          'rubocop',
-          -- 'standardrb',
           -- TypeScript
           'biome',
+          'prismals',
           -- Go
           'gopls',
           -- YAML
@@ -158,152 +131,30 @@ return {
           'graphql',
           -- OpenAPI
           'vacuum',
-        },
+        }
       }
-
-      -- require('mason-lspconfig').setup_handlers {
-      --   function(server_name)
-      --     vim.diagnostic.config({
-      --       underline = true,
-      --       signs = true,
-      --       virtual_text = false,
-      --       float = {
-      --         show_header = true,
-      --         source = 'always',
-      --         border = 'rounded',
-      --         focusable = true,
-      --         focus = true,
-      --         scope = 'line',
-      --         format = function(diagnostic)
-      --           if diagnostic.severity == vim.diagnostic.severity.ERROR then
-      --             return string.format('%s (%s: s)', diagnostic.message, diagnostic.source, diagnostic.code)
-      --           end
-      --           return diagnostic.message
-      --         end,
-      --       },
-      --     })
-      --
-      --     require('lspconfig')[server_name].setup {
-      --       capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      --       on_attach = function(_, bufnr)
-      --         local bufopts = { noremap = true, silent = true, buffer = bufnr }
-      --
-      --         vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, bufopts)
-      --       end,
-      --     }
-      --   end
-      -- }
     end,
   },
+
+  -- フォーマット
   {
-    'nvimdev/lspsaga.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
+    'stevearc/conform.nvim',
+    event = 'BufWritePre',
+    cmd = 'ConformInfo',
+    opts = {
+      formatters_by_ft = {
+        javascript      = { 'biome' },
+        javascriptreact = { 'biome' },
+        typescript      = { 'biome' },
+        typescriptreact = { 'biome' },
+        json            = { 'biome' },
+        jsonc           = { 'biome' },
+        css             = { 'biome' },
+      },
+      format_on_save = {
+        timeout_ms = 2000,
+        lsp_fallback = true,
+      },
     },
-    event = 'LspAttach',
-    config = function()
-      require('lspsaga').setup {
-        border_style = 'single',
-        ui = {
-          code_action = '',
-        },
-        symbol_in_winbar = {
-          enable = false,
-        },
-        outline = {
-          win_width = 50,
-          auto_preview = false,
-        },
-      }
-
-      vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>')
-      vim.keymap.set('n', 'gr', '<cmd>Lspsaga finder<CR>')
-      vim.keymap.set('n', 'gi', '<cmd>Lspsaga finder imp<CR>')
-      -- vim.keymap.set('n', 'gd', '<cmd>Lspsaga peek_definition<CR>')
-      vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-      vim.keymap.set('n', 'gD', '<cmd>Lspsaga peek_definition<CR>')
-      vim.keymap.set('n', 'ga', '<cmd>Lspsaga code_action<CR>')
-      vim.keymap.set('n', 'ge', '<cmd>Lspsaga show_line_diagnostics<CR>')
-      vim.keymap.set('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<CR>')
-      vim.keymap.set('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
-      vim.keymap.set('n', 'gt', '<cmd>Lspsaga term_toggle<CR>')
-      vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>')
-      vim.keymap.set('n', '<leader>to', '<cmd>Lspsaga outline<CR>')
-    end,
   },
-  {
-    'nvimtools/none-ls.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = function(_, opts)
-      local biome = require('null-ls').builtins.formatting.biome.with {
-        command = 'biome',
-      }
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        biome,
-      })
-    end,
-    config = function()
-      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-      local null_ls = require('null-ls')
-
-      null_ls.setup {
-        on_attach = function(client, bufnr)
-          if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format { bufnr = bufnr }
-              end,
-            })
-          end
-        end,
-        sources = {
-          -- Python formatters
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.isort,
-        },
-      }
-    end,
-  },
-  -- {
-  --   'j-hui/fidget.nvim',
-  --   tag = 'legacy',
-  --   event = 'LspAttach',
-  --   config = function()
-  --     require('fidget').setup {}
-  --   end,
-  -- },
-  -- {
-  --   'pmizio/typescript-tools.nvim',
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'neovim/nvim-lspconfig',
-  --   },
-  --   opts = {},
-  --   config = function()
-  --     require('typescript-tools').setup {
-  --       settings = {
-  --         tsserver_locale = 'ja',
-  --         publish_diagnostic_on = 'change',
-  --         tsserver_file_preferences = {
-  --           includeCompletionsForModuleExports = true,
-  --           includeInlayEnumMemberValueHints = true,
-  --           includeInlayFunctionLikeReturnTypeHints = true,
-  --           includeInlayFunctionParameterTypeHints = true,
-  --           includeInlayParameterNameHints = 'all',
-  --           includeInlayPropertyDeclarationTypeHints = true,
-  --           includeInlayVariableTypeHints = true,
-  --           quotePreference = 'auto',
-  --         },
-  --         tsserver_format_optiosn = {
-  --           allowIncompleteCompletions = false,
-  --           allowRenameOfImportPath = false,
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
 }

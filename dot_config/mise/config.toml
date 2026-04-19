@@ -1,16 +1,30 @@
+[settings]
+experimental = true
+python_compile = true
+
+[env]
+GOPATH = "/home/hiroshi/workspace"
+THOR_MERGE = "vimdiff"
+EDITOR = "nvim"
+XDG_CURRENT_DESKTOP = "GNOME"
+GO11MODULE = "on"
+
 [tools]
+bat = "latest"
 awscli = "latest"
+codeql = "latest"
 ghq = "latest"
 github-cli = "latest"
 go = "latest"
-neovim = "latest"
-node = "lts"
+lua = "latest"
+neovim = "ref:master"
+node = "20"
+opam = "latest"
+pnpm = "latest"
 python = "latest"
-ruby = "latest"
+ruby = "3.3.0"
 rust = "latest"
 starship = "latest"
-uv = "latest"
-
-[settings]
-idiomatic_version_file_enable_tools = ["ruby"]
-experimental = true
+tmux = "latest"
+1password-cli = "latest"
+chezmoi = "latest"

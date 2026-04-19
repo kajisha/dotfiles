@@ -1,5 +1,4 @@
 vim.opt.termguicolors = true
-vim.g.have_nerd_font = true
 vim.opt.autowrite = true
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.fileencodings = 'ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin'
@@ -25,7 +24,19 @@ vim.opt.splitright = true
 
 vim.opt.diffopt:append{'vertical'}
 
-vim.g.python3_host_prog = 'python3'
+-- Neovim 0.10+ built-in OSC52 clipboard (SSH / container 対応)
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
+vim.opt.clipboard = 'unnamedplus'
 
 vim.filetype.add {
   pattern = {

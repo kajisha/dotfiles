@@ -3,12 +3,11 @@ return {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
-      { mode = 'n', '<leader>xx', ':Trouble diagnostics toggle<CR>',    noremap = true, silent = true },
-      { mode = 'n', '<leader>xw', ':Trouble workspace_diagnostics<CR>', noremap = true, silent = true },
-      { mode = 'n', '<leader>xd', ':Trouble document_diagnostics<CR>',  noremap = true, silent = true },
-      { mode = 'n', '<leader>xl', ':Trouble loclist<CR>',               noremap = true, silent = true },
-      { mode = 'n', '<leader>xq', ':Trouble quickfix<CR>',              noremap = true, silent = true },
-      { mode = 'n', 'gR',         ':Trouble lsp_references<CR>',        noremap = true, silent = true },
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<CR>',                       mode = 'n', noremap = true, silent = true, desc = 'Diagnostics (project)' },
+      { '<leader>xd', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>',          mode = 'n', noremap = true, silent = true, desc = 'Diagnostics (buffer)' },
+      { '<leader>xl', '<cmd>Trouble loclist toggle<CR>',                            mode = 'n', noremap = true, silent = true, desc = 'Location list' },
+      { '<leader>xq', '<cmd>Trouble qflist toggle<CR>',                            mode = 'n', noremap = true, silent = true, desc = 'Quickfix' },
+      { '<leader>xr', '<cmd>Trouble lsp_references toggle<CR>',                    mode = 'n', noremap = true, silent = true, desc = 'LSP references (Trouble)' },
     },
     config = function()
       require('trouble').setup {
@@ -34,7 +33,6 @@ return {
 
   {
     'dgagn/diagflow.nvim',
-    opts = {
-    },
+    opts = {},
   },
 }

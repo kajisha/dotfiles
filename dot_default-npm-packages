@@ -1,13 +1,4 @@
-eslint
-lerna
-tsun
 typescript
-vls
-webpack
-yarn
-prettier
-stylelint
-neovim
-jest
-standard
 fx
+@biomejs/biome
+tsx

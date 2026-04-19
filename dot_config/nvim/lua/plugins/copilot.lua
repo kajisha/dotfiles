@@ -11,118 +11,66 @@ return {
   },
 
   {
-    "yetone/avante.nvim",
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    -- ⚠️ must add this setting! ! !
-    build = 'make',
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
-    ---@module 'avante'
-    ---@type avante.Config
-    opts = {},
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "stevearc/dressing.nvim", -- for input provider dressing
-      "folke/snacks.nvim", -- for input provider snacks
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    keys = {
+      { "<leader>cc", "<cmd>ClaudeCode<cr>",     desc = "Toggle Claude Code" },
+      { "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude Code" },
     },
-    config = function()
-      require('avante').setup {
-        provider = 'copilot',
-      }
-    end,
   },
 
-  -- {
-  --   'olimorris/codecompanion.nvim',
-  --   config = true,
-  --   dependencies = {
-  --     'github/copilot.vim',
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-treesitter/nvim-treesitter',
-  --   },
-  --   opts = {
-  --     opts = {
-  --       language = 'Japanese',
-  --       display = {
-  --         chat = {
-  --           window = {
-  --             layout = 'horizontal',
-  --           },
-  --         },
-  --       },
-  --       adapters = {
-  --         anthropic = function ()
-  --           return require('codecompanion.adapters').extend('anthropic', {
-  --             env
-  --           })
-  --         end,
-  --
-  --         openai = function()
-  --           return require('codecompanion.adapters').extend("azure_openai", {
-  --             env = {
-  --               api_key = os.getenv('OPENAI_API_KEY'),
-  --               endpoint = os.getenv('OPENAI_API_ENDPOINT'),
-  --             },
-  --             schema = {
-  --               model = {
-  --                 default = os.getenv('OPENAI_MODEL'),
-  --               },
-  --             },
-  --           })
-  --         end,
-  --       },
-  --       strategies = {
-  --         chat = {
-  --           adapter = "anthropic",
-  --         },
-  --         inline = {
-  --           adapter = "anthropic",
-  --         },
-  --       },
-  --     },
-  --     extensions = {
-  --       mcphub = {
-  --         callback = "mcphub.extensions.codecompanion",
-  --         opts = {
-  --           show_result_in_chat = true,
-  --           make_vars = true,
-  --           make_slask_command = true,
-  --         },
-  --       },
-  --     },
-  --   },
-  -- }
+--   {
+--     'olimorris/codecompanion.nvim',
+--     config = true,
+--     dependencies = {
+--       'nvim-lua/plenary.nvim',
+--       'nvim-treesitter/nvim-treesitter',
+--     },
+--     opts = {
+--       opts = {
+--         language = 'Japanese',
+--         display = {
+--           chat = {
+--             window = {
+--               layout = 'horizontal',
+--             },
+--           },
+--         },
+--         adapters = {
+--           openai = function()
+--             return require('codecompanion.adapters').extend("azure_openai", {
+--               env = {
+--                 api_key = os.getenv('OPENAI_API_KEY'),
+--                 endpoint = os.getenv('OPENAI_API_ENDPOINT'),
+--               },
+--               schema = {
+--                 model = {
+--                   default = os.getenv('OPENAI_MODEL'),
+--                 },
+--               },
+--             })
+--           end,
+--         },
+--         strategies = {
+--           chat = {
+--             adapter = "openai",
+--           },
+--           inline = {
+--             adapter = "openai",
+--           },
+--         },
+--       },
+--       extensions = {
+--         mcphub = {
+--           callback = "mcphub.extensions.codecompanion",
+--           opts = {
+--             show_result_in_chat = true,
+--             make_vars = true,
+--             make_slask_command = true,
+--           },
+--         },
+--       },
+--     },
+--   }
 }

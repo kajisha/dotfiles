@@ -13,12 +13,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  require('plugins.nvim-osc52'),
+  require('plugins.snacks'),
+  require('plugins.neoconf'),
+
   require('plugins.lualine'),
   require('plugins.colorscheme'),
 
   require('plugins.editor'),
-  require('plugins.grep'),
 
   require('plugins.treesitter'),
   require('plugins.telescope'),
@@ -33,7 +34,6 @@ require('lazy').setup {
   require('plugins.completion'),
   require('plugins.refactoring'),
 
-  require('plugins.fzf'),
   require('plugins.filer'),
 
   require('plugins.neotest'),
@@ -43,6 +43,4 @@ require('lazy').setup {
   require('plugins.filetype.ruby'),
 
   require('plugins.copilot'),
-  require('plugins.claude_code'),
-  require('plugins.markdown'),
 }

@@ -1,20 +1,24 @@
 # fish_default_key_bindings
-# fzf_key_bindings
+fzf_key_bindings
 
-bind \cg ghq_cd
-bind -M insert \cg ghq_cd
+~/.local/bin/mise activate fish | source
 
-mise activate fish | source
+export SSH_AUTH_SOCK=(gpgconf --list-dirs agent-ssh-socket)
+export GPG_TTY=(tty)
+gpg-agent -q --daemon 2> /dev/null
 
-starship init fish | source
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/hiroshi/.ghcup/bin # ghcup-env
+
+# opam configuration
+# source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+~/.local/share/mise/shims/starship init fish | source
 zoxide init fish | source
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
-set -gx PATH /Users/h.kajisha/.local/bin $PATH
 
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/h.kajisha/.lmstudio/bin
-# End of LM Studio CLI section
-
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

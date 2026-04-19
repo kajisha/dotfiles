@@ -3,11 +3,8 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-file-browser.nvim',
       'otavioschwanck/telescope-alternate.nvim',
       'nvim-telescope/telescope-ghq.nvim',
-      'nvim-telescope/telescope-github.nvim',
-      'jvgrootveld/telescope-zoxide',
     },
     config = function()
       require('telescope').setup {
@@ -18,10 +15,6 @@ return {
           },
         },
         extensions = {
-          file_browser = {
-            theme = 'ivy',
-            hijack_netrw = true,
-          },
           ['telescope-alternate'] = {
             presets = { 'rails', 'rspec' },
             mappings = {
@@ -67,7 +60,6 @@ return {
                   { template = 'db/schemas/**/[1].schema',               label = 'Schema' },
                   { template = 'db/schema.rb',                           label = 'Schema' },
                 },
-
               },
               {
                 pattern = 'db/schemas/**/(.*).schema',
@@ -96,38 +88,23 @@ return {
               },
             },
             telescope_mappings = {
-              i = {
-                open_horizontal = '<CR>',
-              },
-              n = {
-                open_horizontal = '<CR>',
-              },
+              i = { open_horizontal = '<CR>' },
+              n = { open_horizontal = '<CR>' },
             },
           },
         }
       }
 
-      require('telescope').load_extension 'file_browser'
       require('telescope').load_extension 'telescope-alternate'
       require('telescope').load_extension 'ghq'
       require('telescope').load_extension 'textcase'
-      require('telescope').load_extension 'zoxide'
     end,
-    cmd = {
-      'Telescope',
-    },
+    cmd = { 'Telescope' },
     keys = {
-      -- { mode = 'n', '<leader>ff', ':Telescope find_files<CR>' },
-      -- { mode = 'n', '<leader>fg', ':Telescope grep_string<CR>' },
-      -- { mode = 'n', '<leader>fB', ':Telescope buffers<CR>' },
-      -- { mode = 'n', '<leader>fb', ':Telescope file_browser<CR>',                       noremap = true },
       { mode = 'n', '<leader>fa', ':Telescope telescope-alternate alternate_file<CR>', noremap = true },
-      { mode = 'n', '<leader>fk', ':Telescope keymaps<CR>',                            noremap = true },
       { mode = 'n', '<leader>fG', ':Telescope ghq list<CR>',                           noremap = true },
-      { mode = 'n', '<leader>fz', ':Telescope zoxide list<CR>',                           noremap = true },
-      -- { mode = 'n', '<leader>fo', ':Telescope oldfiles<CR>',                           noremap = true },
-      { mode = 'n', 'ga.',        ':TextCaseOpenTelescope<CR>',                        desc = 'telescope' },
-      { mode = 'v', 'ga.',        ':TextCaseOpenTelescope<CR>',                        desc = 'telescope' },
+      { mode = 'n', 'ga.',        ':TextCaseOpenTelescope<CR>',                        desc = 'Telescope' },
+      { mode = 'v', 'ga.',        ':TextCaseOpenTelescope<CR>',                        desc = 'Telescope' },
     },
   },
   {
@@ -138,20 +115,16 @@ return {
       require("telescope").load_extension("textcase")
     end,
     keys = {
-      'cr', -- Default invocation prefix
+      'cr',
       { 'crs', '<cmd>TextCaseOpenTelescope<CR>', mode = { 'n', 'x' }, desc = 'Telescope' },
     },
     cmd = {
-      -- NOTE: The Subs command name can be customized via the option "substitude_command_name"
       "Subs",
       "TextCaseOpenTelescope",
       "TextCaseOpenTelescopeQuickChange",
       "TextCaseOpenTelescopeLSPChange",
       "TextCaseStartReplacingCommand",
     },
-    -- If you want to use the interactive feature of the `Subs` command right away, text-case.nvim
-    -- has to be loaded on startup. Otherwise, the interactive feature of the `Subs` will only be
-    -- available after the first executing of it or after a keymap of text-case.nvim has been used.
     lazy = false,
   },
 }

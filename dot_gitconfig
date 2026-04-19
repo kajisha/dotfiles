@@ -1,13 +1,12 @@
 [user]
-	name = kajisha
-	email = kajisha@users.noreply.github.com
-	signingkey = 07F5FCE5399E821B
-	; signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMKD9Dh6+kVSJ+euxKgd4PdZTmFl0BEAgf8OvlrDYEE"
+  name = Hiroshi Kajisha
+  email = kajisha@gmail.com
+  ; signingkey = 629E58FE01F044BE
 [fetch]
 	prune = true
 [merge]
   ff = only
-  conflictStyle = zdiff3
+  tool = vimdiff
 [alias]
   aa = add --all
   ap = add --patch
@@ -36,39 +35,33 @@
   wa = worktree add
   wl = worktree list
   wrm = worktree remove
-	pl = !git pull --rebase --prune origin \"$(git branch --show-current)\"
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
   quotepath = false
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  navigate = true
-  dark = true
+  pager = bat
 [color]
   ui = true
 [pager]
   log = bat
   show = bat
+  diff = bat
 [ghq]
   root = ~/workspace/src
 [url "git@github.com:"]
   pushinsteadof = https://github.com/
 [rerere]
   enabled = true
-[gpg]
-  program = gpg
+; [gpg]
+;   program = gpg
   ; format = ssh
 [push]
   default = current
-	autoSetupRemote = true
 [tag]
-	gpgSign = true
+;   gpgsign = true
 [commit]
   template = ~/.gitmessage
-	gpgsign = true
+;   gpgsign = true
 [rebase]
   autosquash = true
 [tig "bind"]
@@ -87,6 +80,8 @@
   process = git-lfs filter-process
 [web]
   browser = xdg-open
+[credential]
+  helper = /usr/bin/git-credential-manager
 [pull]
   rebase = merges
 [remote "origin"]
@@ -95,11 +90,5 @@
 	defaultBranch = main
 [gpg "ssh"]
 	allowedSignersFile = /home/hiroshi/.ssh/allowed_signers
-[credential "https://dev.azure.com"]
-	useHttpPath = true
-[split-diffs]
-	min-line-width = 40
 [coderabbit]
-	machineId = cli/505d61c1134b410495d24548cb0063e2
-[credential]
-	helper = store
+	machineId = cli/d299bd6ac68c4153b16ad227e1352fe3
