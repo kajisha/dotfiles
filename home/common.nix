@@ -19,9 +19,6 @@
   # アップグレード時は公式ドキュメントに従って段階的に上げる。
   home.stateVersion = "24.11";
 
-  # ---- nixpkgs 設定 -------------------------------------------
-  nixpkgs.config.allowUnfree = true;  # codeql / 1password-cli 等
-
   # ---- 環境変数 ------------------------------------------------
   home.sessionVariables = {
     EDITOR = "nvim";

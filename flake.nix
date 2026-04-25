@@ -10,9 +10,15 @@
       # home-manager が使う nixpkgs を上の inputs と統一する（重要: 二重取得を防ぐ）
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # neovim nightly ビルド（ref:master 相当）
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, ... }:
     let
       # ---- ヘルパー関数 ----------------------------------------
       # username / homeDirectory を specialArgs 経由でモジュールに渡す。
@@ -23,8 +29,16 @@
         , homeDirectory
         , modules
         }:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            # neovim nightly overlay: pkgs.neovim を nightly ビルドに差し替える
+            overlays = [ neovim-nightly-overlay.overlays.default ];
+            config.allowUnfree = true;  # codeql / _1password-cli 等
+          };
+        in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          inherit pkgs;
           # username と homeDirectory をモジュール側で参照できるようにする
           extraSpecialArgs = { inherit username homeDirectory; };
           modules = modules;
