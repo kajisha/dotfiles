@@ -31,8 +31,4 @@ return {
     end,
   },
 
-  {
-    'dgagn/diagflow.nvim',
-    opts = {},
-  },
 }

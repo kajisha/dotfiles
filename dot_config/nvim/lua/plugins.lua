@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   require('plugins.snacks'),
   require('plugins.neoconf'),
+  require('plugins.whichkey'),
 
   require('plugins.lualine'),
   require('plugins.colorscheme'),

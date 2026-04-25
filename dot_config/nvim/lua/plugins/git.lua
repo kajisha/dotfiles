@@ -3,19 +3,12 @@ return {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup {}
-    end
-  },
-  {
-    'tpope/vim-fugitive',
+    end,
     keys = {
-      { mode = 'n', '<leader>gb',  ':Git blame<CR>',          noremap = true },
-      { mode = 'n', '<leader>gca', ':Git commit --amend<CR>', noremap = true },
-      { mode = 'n', '<leader>gc',  ':Git commit -v -q<CR>',   noremap = true },
-      { mode = 'n', '<leader>gd',  ':Gdiffsplit<CR>',         noremap = true },
-      { mode = 'n', '<leader>gw',  ':Gwrite<CR>',             noremap = true },
-      { mode = 'n', '<leader>gr',  ':Gread<CR>',              noremap = true },
-      { mode = 'n', '<leader>gp',  ':Git push<CR>',           noremap = true },
-      { mode = 'n', '<leader>gl',  ':Glog -- %<CR>',          noremap = true },
+      { '<leader>gb', function() require('gitsigns').blame_line({ full = true }) end, desc = 'Blame line' },
+      { '<leader>gd', function() require('gitsigns').diffthis() end,                  desc = 'Diff this' },
+      { '<leader>gw', function() require('gitsigns').stage_buffer() end,              desc = 'Stage buffer' },
+      { '<leader>gr', function() require('gitsigns').reset_buffer() end,              desc = 'Reset buffer' },
     },
   },
 }

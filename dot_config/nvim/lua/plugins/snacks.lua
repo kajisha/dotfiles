@@ -5,6 +5,7 @@ return {
   opts = {
     bigfile    = { enabled = true },
     gitbrowse  = { enabled = true },
+    lazygit    = { enabled = true },
     indent     = { enabled = true },
     input      = { enabled = true },
     notifier   = {
@@ -36,6 +37,9 @@ return {
 
     -- LSP picker
     { '<leader>fs', function() Snacks.picker.lsp_symbols() end,   desc = 'LSP symbols' },
+
+    -- Git
+    { '<leader>gg', function() Snacks.lazygit() end,              desc = 'Lazygit' },
 
     -- Git picker
     { '<leader>gs', function() Snacks.picker.git_status() end,    desc = 'Git status (picker)' },

@@ -66,7 +66,11 @@ return {
 
       -- diagnostic 表示設定
       vim.diagnostic.config({
-        virtual_text = false,
+        virtual_text = {
+          prefix  = '●',
+          source  = 'if_many',
+          spacing = 4,
+        },
         signs = true,
         underline = true,
         float = {
