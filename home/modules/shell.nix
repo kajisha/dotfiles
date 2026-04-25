@@ -1,50 +1,79 @@
-# modules/shell.nix — シェル設定
+# modules/shell.nix — シェル設定（fish メイン）
+# mise がツールを管理しているため、home-manager との重複に注意:
+#   - starship: mise 管理 → programs.starship は使わず mise に任せる
+#   - fzf key bindings: programs.fzf.enableFishIntegration が自動設定するため手動不要
+#   - zoxide: programs.zoxide.enableFishIntegration が自動設定
 { pkgs, lib, config, ... }:
 
 {
-  programs.zsh = {
+  # ---- fish (メインシェル) ------------------------------------
+  programs.fish = {
     enable = true;
 
-    enableCompletion          = true;
-    autosuggestion.enable     = true;
-    syntaxHighlighting.enable = true;
-    dotDir                    = config.home.homeDirectory;  # ホームディレクトリを明示（legacy 動作を固定）
-
     shellAliases = {
-      ll   = "ls -lahF";
-      la   = "ls -A";
-      ".."  = "cd ..";
-      "..." = "cd ../..";
-      gs   = "git status";
-      gd   = "git diff";
-      gc   = "git commit";
-      gp   = "git push";
-      gl   = "git log --oneline --graph --decorate";
+      ll  = "ls -lahF";
+      la  = "ls -A";
+      gs  = "git status";
+      gd  = "git diff";
+      gc  = "git commit";
+      gp  = "git push";
+      gl  = "git log --oneline --graph --decorate";
+      cat = "bat --paging=never";
+      ls  = "eza";
     };
 
-    # initExtra → initContent に改名（home-manager master）
-    initContent = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin ''
-        if [ -x /opt/homebrew/bin/brew ]; then
-          eval "$(/opt/homebrew/bin/brew shellenv)"
-        elif [ -x /usr/local/bin/brew ]; then
-          eval "$(/usr/local/bin/brew shellenv)"
-        fi
-      ''}
+    interactiveShellInit = ''
+      # mise でツールバージョン管理（node / python / ruby / go / neovim 等）
+      if test -x ~/.local/bin/mise
+        ~/.local/bin/mise activate fish | source
+      end
 
-      # TODO: 既存の .zshrc のカスタム設定をここに移植してください
+      # starship は mise 管理なので mise 経由で初期化（Nix の starship と重複させない）
+      if test -x ~/.local/share/mise/shims/starship
+        ~/.local/share/mise/shims/starship init fish | source
+      end
+
+      # GPG / SSH エージェント
+      set -gx GPG_TTY (tty)
+      if command -q gpgconf
+        set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket 2>/dev/null)
+      end
+
+      # bun
+      if test -d ~/.bun
+        set -gx BUN_INSTALL "$HOME/.bun"
+        fish_add_path $BUN_INSTALL/bin
+      end
+
+      # ghcup (Haskell)
+      if test -d ~/.ghcup
+        fish_add_path $HOME/.cabal/bin $HOME/.ghcup/bin
+      end
+
+      # opam (OCaml) — 必要な場合はコメントアウトを外す
+      # source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+      # TODO: その他の設定をここに追記してください
     '';
   };
 
+  # ---- direnv（.envrc 自動読み込み）---------------------------
   programs.direnv = {
-    enable               = true;
-    enableZshIntegration = true;
-    nix-direnv.enable    = true;
+    enable                = true;
+    enableFishIntegration = true;
+    nix-direnv.enable     = true;
   };
 
+  # ---- fzf（キーバインドは enableFishIntegration が自動設定）--
   programs.fzf = {
-    enable               = true;
-    enableZshIntegration = true;
-    defaultOptions       = [ "--height 40%" "--border" "--reverse" ];
+    enable                = true;
+    enableFishIntegration = true;  # fzf --fish | source を自動追加（fzf_key_bindings 含む）
+    defaultOptions        = [ "--height 40%" "--border" "--reverse" ];
+  };
+
+  # ---- zoxide（スマートな cd）---------------------------------
+  programs.zoxide = {
+    enable                = true;
+    enableFishIntegration = true;  # zoxide init fish | source を自動追加
   };
 }

@@ -8,6 +8,7 @@
     vimAlias      = true;
     viAlias       = true;
     withPython3   = false;  # 新デフォルト（警告回避）
+    withRuby      = false;  # 新デフォルト（警告回避）
 
     extraPackages = with pkgs; [
       ripgrep
