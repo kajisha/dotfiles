@@ -1,6 +1,8 @@
 return {
   'folke/neoconf.nvim',
-  priority = 100,
-  cmd = 'Neoconf',
-  opts = {},
+  lazy = false,
+  priority = 950,
+  config = function()
+    require('neoconf').setup {}
+  end,
 }
