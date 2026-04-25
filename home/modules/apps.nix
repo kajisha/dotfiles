@@ -1,12 +1,15 @@
 # modules/apps.nix — パッケージとアプリケーション設定
-# NOTE: 以下のツールは mise で管理されているため Nix では管理しない:
-#   neovim, bat, starship, tmux, gh, go, node, rust, python, ruby, lua 等
-#   → mise で管理するツールを重複して追加しないこと
 { pkgs, ... }:
 
 {
+  # ---- 環境変数 ------------------------------------------------
+  home.sessionVariables = {
+    GOPATH     = "$HOME/workspace";
+    GOBIN      = "$HOME/workspace/bin";
+    THOR_MERGE = "vimdiff";
+  };
+
   # ---- Nix で管理するパッケージ --------------------------------
-  # mise と重複しないよう、mise に入っていないものだけを管理する。
   home.packages = with pkgs; [
     # ---- CLI 必須ツール ----------------------------------------
     curl
@@ -17,14 +20,30 @@
     bottom    # モダンな top 代替 (btm コマンド)
 
     # ---- ファイル操作 ------------------------------------------
-    ripgrep   # 高速 grep (rg) — mise で管理していない場合
-    fd        # 高速 find (fd) — mise で管理していない場合
+    ripgrep   # 高速 grep (rg)
+    fd        # 高速 find (fd)
 
     # ---- 圧縮・展開 --------------------------------------------
     unzip
     zip
 
-    # ---- TODO: mise に入っていない追加ツールをここに列挙 --------
+    # ---- 言語ランタイム ----------------------------------------
+    go          # Go（GOPATH は sessionVariables で設定）
+    lua5_4      # Lua 5.4
+    nodejs_20   # Node.js 20 LTS
+    pnpm        # Node パッケージマネージャ
+    python313   # Python 3.13
+    ruby_3_3    # Ruby 3.3
+    rustup      # Rust ツールチェーン管理（rustc / cargo を内包）
+
+    # ---- クラウド・DevOps -------------------------------------
+    awscli2           # AWS CLI v2
+    codeql            # GitHub CodeQL 解析エンジン
+    _1password-cli    # 1Password CLI (op コマンド)
+
+    # ---- 開発ツール --------------------------------------------
+    ghq     # Git リポジトリ管理
+    opam    # OCaml パッケージマネージャ
   ];
 
   # ---- eza (ls 代替) ------------------------------------------
@@ -36,8 +55,17 @@
     extraOptions          = [ "--group-directories-first" "--long" ];
   };
 
+  # ---- tmux（ターミナルマルチプレクサ）-----------------------
+  programs.tmux = {
+    enable       = true;
+    terminal     = "screen-256color";
+    escapeTime   = 0;      # Esc 遅延をゼロに（Neovim 向け）
+    historyLimit = 50000;
+    mouse        = true;
+    keyMode      = "vi";
+  };
+
   # ---- bat (cat 代替) -----------------------------------------
-  # mise で bat を管理している場合は enable = false にする
   programs.bat = {
     enable = true;
     config = {

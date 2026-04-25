@@ -1,8 +1,7 @@
 # modules/shell.nix — シェル設定（fish メイン）
-# mise がツールを管理しているため、home-manager との重複に注意:
-#   - starship: mise 管理 → programs.starship は使わず mise に任せる
-#   - fzf key bindings: programs.fzf.enableFishIntegration が自動設定するため手動不要
-#   - zoxide: programs.zoxide.enableFishIntegration が自動設定
+# fzf key bindings: programs.fzf.enableFishIntegration が自動設定するため手動不要
+# zoxide: programs.zoxide.enableFishIntegration が自動設定
+# starship: programs.starship.enableFishIntegration が自動設定
 { pkgs, lib, config, ... }:
 
 {
@@ -23,16 +22,6 @@
     };
 
     interactiveShellInit = ''
-      # mise でツールバージョン管理（node / python / ruby / go / neovim 等）
-      if test -x ~/.local/bin/mise
-        ~/.local/bin/mise activate fish | source
-      end
-
-      # starship は mise 管理なので mise 経由で初期化（Nix の starship と重複させない）
-      if test -x ~/.local/share/mise/shims/starship
-        ~/.local/share/mise/shims/starship init fish | source
-      end
-
       # GPG / SSH エージェント
       set -gx GPG_TTY (tty)
       if command -q gpgconf
@@ -75,5 +64,11 @@
   programs.zoxide = {
     enable                = true;
     enableFishIntegration = true;  # zoxide init fish | source を自動追加
+  };
+
+  # ---- starship（プロンプト）----------------------------------
+  programs.starship = {
+    enable                = true;
+    enableFishIntegration = true;  # starship init fish | source を自動追加
   };
 }
