@@ -1,3 +1,6 @@
+# OMC / Claude Code の作業ファイル
+.omc/
+
 # Nix ビルド成果物
 result
 result-*
