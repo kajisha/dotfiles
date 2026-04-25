@@ -1,0 +1,21 @@
+# Nix ビルド成果物
+result
+result-*
+
+# home-manager の世代シンボリックリンク
+/gcroots/
+
+# エディタ
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# バックアップ
+*.bak
+*.backup
+chezmoi-backup-*.tar.gz
