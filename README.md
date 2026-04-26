@@ -19,7 +19,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 ### 2. このリポジトリをクローン
 
 ```bash
-git clone <YOUR_REPO_URL> ~/dotfiles
+git clone git@github.com:kajisha/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
