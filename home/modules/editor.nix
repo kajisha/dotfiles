@@ -38,7 +38,10 @@
 
       vim.g.mapleader = " "
 
-      -- TODO: 既存の init.lua の設定をここに移植してください
+      -- 既存の lua/ 以下の設定を読み込む
+      require('opt')
+      require('keymap')
+      require('plugins')
     '';
   };
 }
