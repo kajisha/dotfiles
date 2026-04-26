@@ -30,10 +30,10 @@
     # ---- 言語ランタイム ----------------------------------------
     go          # Go（GOPATH は sessionVariables で設定）
     lua5_4      # Lua 5.4
-    nodejs_20   # Node.js 20 LTS
+    nodejs_24   # Node.js 24 LTS
     pnpm        # Node パッケージマネージャ
-    python313   # Python 3.13
-    ruby_3_3    # Ruby 3.3
+    # python313 は下の withPackages 版で提供
+    ruby_3_4    # Ruby 3.4
     rustup      # Rust ツールチェーン管理（rustc / cargo を内包）
 
     # ---- クラウド・DevOps -------------------------------------
@@ -44,16 +44,33 @@
     # ---- 開発ツール --------------------------------------------
     ghq     # Git リポジトリ管理
     opam    # OCaml パッケージマネージャ
-  ];
 
-  # ---- eza (ls 代替) ------------------------------------------
-  programs.eza = {
-    enable                = true;
-    enableFishIntegration = true;
-    icons                 = "auto";
-    git                   = true;
-    extraOptions          = [ "--group-directories-first" "--long" ];
-  };
+    # ---- AI コーディングエージェント ---------------------------
+    codex       # OpenAI Codex CLI
+    gemini-cli  # Google Gemini CLI
+
+    # ---- mise default-npm-packages から移行 -----------------
+    typescript          # tsc
+    fx                  # JSON viewer
+    biome               # @biomejs/biome
+    tsx                 # TypeScript 実行ツール
+
+    # ---- mise default-cargo-crates から移行 -----------------
+    cargo-edit          # cargo add / rm / upgrade
+    tree-sitter         # tree-sitter-cli
+    mise                # rtx-cli の後継 (プロジェクト固有ツール用)
+    # ripgrep / fd は上記で設定済み
+
+    # ---- mise default-gems から移行 -------------------------
+    solargraph          # Ruby LSP
+    rubyPackages.standard  # Ruby リンタ
+    # neovim gem は withRuby = false なので不要
+
+    # ---- mise default-python-packages から移行 ---------------
+    (python313.withPackages (ps: with ps; [ sqlparse ]))
+    # neovim は withPython3 = false なので不要
+    # awscli は上記 awscli2 で代用
+  ];
 
   # ---- tmux（ターミナルマルチプレクサ）-----------------------
   programs.tmux = {
