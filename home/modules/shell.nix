@@ -18,10 +18,15 @@
       gp  = "git push";
       gl  = "git log --oneline --graph --decorate";
       cat = "bat --paging=never";
-      ls  = "eza";
     };
 
     interactiveShellInit = ''
+      # Nix profile bin（home-manager 管理ツール: bat, eza, mise, direnv 等）
+      # WSL の継承 PATH では追加されないため、対話シェルで先頭に追加する
+      if test -d $HOME/.nix-profile/bin
+        fish_add_path -gp $HOME/.nix-profile/bin
+      end
+
       # GPG / SSH エージェント
       set -gx GPG_TTY (tty)
       if command -q gpgconf
@@ -49,7 +54,7 @@
   # ---- direnv（.envrc 自動読み込み）---------------------------
   programs.direnv = {
     enable                = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false;  # fish では hang するため無効化
     nix-direnv.enable     = true;
   };
 
