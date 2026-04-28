@@ -74,7 +74,6 @@
     # ---- Homebrew から移行 ----------------------------------
     aws-sam-cli       # AWS SAM CLI
     azure-cli         # Azure CLI
-    chezmoi           # dotfiles 管理（移行期間用、最終的には不要）
     cmake             # ビルドシステム
     ninja             # 高速ビルドシステム
     automake          # autotools
@@ -89,7 +88,6 @@
     sox               # 音声変換
     tig               # Git TUI
     watch             # 定期コマンド実行
-    yadm              # Yet Another Dotfiles Manager
     # mactop は nixpkgs 側のパッケージ定義に HOME 不備があり sandbox で失敗するため Homebrew のまま
 
     # ---- フォント（Homebrew cask から移行）------------------
