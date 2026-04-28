@@ -33,7 +33,13 @@
           pkgs = import nixpkgs {
             inherit system;
             # neovim nightly overlay: pkgs.neovim を nightly ビルドに差し替える
-            overlays = [ neovim-nightly-overlay.overlays.default ];
+            overlays = [
+              neovim-nightly-overlay.overlays.default
+              # direnv の test-zsh が macOS sandbox で hang する既知問題回避
+              (final: prev: {
+                direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
+              })
+            ];
             config.allowUnfree = true;  # codeql / _1password-cli 等
           };
         in
@@ -64,6 +70,13 @@
           system        = "aarch64-darwin";
           username      = "hiroshi";
           homeDirectory = "/Users/hiroshi";
+          modules       = [ ./home/common.nix ./home/darwin.nix ];
+        };
+
+        "h.kajisha@mac-arm" = mkHomeConfig {
+          system        = "aarch64-darwin";
+          username      = "h.kajisha";
+          homeDirectory = "/Users/h.kajisha";
           modules       = [ ./home/common.nix ./home/darwin.nix ];
         };
 
