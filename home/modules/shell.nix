@@ -5,9 +5,51 @@
 { pkgs, lib, config, ... }:
 
 {
+  # ---- direnv（.envrc 自動読み込み）---------------------------
+  programs.direnv = {
+    enable                = true;
+    enableFishIntegration = false;  # fish では hang するため無効化
+    nix-direnv.enable     = true;
+  };
+
+  # ---- fzf（キーバインドは enableFishIntegration が自動設定）--
+  programs.fzf = {
+    enable                = true;
+    enableFishIntegration = true;  # fzf --fish | source を自動追加（fzf_key_bindings 含む）
+    defaultOptions        = [ "--height 40%" "--border" "--reverse" ];
+  };
+
+  # ---- zoxide（スマートな cd）---------------------------------
+  programs.zoxide = {
+    enable                = true;
+    enableFishIntegration = true;  # zoxide init fish | source を自動追加
+  };
+
+  # ---- starship（プロンプト）----------------------------------
+  programs.starship = {
+    enable                = true;
+    enableFishIntegration = true;  # starship init fish | source を自動追加
+  };
+
   # ---- fish (メインシェル) ------------------------------------
   programs.fish = {
     enable = true;
+
+    loginShellInit = ''
+      # Nix デーモン（nix コマンド本体）の PATH
+      if test -d /nix/var/nix/profiles/default/bin
+        fish_add_path -gp /nix/var/nix/profiles/default/bin
+      end
+      set -gx NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
+      if test -e /etc/ssl/cert.pem
+        set -gx NIX_SSL_CERT_FILE /etc/ssl/cert.pem
+      end
+
+      # home-manager のセッション変数をログインシェルで有効化
+      if test -e $HOME/.nix-profile/etc/profile.d/hm-session-vars.fish
+        source $HOME/.nix-profile/etc/profile.d/hm-session-vars.fish
+      end
+    '';
 
     shellAliases = {
       ll  = "ls -lahF";
@@ -21,8 +63,12 @@
     };
 
     interactiveShellInit = ''
-      # Nix profile bin（home-manager 管理ツール: bat, eza, mise, direnv 等）
-      # WSL の継承 PATH では追加されないため、対話シェルで先頭に追加する
+      # Nix daemon + home-manager profile の PATH
+      # loginShellInit でも設定するが、Linux では対話シェルがログインシェルで
+      # ない場合があるためここでも追加（fish_add_path は重複を自動排除）
+      if test -d /nix/var/nix/profiles/default/bin
+        fish_add_path -gp /nix/var/nix/profiles/default/bin
+      end
       if test -d $HOME/.nix-profile/bin
         fish_add_path -gp $HOME/.nix-profile/bin
       end
@@ -51,29 +97,4 @@
     '';
   };
 
-  # ---- direnv（.envrc 自動読み込み）---------------------------
-  programs.direnv = {
-    enable                = true;
-    enableFishIntegration = false;  # fish では hang するため無効化
-    nix-direnv.enable     = true;
-  };
-
-  # ---- fzf（キーバインドは enableFishIntegration が自動設定）--
-  programs.fzf = {
-    enable                = true;
-    enableFishIntegration = true;  # fzf --fish | source を自動追加（fzf_key_bindings 含む）
-    defaultOptions        = [ "--height 40%" "--border" "--reverse" ];
-  };
-
-  # ---- zoxide（スマートな cd）---------------------------------
-  programs.zoxide = {
-    enable                = true;
-    enableFishIntegration = true;  # zoxide init fish | source を自動追加
-  };
-
-  # ---- starship（プロンプト）----------------------------------
-  programs.starship = {
-    enable                = true;
-    enableFishIntegration = true;  # starship init fish | source を自動追加
-  };
 }

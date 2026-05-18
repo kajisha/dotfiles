@@ -11,14 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # neovim nightly ビルド（ref:master 相当）
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # neovim nightly ソース（ref:master 相当）
+    neovim-src = {
+      url = "github:neovim/neovim";
+      flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-nightly-overlay, ... }:
+  outputs = { self, nixpkgs, home-manager, neovim-src, ... }:
     let
       # ---- ヘルパー関数 ----------------------------------------
       # username / homeDirectory を specialArgs 経由でモジュールに渡す。
@@ -32,9 +32,15 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            # neovim nightly overlay: pkgs.neovim を nightly ビルドに差し替える
+            # neovim-src から neovim-unwrapped をビルドし直す
             overlays = [
-              neovim-nightly-overlay.overlays.default
+              (final: prev: {
+                neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (_old: {
+                  version = "nightly";
+                  src     = neovim-src;
+                  doInstallCheck = false;
+                });
+              })
               # direnv の test-zsh が macOS sandbox で hang する既知問題回避
               (final: prev: {
                 direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
@@ -74,6 +80,14 @@
         };
 
         "h.kajisha@mac-arm" = mkHomeConfig {
+          system        = "aarch64-darwin";
+          username      = "h.kajisha";
+          homeDirectory = "/Users/h.kajisha";
+          modules       = [ ./home/common.nix ./home/darwin.nix ];
+        };
+
+        # home-manager switch --flake . でプロファイルキー省略時に解決されるエイリアス
+        "h.kajisha" = mkHomeConfig {
           system        = "aarch64-darwin";
           username      = "h.kajisha";
           homeDirectory = "/Users/h.kajisha";
