@@ -19,7 +19,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 ### 2. このリポジトリをクローン
 
 ```bash
-git clone git@github.com:kajisha/dotfiles.git ~/dotfiles
+git clone <repository-url> ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -29,7 +29,8 @@ cd ~/dotfiles
 bash scripts/bootstrap.sh
 ```
 
-スクリプトがプラットフォームを検出し、適切なプロファイルで `home-manager switch` を実行する。
+スクリプトがプラットフォームを判定し、利用可能なプロファイルを表示して対話的に `home-manager switch` を実行する。
+自動選択ではなく、番号を選ぶ方式。
 
 ---
 
@@ -45,10 +46,10 @@ dotfiles/
 │   ├── darwin.nix          # macOS 固有
 │   ├── wsl.nix             # WSL2 追加設定
 │   └── modules/
-│       ├── shell.nix       # zsh / fish / direnv / fzf
+│       ├── shell.nix       # fish / direnv / fzf / zoxide / starship
 │       ├── git.nix         # git / gh / delta
 │       ├── editor.nix      # neovim
-│       └── apps.nix        # パッケージ / starship / tmux / bat / eza
+│       └── apps.nix        # パッケージ / tmux / bat / ssh
 ├── scripts/
 │   ├── bootstrap.sh        # 初回セットアップ
 │   └── migrate.sh          # chezmoi からの移行支援
@@ -61,12 +62,13 @@ dotfiles/
 
 | プロファイル | 対象 OS | アーキテクチャ |
 |-------------|---------|--------------|
-| `YOUR_USER@mac-arm` | macOS (M1/M2/M3) | aarch64-darwin |
-| `YOUR_USER@mac-intel` | macOS (Intel) | x86_64-darwin |
-| `YOUR_USER@linux` | Linux (non-NixOS) | x86_64-linux |
-| `YOUR_USER@wsl` | WSL2 | x86_64-linux |
+| `<username>@mac-arm` | macOS (Apple Silicon) | aarch64-darwin |
+| `<username>@mac-intel` | macOS (Intel) | x86_64-darwin |
+| `<username>@linux` | Linux (non-NixOS) | x86_64-linux |
+| `<username>@wsl` | WSL2 | x86_64-linux |
 
-> **TODO**: `flake.nix` と `home/common.nix` の `YOUR_USER` を実際のユーザー名に変更する。
+実際の `homeConfigurations` のキーは `flake.nix` を参照してください。
+このリポジトリでは、`flake.nix` に複数の例示用キーとエイリアスを定義しています。
 
 ---
 
@@ -75,7 +77,7 @@ dotfiles/
 ### 設定を適用する
 
 ```bash
-home-manager switch --flake ~/dotfiles#YOUR_USER@HOSTNAME
+home-manager switch --flake ~/dotfiles#<profile-key>
 ```
 
 ### パッケージを追加する
@@ -94,14 +96,14 @@ home.packages = with pkgs; [
 ```bash
 cd ~/dotfiles
 nix flake update          # flake.lock を更新
-home-manager switch --flake .#YOUR_USER@HOSTNAME
+home-manager switch --flake .#<profile-key>
 ```
 
 ### 前の世代にロールバックする
 
 ```bash
-home-manager generations               # 世代一覧を表示
-home-manager switch --generation 42   # 42 番の世代に戻す
+home-manager generations             # 世代一覧を表示
+home-manager switch --rollback       # 直前の世代に戻す
 ```
 
 ### 古い世代を削除してディスク容量を確保する
@@ -123,7 +125,7 @@ bash scripts/migrate.sh
 
 ## よく使うリソース
 
-- [home-manager オプション検索](https://mipmip.github.io/home-manager-option-search/) — `programs.zsh` などを検索
+- [home-manager オプション検索](https://mipmip.github.io/home-manager-option-search/) — `programs.fish` などを検索
 - [NixOS パッケージ検索](https://search.nixos.org/packages) — パッケージ名を検索
 - [home-manager 公式マニュアル](https://nix-community.github.io/home-manager/)
 - [Zero to Nix](https://zero-to-nix.com/) — Nix 入門ガイド
@@ -135,7 +137,8 @@ bash scripts/migrate.sh
 ### `error: flake 'path:...' does not provide attribute`
 
 プロファイル名が `flake.nix` の `homeConfigurations` キーと一致していない。  
-`whoami` と `hostname -s` でユーザー名・ホスト名を確認し、`flake.nix` を修正する。
+`home-manager switch --flake .#<プロファイル名>` で、`flake.nix` に定義されているキーを指定する。
+`flake.nix` を開いて、対象環境に対応するキー名を確認する。
 
 ### WSL2 でサービスが起動しない
 
@@ -156,4 +159,5 @@ systemd=true
 echo $PATH | tr ':' '\n' | grep nix
 ```
 
-入っていない場合、シェルの設定ファイルに `source ~/.nix-profile/etc/profile.d/hm-session-vars.sh` を追加する。
+入っていない場合、fish では `source ~/.nix-profile/etc/profile.d/hm-session-vars.fish` を確認する。  
+sh/zsh 系のシェルを使っている場合は `source ~/.nix-profile/etc/profile.d/hm-session-vars.sh` を追加する。
