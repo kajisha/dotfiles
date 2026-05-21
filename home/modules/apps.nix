@@ -1,6 +1,85 @@
 # modules/apps.nix — パッケージとアプリケーション設定
 { pkgs, ... }:
 
+let
+  # microsoft/apm — Agent Package Manager (The NPM for AI-Native Development)
+  # nixpkgs 未収録のため公式リリースバイナリ (PyInstaller) を直接パッケージング。
+  # プラットフォーム4種対応: aarch64-darwin / x86_64-darwin / aarch64-linux / x86_64-linux
+  msapm =
+    let
+      version = "0.14.0";
+      platformSrc = {
+        "aarch64-darwin" = {
+          url    = "https://github.com/microsoft/apm/releases/download/v${version}/apm-darwin-arm64.tar.gz";
+          sha256 = "3bb8b7ce7d4fc68646bfbe96c188e3c0cc278bfe066f68fb52e8929fd0da3938";
+        };
+        "x86_64-darwin" = {
+          url    = "https://github.com/microsoft/apm/releases/download/v${version}/apm-darwin-x86_64.tar.gz";
+          sha256 = "3f70f6c0985b344973f5ba6004f0bfc02212e547b95fdce04deb6d8a3ef7ae6d";
+        };
+        "aarch64-linux" = {
+          url    = "https://github.com/microsoft/apm/releases/download/v${version}/apm-linux-arm64.tar.gz";
+          sha256 = "3a8340b02851a94760a449d732e5f417b2ba4409689471302af9c5801851ad72";
+        };
+        "x86_64-linux" = {
+          url    = "https://github.com/microsoft/apm/releases/download/v${version}/apm-linux-x86_64.tar.gz";
+          sha256 = "5ca7853e4b8858272da721e1d68548a6c078f7920487298bef901bd6e709a7d1";
+        };
+      };
+      src = platformSrc.${pkgs.stdenv.hostPlatform.system};
+    in
+    pkgs.stdenv.mkDerivation {
+      pname   = "apm";
+      inherit version;
+
+      src = pkgs.fetchurl { inherit (src) url sha256; };
+
+      dontConfigure = true;
+      dontBuild     = true;
+      dontStrip     = true;
+
+      nativeBuildInputs =
+        [ pkgs.makeWrapper ]
+        ++ pkgs.lib.optionals pkgs.stdenv.isLinux [ pkgs.autoPatchelfHook ];
+
+      # autoPatchelfHook が ELF の rpath を解決するために必要なランタイムライブラリ
+      buildInputs = pkgs.lib.optionals pkgs.stdenv.isLinux [
+        pkgs.stdenv.cc.cc.lib
+        pkgs.zlib
+      ];
+
+      installPhase = ''
+        runHook preInstall
+
+        mkdir -p $out/lib/apm $out/bin
+        cp -r . $out/lib/apm/
+        chmod +x $out/lib/apm/apm
+
+        # PyInstaller の Python.framework は署名が曖昧で macOS の検証に失敗するため除去
+        ${pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+          framework="$out/lib/apm/_internal/Python.framework/Python"
+          if [ -f "$framework" ]; then
+            /usr/bin/codesign --remove-signature "$framework" || true
+          fi
+        ''}
+
+        # PyInstaller が _internal を実行バイナリの隣で探すため、
+        # symlink ではなく makeWrapper (execスクリプト) でラップする
+        makeWrapper $out/lib/apm/apm $out/bin/apm
+
+        runHook postInstall
+      '';
+
+      meta = with pkgs.lib; {
+        description = "Agent Package Manager: The NPM for AI-Native Development";
+        homepage    = "https://github.com/microsoft/apm";
+        license     = licenses.mit;
+        mainProgram = "apm";
+        platforms   = [ "aarch64-darwin" "x86_64-darwin" "aarch64-linux" "x86_64-linux" ];
+      };
+    };
+in
+
 {
   # ---- 環境変数 ------------------------------------------------
   home.sessionVariables = {
@@ -48,6 +127,7 @@
     # ---- AI コーディングエージェント ---------------------------
     codex       # OpenAI Codex CLI
     gemini-cli  # Google Gemini CLI
+    msapm       # Microsoft Agent Package Manager (microsoft/apm)
 
     # ---- mise default-npm-packages から移行 -----------------
     typescript          # tsc
