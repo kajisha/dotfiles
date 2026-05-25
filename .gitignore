@@ -1,5 +1,6 @@
 # OMC / Claude Code の作業ファイル
 .omc/
+.claude/settings.local.json
 
 # Nix ビルド成果物
 result
