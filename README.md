@@ -80,6 +80,24 @@ dotfiles/
 home-manager switch --flake ~/dotfiles#<profile-key>
 ```
 
+### `--flake` を毎回付けずに `home-manager` を使う
+
+`home-manager` CLI は `~/.config/home-manager/flake.nix` を自動検出する。
+このリポジトリをそこにシンボリックリンクしておくと、`--flake` 引数なしでも
+`home-manager news` / `home-manager switch` / `home-manager generations` などが動く。
+
+```bash
+ln -s ~/dotfiles ~/.config/home-manager
+
+# 以降は --flake なしで OK
+home-manager news
+home-manager switch
+```
+
+`scripts/bootstrap.sh` を使うとこのリンクは Step 4.5 で自動的に作成される。
+`flake.nix` に `"h.kajisha"` のようなユーザー名エイリアスを定義しておけば、
+プロファイルキー (`#<name>`) も省略できる。
+
 ### パッケージを追加する
 
 `home/modules/apps.nix` の `home.packages` にパッケージ名を追加して再度 switch する。

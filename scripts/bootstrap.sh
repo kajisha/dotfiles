@@ -108,6 +108,28 @@ if grep -r "CHANGEME_" "$DOTFILES_DIR/flake.nix" "$DOTFILES_DIR/home/" &>/dev/nu
   [[ "$proceed" =~ ^[Yy]$ ]] || exit 0
 fi
 
+# ---- Step 4.5: ~/.config/home-manager シンボリックリンク -------
+# home-manager CLI は ~/.config/home-manager/flake.nix を自動検出する。
+# このリンクを張っておくと `home-manager news` / `home-manager switch` を
+# `--flake` 引数なしで実行できるようになる。
+echo ""
+echo -e "${BOLD}Step 4.5: ~/.config/home-manager リンク${RESET}"
+HM_CFG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/home-manager"
+mkdir -p "$(dirname "$HM_CFG_DIR")"
+if [ -L "$HM_CFG_DIR" ]; then
+  current_target="$(readlink "$HM_CFG_DIR")"
+  if [ "$current_target" = "$DOTFILES_DIR" ]; then
+    success "既に $HM_CFG_DIR → $DOTFILES_DIR のリンクがあります"
+  else
+    warn "$HM_CFG_DIR は別の場所 ($current_target) を指しています。手動で確認してください"
+  fi
+elif [ -e "$HM_CFG_DIR" ]; then
+  warn "$HM_CFG_DIR は通常ファイル/ディレクトリとして存在します。手動で確認してください"
+else
+  ln -s "$DOTFILES_DIR" "$HM_CFG_DIR"
+  success "$HM_CFG_DIR → $DOTFILES_DIR のシンボリックリンクを作成しました"
+fi
+
 # ---- Step 5: home-manager switch ------------------------------
 echo ""
 echo -e "${BOLD}Step 5: home-manager switch${RESET}"
