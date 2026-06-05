@@ -94,6 +94,7 @@
       # source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
       # TODO: その他の設定をここに追記してください
+      direnv hook fish | source
     '';
   };
 
