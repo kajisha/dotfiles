@@ -6,6 +6,7 @@
 {
   # ---- Linux 専用パッケージ ------------------------------------
   home.packages = with pkgs; [
+    ollama     # ローカル LLM (Linux 用)
     pciutils   # lspci
     usbutils   # lsusb
   ];

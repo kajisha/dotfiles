@@ -161,8 +161,6 @@ in
     entr              # ファイル変更で再実行
     ffmpeg            # 動画変換
     glow              # Markdown プレビュー
-    ollama            # ローカル LLM
-    pinentry_mac      # GPG 用パスフレーズ入力 (macOS)
     poppler           # PDF レンダリング
     socat             # ネットワークリレー
     sox               # 音声変換
