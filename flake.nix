@@ -39,6 +39,7 @@
                   version = "nightly";
                   src     = neovim-src;
                   doInstallCheck = false;
+                  patches = [ ]; # パッチを一切適用しない
                   postInstall = (old.postInstall or "") + ''
                     if [ ! -f "$out/share/applications/nvim.desktop" ]; then
                       mkdir -p "$out/share/applications"
