@@ -92,46 +92,15 @@ EOF
       homeConfigurations = {
 
         # ---- macOS (Apple Silicon: M1/M2/M3) --------------------
-        "hiroshi@mac-arm" = mkHomeConfig {
-          system        = "aarch64-darwin";
-          username      = "hiroshi";
-          homeDirectory = "/Users/hiroshi";
-          modules       = [ ./home/common.nix ./home/darwin.nix ];
-        };
-
-        "h.kajisha@mac-arm" = mkHomeConfig {
+        "mac" = mkHomeConfig {
           system        = "aarch64-darwin";
           username      = "h.kajisha";
           homeDirectory = "/Users/h.kajisha";
           modules       = [ ./home/common.nix ./home/darwin.nix ];
-        };
-
-        # home-manager switch --flake . でプロファイルキー省略時に解決されるエイリアス
-        "h.kajisha" = mkHomeConfig {
-          system        = "aarch64-darwin";
-          username      = "h.kajisha";
-          homeDirectory = "/Users/h.kajisha";
-          modules       = [ ./home/common.nix ./home/darwin.nix ];
-        };
-
-        # ---- macOS (Intel) ---------------------------------------
-        "hiroshi@mac-intel" = mkHomeConfig {
-          system        = "x86_64-darwin";
-          username      = "hiroshi";
-          homeDirectory = "/Users/hiroshi";
-          modules       = [ ./home/common.nix ./home/darwin.nix ];
-        };
-
-        # ---- Linux (non-NixOS, x86_64) --------------------------
-        "hiroshi@linux" = mkHomeConfig {
-          system        = "x86_64-linux";
-          username      = "hiroshi";
-          homeDirectory = "/home/hiroshi";
-          modules       = [ ./home/common.nix ./home/linux.nix ];
         };
 
         # ---- WSL2 -----------------------------------------------
-        "hiroshi@Desktop" = mkHomeConfig {
+        "wsl" = mkHomeConfig {
           system        = "x86_64-linux";
           username      = "hiroshi";
           homeDirectory = "/home/hiroshi";
