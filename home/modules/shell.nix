@@ -60,6 +60,8 @@
       gp  = "git push";
       gl  = "git log --oneline --graph --decorate";
       cat = "bat --paging=never";
+      nix-clean = "nix-collect-garbage -d && nix-store --gc && rm -rf ~/.cache/nix";
+      nix-clean-safe = "nix-collect-garbage -d";
     };
 
     interactiveShellInit = ''
