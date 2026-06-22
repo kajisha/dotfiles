@@ -65,6 +65,15 @@ EOF
               (final: prev: {
                 direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
               })
+              # mise の setuid-bit metadata test は Darwin sandbox でも Linux と同様に失敗する
+              (final: prev: {
+                mise = prev.mise.overrideAttrs (old: {
+                  checkFlags = (old.checkFlags or [ ])
+                    ++ prev.lib.optionals prev.stdenv.hostPlatform.isDarwin [
+                      "--skip=oci::layer::tests::preserve_metadata_dir_layer_keeps_special_permission_bits"
+                    ];
+                });
+              })
             ];
             config.allowUnfree = true;  # codeql / _1password-cli 等
           };

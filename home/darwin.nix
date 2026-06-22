@@ -9,6 +9,8 @@
     coreutils   # GNU coreutils (gls, gcat など)
     gnused
     gawk
+    cmux         # Claude Code セッション管理 (macOS のみ)
+    ssm-session-manager-plugin # AWS CLI Session Manager plugin (macOS のみ)
     ollama       # ローカル LLM (macOS では nixpkgs 標準の MLX 有効設定を使う)
     pinentry_mac # GPG 用パスフレーズ入力 (macOS)
   ];
