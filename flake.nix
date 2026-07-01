@@ -11,6 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mac-app-util.url = "github:hraban/mac-app-util";
+
     # neovim nightly ソース（ref:master 相当）
     neovim-src = {
       url = "github:neovim/neovim";
@@ -18,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, neovim-src, ... }:
+  outputs = { self, nixpkgs, home-manager, mac-app-util, neovim-src, ... }:
     let
       # ---- ヘルパー関数 ----------------------------------------
       # username / homeDirectory を specialArgs 経由でモジュールに渡す。
@@ -65,13 +67,23 @@ EOF
               (final: prev: {
                 direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
               })
-              # mise の setuid-bit metadata test は Darwin sandbox でも Linux と同様に失敗する
+              # mise の test suite は Darwin sandbox で hang/fail しやすいため無効化する
               (final: prev: {
                 mise = prev.mise.overrideAttrs (old: {
+                  doCheck = if prev.stdenv.hostPlatform.isDarwin then false else (old.doCheck or true);
                   checkFlags = (old.checkFlags or [ ])
                     ++ prev.lib.optionals prev.stdenv.hostPlatform.isDarwin [
                       "--skip=oci::layer::tests::preserve_metadata_dir_layer_keeps_special_permission_bits"
                     ];
+                });
+              })
+              (final: prev: {
+                cmux = prev.cmux.overrideAttrs (finalAttrs: oldAttrs: {
+                  version = "0.64.17";
+                  src = prev.fetchurl {
+                    url = "https://github.com/manaflow-ai/cmux/releases/download/v${finalAttrs.version}/cmux-macos.dmg";
+                    hash = "sha256-LVdt+sjSY/vDOiRX3JIAhSDffM5KMIC7SZsRwbvKliQ=";
+                  };
                 });
               })
             ];
@@ -105,7 +117,11 @@ EOF
           system        = "aarch64-darwin";
           username      = "h.kajisha";
           homeDirectory = "/Users/h.kajisha";
-          modules       = [ ./home/common.nix ./home/darwin.nix ];
+          modules       = [
+            ./home/common.nix
+            mac-app-util.homeManagerModules.default
+            ./home/darwin.nix
+          ];
         };
 
         # ---- WSL2 -----------------------------------------------

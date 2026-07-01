@@ -34,6 +34,9 @@
   # ---- fish (メインシェル) ------------------------------------
   programs.fish = {
     enable = true;
+    # fish 4.8 no longer ships share/fish/tools/create_manpage_completions.py,
+    # which the current Home Manager module still calls when this is true.
+    generateCompletions = false;
 
     loginShellInit = ''
       # Nix デーモン（nix コマンド本体）の PATH

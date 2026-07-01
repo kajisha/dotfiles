@@ -4,12 +4,19 @@
 { pkgs, ... }:
 
 {
+  # ---- macOS アプリ bundle ------------------------------------
+  # home.packages に含まれる *.app を ~/Applications/Home Manager Apps にリンクする。
+  targets.darwin.linkApps = {
+    enable = true;
+    directory = "Applications/Home Manager Apps";
+  };
+
   # ---- macOS 専用パッケージ ------------------------------------
   home.packages = with pkgs; [
     coreutils   # GNU coreutils (gls, gcat など)
     gnused
     gawk
-    cmux         # Claude Code セッション管理 (macOS のみ)
+    cmux         # Claude Code セッション管理: CLI + cmux.app (macOS のみ)
     ssm-session-manager-plugin # AWS CLI Session Manager plugin (macOS のみ)
     ollama       # ローカル LLM (macOS では nixpkgs 標準の MLX 有効設定を使う)
     pinentry_mac # GPG 用パスフレーズ入力 (macOS)
