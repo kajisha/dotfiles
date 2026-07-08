@@ -16,6 +16,10 @@
     coreutils   # GNU coreutils (gls, gcat など)
     gnused
     gawk
+    colima       # Docker Desktop 代替のローカルコンテナランタイム
+    docker       # Docker CLI
+    docker-compose # Docker Compose v2 plugin
+    docker-buildx  # BuildKit / buildx plugin
     cmux         # Claude Code セッション管理: CLI + cmux.app (macOS のみ)
     ssm-session-manager-plugin # AWS CLI Session Manager plugin (macOS のみ)
     ollama       # ローカル LLM (macOS では nixpkgs 標準の MLX 有効設定を使う)
