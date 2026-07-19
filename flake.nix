@@ -13,6 +13,11 @@
 
     mac-app-util.url = "github:hraban/mac-app-util";
 
+    herdr = {
+      url = "github:ogulcancelik/herdr/v0.7.4";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # neovim nightly ソース（ref:master 相当）
     neovim-src = {
       url = "github:neovim/neovim";
@@ -20,7 +25,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, mac-app-util, neovim-src, ... }:
+  outputs = { self, nixpkgs, home-manager, mac-app-util, herdr, neovim-src, ... }:
     let
       # ---- ヘルパー関数 ----------------------------------------
       # username / homeDirectory を specialArgs 経由でモジュールに渡す。
@@ -36,6 +41,7 @@
             inherit system;
             # neovim-src から neovim-unwrapped をビルドし直す
             overlays = [
+              herdr.overlays.default
               (final: prev: {
                 neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (old: {
                   version = "nightly";
@@ -115,8 +121,8 @@ EOF
         # ---- macOS (Apple Silicon: M1/M2/M3) --------------------
         "mac" = mkHomeConfig {
           system        = "aarch64-darwin";
-          username      = "h.kajisha";
-          homeDirectory = "/Users/h.kajisha";
+          username      = "hiroshi";
+          homeDirectory = "/Users/hiroshi";
           modules       = [
             ./home/common.nix
             mac-app-util.homeManagerModules.default
