@@ -23,3 +23,4 @@ Thumbs.db
 *.bak
 *.backup
 chezmoi-backup-*.tar.gz
+.worktrees/
