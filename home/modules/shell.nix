@@ -31,6 +31,16 @@
     enableFishIntegration = true;  # starship init fish | source を自動追加
   };
 
+  # ---- zsh (macOS のデフォルトシェル) -------------------------
+  programs.zsh = {
+    enable = true;
+    dotDir = config.home.homeDirectory;
+    initContent = lib.mkBefore ''
+      path=("$HOME/.nix-profile/bin" "/nix/var/nix/profiles/default/bin" $path)
+      export PATH
+    '';
+  };
+
   # ---- fish (メインシェル) ------------------------------------
   programs.fish = {
     enable = true;

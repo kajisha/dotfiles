@@ -84,10 +84,13 @@ in
 {
   # ---- 環境変数 ------------------------------------------------
   home.sessionVariables = {
-    GOPATH     = "$HOME/workspace";
-    GOBIN      = "$HOME/workspace/bin";
-    THOR_MERGE = "vimdiff";
+    GOPATH            = "$HOME/workspace";
+    GOBIN             = "$HOME/workspace/bin";
+    NPM_CONFIG_PREFIX = "$HOME/.local";
+    THOR_MERGE        = "vimdiff";
   };
+
+  home.sessionPath = [ "$HOME/.local/bin" ];
 
   # ---- Nix で管理するパッケージ --------------------------------
   home.packages = with pkgs; [
@@ -119,6 +122,7 @@ in
     # ---- クラウド・DevOps -------------------------------------
     awscli2           # AWS CLI v2
     codeql            # GitHub CodeQL 解析エンジン
+    gnupg             # GPG / gpgconf (fish の SSH agent 初期化で使用)
     _1password-cli    # 1Password CLI (op コマンド)
 
     # ---- 開発ツール --------------------------------------------
@@ -126,8 +130,8 @@ in
     opam    # OCaml パッケージマネージャ
 
     # ---- AI コーディングエージェント ---------------------------
-    codex       # OpenAI Codex CLI
     gemini-cli  # Google Gemini CLI
+    herdr       # AI エージェント向けターミナルマルチプレクサ
     msapm       # Microsoft Agent Package Manager (microsoft/apm)
 
     # ---- mise default-npm-packages から移行 -----------------
