@@ -82,15 +82,30 @@ let
 in
 
 {
-  # ---- 環境変数 ------------------------------------------------
-  home.sessionVariables = {
-    GOPATH            = "$HOME/workspace";
-    GOBIN             = "$HOME/workspace/bin";
-    NPM_CONFIG_PREFIX = "$HOME/.local";
-    THOR_MERGE        = "vimdiff";
-  };
-
   home.sessionPath = [ "$HOME/.local/bin" ];
+
+  programs.mise = {
+    enable = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
+
+    globalConfig = {
+      tools = {
+        go = "latest";
+        node = "latest";
+        uv = "latest";
+        ruby = "latest";
+        lua = "latest";
+      };
+
+      env = {
+        GOPATH = "{{env.HOME}}/workspace";
+        GOBIN = "{{env.HOME}}/workspace/bin";
+        NPM_CONFIG_PREFIX = "{{env.HOME}}/.local";
+        THOR_MERGE = "vimdiff";
+      };
+    };
+  };
 
   # ---- Nix で管理するパッケージ --------------------------------
   home.packages = with pkgs; [
@@ -110,13 +125,8 @@ in
     unzip
     zip
 
-    # ---- 言語ランタイム ----------------------------------------
-    go          # Go（GOPATH は sessionVariables で設定）
-    lua5_4      # Lua 5.4
-    nodejs_24   # Node.js 24 LTS
+    # ---- 言語ツール --------------------------------------------
     pnpm        # Node パッケージマネージャ
-    # python313 は下の withPackages 版で提供
-    ruby_3_4    # Ruby 3.4
     rustup      # Rust ツールチェーン管理（rustc / cargo を内包）
 
     # ---- クラウド・DevOps -------------------------------------
@@ -143,18 +153,12 @@ in
     # ---- mise default-cargo-crates から移行 -----------------
     cargo-edit          # cargo add / rm / upgrade
     tree-sitter         # tree-sitter-cli
-    mise                # rtx-cli の後継 (プロジェクト固有ツール用)
     # ripgrep / fd は上記で設定済み
 
     # ---- mise default-gems から移行 -------------------------
     solargraph          # Ruby LSP
     rubyPackages.standard  # Ruby リンタ
     # neovim gem は withRuby = false なので不要
-
-    # ---- mise default-python-packages から移行 ---------------
-    (python313.withPackages (ps: with ps; [ sqlparse ]))
-    # neovim は withPython3 = false なので不要
-    # awscli は上記 awscli2 で代用
 
     # ---- Homebrew から移行 ----------------------------------
     aws-sam-cli       # AWS SAM CLI

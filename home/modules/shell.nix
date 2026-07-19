@@ -5,13 +5,6 @@
 { pkgs, lib, config, ... }:
 
 {
-  # ---- direnv（.envrc 自動読み込み）---------------------------
-  programs.direnv = {
-    enable                = true;
-    enableFishIntegration = false;  # fish では hang するため無効化
-    nix-direnv.enable     = true;
-  };
-
   # ---- fzf（キーバインドは enableFishIntegration が自動設定）--
   programs.fzf = {
     enable                = true;
@@ -109,7 +102,6 @@
       # source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
       # TODO: その他の設定をここに追記してください
-      direnv hook fish | source
     '';
   };
 
