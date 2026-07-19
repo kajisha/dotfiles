@@ -91,7 +91,7 @@ in
 
     globalConfig = {
       tools = {
-        "go" = "latest";
+        go = "latest";
         node = "latest";
         uv = "latest";
         ruby = "latest";
