@@ -69,10 +69,6 @@ EOF
                   '';
                 });
               })
-              # direnv の test-zsh が macOS sandbox で hang する既知問題回避
-              (final: prev: {
-                direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
-              })
               # mise の test suite は Darwin sandbox で hang/fail しやすいため無効化する
               (final: prev: {
                 mise = prev.mise.overrideAttrs (old: {
