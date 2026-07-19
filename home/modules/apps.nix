@@ -91,7 +91,7 @@ in
 
     globalConfig = {
       tools = {
-        go = "latest";
+        "go" = "latest";
         node = "latest";
         uv = "latest";
         ruby = "latest";
@@ -103,6 +103,7 @@ in
         GOBIN = "{{env.HOME}}/workspace/bin";
         NPM_CONFIG_PREFIX = "{{env.HOME}}/.local";
         THOR_MERGE = "vimdiff";
+        RUBY_CONFIGURE_OPTS = "--with-libyaml-include=${pkgs.libyaml.dev}/include --with-libyaml-lib=${pkgs.libyaml}/lib";
       };
     };
   };
@@ -126,6 +127,7 @@ in
     zip
 
     # ---- 言語ツール --------------------------------------------
+    libyaml     # mise 管理 Ruby の psych 拡張ビルドに必要
     pnpm        # Node パッケージマネージャ
     rustup      # Rust ツールチェーン管理（rustc / cargo を内包）
 
