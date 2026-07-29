@@ -4,5 +4,5 @@
 
 ## マシン別設定の使用方法
 
-- `--flake .#mac` で `h.kajisha@mac-arm` の設定を適用
+- `--flake .#mac` で `hiroshi@Mac` の設定を適用
 - `--flake .#wsl` で `hiroshi@Desktop` の設定を適用

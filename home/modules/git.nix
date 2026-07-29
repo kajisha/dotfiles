@@ -9,9 +9,17 @@
     # ---- エイリアス -------------------------------------------
     settings = {
       user = {
-        name  = "Hiroshi Kajisha";
-        email = "kajisha@gmail.com";
+        name       = "Hiroshi Kajisha";
+        email      = "kajisha@users.noreply.github.com";
+        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGI8WeZb3YTksSUq+SNWRlsoghVhHNPVwyaXWZb35KQ";
       };
+
+      gpg = {
+        format = "ssh";
+        ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      };
+
+      commit.gpgsign = true;
 
       alias = {
         st  = "status -sb";
@@ -41,6 +49,9 @@
       diff.algorithm        = "histogram";
       rebase.autosquash     = true;
       rebase.autostash      = true;
+
+      # ghq のチェックアウト先（例: ~/workspace/src/github.com/kajisha/dotfiles）
+      ghq.root = "~/workspace/src";
     };
 
     ignores = [

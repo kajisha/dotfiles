@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hunk = {
+      url = "github:modem-dev/hunk/v0.17.6";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # neovim nightly ソース（ref:master 相当）
     neovim-src = {
       url = "github:neovim/neovim";
@@ -25,7 +30,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, mac-app-util, herdr, neovim-src, ... }:
+  outputs = { self, nixpkgs, home-manager, mac-app-util, herdr, hunk, neovim-src, ... }:
     let
       # ---- ヘルパー関数 ----------------------------------------
       # username / homeDirectory を specialArgs 経由でモジュールに渡す。
@@ -96,7 +101,7 @@ EOF
           inherit pkgs;
           # username と homeDirectory をモジュール側で参照できるようにする
           extraSpecialArgs = { inherit username homeDirectory; };
-          modules = modules;
+          modules = modules ++ [ hunk.homeManagerModules.default ];
         };
 
     in {

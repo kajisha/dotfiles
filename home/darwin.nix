@@ -20,12 +20,87 @@
     docker       # Docker CLI
     docker-compose # Docker Compose v2 plugin
     docker-buildx  # BuildKit / buildx plugin
+    aerospace      # i3-like tiling window manager
     cmux         # Claude Code セッション管理: CLI + cmux.app (macOS のみ)
     slack        # チームコミュニケーション
     ssm-session-manager-plugin # AWS CLI Session Manager plugin (macOS のみ)
     ollama       # ローカル LLM (macOS では nixpkgs 標準の MLX 有効設定を使う)
     pinentry_mac # GPG 用パスフレーズ入力 (macOS)
   ];
+
+  # ---- AeroSpace ------------------------------------------------
+  # Corne で押しやすい単一 Control 中心の操作。Ctrl+J は macSKK と
+  # 競合するため使わない。設定の省略値は AeroSpace の上流既定に従う。
+  xdg.configFile."aerospace/aerospace.toml".text = ''
+    config-version = 2
+    start-at-login = true
+
+    default-root-container-layout = 'tiles'
+    default-root-container-orientation = 'auto'
+    accordion-padding = 0
+    persistent-workspaces = ['1', '2', '3', '4', '5', '7', '8', '9']
+
+    on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+    gaps.inner.horizontal = 0
+    gaps.inner.vertical = 0
+    gaps.outer.left = 0
+    gaps.outer.bottom = 0
+    gaps.outer.top = 0
+    gaps.outer.right = 0
+
+    [workspace-to-monitor-force-assignment]
+    7 = 'JAPANNEXT MNT'
+    8 = 'JAPANNEXT MNT'
+    9 = 'JAPANNEXT MNT'
+
+    [mode.main.binding]
+    ctrl-h = 'focus left'
+    ctrl-k = 'focus up'
+    ctrl-n = 'focus down'
+    ctrl-l = 'focus right'
+
+    ctrl-shift-h = 'move left'
+    ctrl-shift-k = 'move up'
+    ctrl-shift-n = 'move down'
+    ctrl-shift-l = 'move right'
+
+    ctrl-slash = 'layout tiles horizontal vertical'
+    ctrl-minus = 'resize smart -50'
+    ctrl-equal = 'resize smart +50'
+
+    ctrl-1 = 'workspace 1'
+    ctrl-2 = 'workspace 2'
+    ctrl-3 = 'workspace 3'
+    ctrl-4 = 'workspace 4'
+    ctrl-5 = 'workspace 5'
+    ctrl-7 = 'workspace 7'
+    ctrl-8 = 'workspace 8'
+    ctrl-9 = 'workspace 9'
+
+    ctrl-shift-1 = 'move-node-to-workspace 1'
+    ctrl-shift-2 = 'move-node-to-workspace 2'
+    ctrl-shift-3 = 'move-node-to-workspace 3'
+    ctrl-shift-4 = 'move-node-to-workspace 4'
+    ctrl-shift-5 = 'move-node-to-workspace 5'
+    ctrl-shift-7 = 'move-node-to-workspace 7'
+    ctrl-shift-8 = 'move-node-to-workspace 8'
+    ctrl-shift-9 = 'move-node-to-workspace 9'
+
+    ctrl-tab = 'workspace-back-and-forth'
+    ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    ctrl-shift-semicolon = 'mode service'
+
+    [mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
+    f = ['layout floating tiling', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+    h = ['join-with left', 'mode main']
+    k = ['join-with up', 'mode main']
+    n = ['join-with down', 'mode main']
+    l = ['join-with right', 'mode main']
+  '';
 
   # ---- macSKK 辞書 ---------------------------------------------
   # macSKK は App Sandbox 内の実ファイルを読むため、Nix store への

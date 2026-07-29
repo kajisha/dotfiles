@@ -1,5 +1,5 @@
 # modules/apps.nix — パッケージとアプリケーション設定
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   # microsoft/apm — Agent Package Manager (The NPM for AI-Native Development)
@@ -107,6 +107,34 @@ in
       };
     };
   };
+
+  # Home Manager normally links this file into the read-only Nix store.
+  # Replace that link after activation so mise can update the config in place.
+  xdg.configFile."mise/config.toml".force = true;
+  home.activation.makeMiseConfigWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mise_config="${config.xdg.configHome}/mise/config.toml"
+    if [[ -L "$mise_config" ]]; then
+      ${pkgs.coreutils}/bin/cp -L "$mise_config" "$mise_config.tmp"
+      ${pkgs.coreutils}/bin/mv -f "$mise_config.tmp" "$mise_config"
+    fi
+    if [[ -e "$mise_config" ]]; then
+      ${pkgs.coreutils}/bin/chmod u+w "$mise_config"
+    fi
+  '';
+
+  # ---- Herdr -----------------------------------------------------
+  # iTerm2 remains the terminal emulator. Herdr owns persistent panes
+  # and reports Codex / Claude Code state inside the terminal.
+  xdg.configFile."herdr/config.toml".text = ''
+    [ui]
+    show_agent_labels_on_pane_borders = true
+
+    [session]
+    resume_agents_on_restore = true
+  '';
+
+  # ---- Hunk ------------------------------------------------------
+  programs.hunk.enable = true;
 
   # ---- Nix で管理するパッケージ --------------------------------
   home.packages = with pkgs; [

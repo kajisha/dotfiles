@@ -1,47 +1,22 @@
 # modules/editor.nix — エディタ設定（Neovim）
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  programs.neovim = {
-    enable        = true;
-    defaultEditor = true;
-    vimAlias      = true;
-    viAlias       = true;
-    withPython3   = false;  # 新デフォルト（警告回避）
-    withRuby      = false;  # 新デフォルト（警告回避）
+  home.packages = with pkgs; [
+    neovim
+    ripgrep
+    fd
+  ];
 
-    extraPackages = with pkgs; [
-      ripgrep
-      fd
-    ];
+  home.shellAliases = {
+    vim = "nvim";
+    vi = "nvim";
+  };
 
-    plugins = with pkgs.vimPlugins; [
-      # TODO: 使っているプラグインを列挙
-    ];
-
-    # home-manager master では initLua に改名された
-    initLua = ''
-      vim.opt.number         = true
-      vim.opt.relativenumber = true
-      vim.opt.expandtab      = true
-      vim.opt.tabstop        = 2
-      vim.opt.shiftwidth     = 2
-      vim.opt.smartindent    = true
-      vim.opt.wrap           = false
-      vim.opt.termguicolors  = true
-      vim.opt.mouse          = "a"
-      vim.opt.clipboard      = "unnamedplus"
-      vim.opt.ignorecase     = true
-      vim.opt.smartcase      = true
-      vim.opt.splitbelow     = true
-      vim.opt.splitright     = true
-
-      vim.g.mapleader = " "
-
-      -- 既存の lua/ 以下の設定を読み込む
-      require('opt')
-      require('keymap')
-      require('plugins')
-    '';
+  # Neovim の Lua 設定と lazy.nvim のプラグイン定義を、一つの構成として管理する。
+  home.file.".config/nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/dotfiles/dot_config/nvim";
+    force = true;
   };
 }
