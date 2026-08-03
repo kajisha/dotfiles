@@ -1,9 +1,21 @@
 # darwin.nix — macOS 固有の設定
 # nix-darwin を使わない standalone home-manager 構成。
 # username / homeDirectory は flake.nix → common.nix で設定済みのため、ここでは不要。
-{ pkgs, lib, ... }:
+{ pkgs, lib, homeDirectory, ... }:
 
-{
+let
+  localMemoryDir = "${homeDirectory}/mem0-deploy";
+  plistFormat = pkgs.formats.plist { };
+  startLocalMemoryMcp = pkgs.writeShellScript "start-local-memory-mcp" ''
+    until ${pkgs.curl}/bin/curl --fail --silent --max-time 2 \
+      http://127.0.0.1:11434/api/tags >/dev/null; do
+      sleep 2
+    done
+
+    exec ${localMemoryDir}/.venv/bin/python \
+      ${localMemoryDir}/src/local_mcp_server.py
+  '';
+in {
   # ---- macOS アプリ bundle ------------------------------------
   # home.packages に含まれる *.app を ~/Applications/Home Manager Apps にリンクする。
   targets.darwin.linkApps = {
@@ -27,6 +39,44 @@
     ollama       # ローカル LLM (macOS では nixpkgs 標準の MLX 有効設定を使う)
     pinentry_mac # GPG 用パスフレーズ入力 (macOS)
   ];
+
+  # ---- Local Mem0 ------------------------------------------------
+  # Local Mem0 は起動時に Ollama のモデル一覧へ接続するため、Ollama を
+  # LaunchAgent として常駐させ、MCP 側は readiness を待ってから起動する。
+  home.file."Library/LaunchAgents/ai.ollama.local.plist".source =
+    plistFormat.generate "ai.ollama.local.plist" {
+      Label = "ai.ollama.local";
+      ProgramArguments = [
+        "${pkgs.ollama}/bin/ollama"
+        "serve"
+      ];
+      EnvironmentVariables = {
+        HOME = homeDirectory;
+        OLLAMA_HOST = "127.0.0.1:11434";
+      };
+      RunAtLoad = true;
+      KeepAlive = true;
+      ProcessType = "Background";
+      StandardOutPath = "${homeDirectory}/Library/Logs/ollama.out.log";
+      StandardErrorPath = "${homeDirectory}/Library/Logs/ollama.err.log";
+    };
+
+  home.file."Library/LaunchAgents/ai.mem0.local-mcp.plist".source =
+    plistFormat.generate "ai.mem0.local-mcp.plist" {
+      Label = "ai.mem0.local-mcp";
+      ProgramArguments = [ "${startLocalMemoryMcp}" ];
+      WorkingDirectory = localMemoryDir;
+      EnvironmentVariables = {
+        LOCAL_MEM0_DATA_DIR = "${homeDirectory}/.local/share/mem0-oss/personal";
+        LOCAL_MEM0_USER_ID = "hiroshi";
+        MEM0_TELEMETRY = "false";
+      };
+      RunAtLoad = true;
+      KeepAlive = true;
+      ProcessType = "Background";
+      StandardOutPath = "${homeDirectory}/Library/Logs/local-mem0-mcp.out.log";
+      StandardErrorPath = "${homeDirectory}/Library/Logs/local-mem0-mcp.err.log";
+    };
 
   # ---- AeroSpace ------------------------------------------------
   # Corne で押しやすい単一 Control 中心の操作。Ctrl+J は macSKK と

@@ -2,11 +2,11 @@
   description = "Home Manager configuration — multi-platform (Linux / macOS / WSL2)";
 
   inputs = {
-    # nixpkgs のバージョンを固定。安定性重視なら "nixos-24.11" に変更する。
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    # x86_64-darwin も評価する入力があるため、Darwin 対応が残る安定版に固定する。
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       # home-manager が使う nixpkgs を上の inputs と統一する（重要: 二重取得を防ぐ）
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -51,6 +51,7 @@
                 neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (old: {
                   version = "nightly";
                   src     = neovim-src;
+                  doCheck = false;
                   doInstallCheck = false;
                   patches = [ ]; # パッチを一切適用しない
                   postInstall = (old.postInstall or "") + ''
@@ -85,11 +86,48 @@ EOF
                 });
               })
               (final: prev: {
-                cmux = prev.cmux.overrideAttrs (finalAttrs: oldAttrs: {
+                # cmux は nixpkgs 26.05 に未収録のため、公式パッケージ定義を
+                # 小さくバックポートする。
+                cmux = prev.stdenvNoCC.mkDerivation (finalAttrs: {
+                  pname = "cmux";
                   version = "0.64.17";
+
+                  __structuredAttrs = true;
+                  strictDeps = true;
+
                   src = prev.fetchurl {
                     url = "https://github.com/manaflow-ai/cmux/releases/download/v${finalAttrs.version}/cmux-macos.dmg";
                     hash = "sha256-LVdt+sjSY/vDOiRX3JIAhSDffM5KMIC7SZsRwbvKliQ=";
+                  };
+
+                  unpackCmd = "7zz x -snld -xr'!*:com.apple.*' $curSrc";
+                  nativeBuildInputs = [
+                    prev._7zz
+                    prev.makeBinaryWrapper
+                  ];
+                  sourceRoot = ".";
+
+                  installPhase = ''
+                    runHook preInstall
+
+                    mkdir -p $out/Applications $out/bin
+                    cp -R cmux.app $out/Applications/
+                    makeBinaryWrapper \
+                      "$out/Applications/cmux.app/Contents/MacOS/cmux" \
+                      "$out/bin/cmux"
+
+                    runHook postInstall
+                  '';
+
+                  dontFixup = true;
+
+                  meta = {
+                    description = "Native macOS terminal built on Ghostty, designed for AI coding agents";
+                    homepage = "https://cmux.com";
+                    license = prev.lib.licenses.gpl3Plus;
+                    sourceProvenance = with prev.lib.sourceTypes; [ binaryNativeCode ];
+                    mainProgram = "cmux";
+                    platforms = prev.lib.platforms.darwin;
                   };
                 });
               })
