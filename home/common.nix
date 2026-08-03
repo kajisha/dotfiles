@@ -19,6 +19,9 @@
   # アップグレード時は公式ドキュメントに従って段階的に上げる。
   home.stateVersion = "24.11";
 
+  # macOS のログインシェル起動時に "Last login" を表示しない。
+  home.file.".hushlogin".text = "";
+
   # ---- 環境変数 ------------------------------------------------
   home.sessionVariables = {
     EDITOR = "nvim";

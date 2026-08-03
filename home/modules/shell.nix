@@ -41,6 +41,13 @@
     # which the current Home Manager module still calls when this is true.
     generateCompletions = false;
 
+    shellInit = ''
+      # Home Manager の fish integration より先に fzf などを解決できるようにする。
+      if test -d $HOME/.nix-profile/bin
+        fish_add_path --path --prepend $HOME/.nix-profile/bin
+      end
+    '';
+
     loginShellInit = ''
       # Nix デーモン（nix コマンド本体）の PATH
       if test -d /nix/var/nix/profiles/default/bin
@@ -71,6 +78,9 @@
     };
 
     interactiveShellInit = ''
+      # fish の起動時メッセージを表示しない。
+      set -g fish_greeting
+
       # Nix daemon + home-manager profile の PATH
       # loginShellInit でも設定するが、Linux では対話シェルがログインシェルで
       # ない場合があるためここでも追加（fish_add_path は重複を自動排除）
@@ -101,7 +111,11 @@
       # opam (OCaml) — 必要な場合はコメントアウトを外す
       # source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
-      # TODO: その他の設定をここに追記してください
+      # 画面をクリア
+      bind ctrl-l clear
+
+      # zoxide の履歴を fzf で絞り込み、選択したディレクトリへ移動
+      bind ctrl-g __zoxide_zi
     '';
   };
 
