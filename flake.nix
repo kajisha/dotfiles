@@ -46,6 +46,10 @@
             inherit system;
             # neovim-src から neovim-unwrapped をビルドし直す
             overlays = [
+              (import ./nix/security-overlay.nix)
+              # easyOverlay binds bun2nix's helpers to prev, so this must
+              # follow the security overlay to use its patched Bun.
+              hunk.inputs.bun2nix.overlays.default
               herdr.overlays.default
               (final: prev: {
                 neovim-unwrapped = prev.neovim-unwrapped.overrideAttrs (old: {
@@ -139,7 +143,18 @@ EOF
           inherit pkgs;
           # username と homeDirectory をモジュール側で参照できるようにする
           extraSpecialArgs = { inherit username homeDirectory; };
-          modules = modules ++ [ hunk.homeManagerModules.default ];
+          modules = modules ++ [
+            hunk.homeManagerModules.default
+            {
+              # Hunk's flake imports nixpkgs separately, outside our overlays.
+              # Rebuild --compile with the fixed runtime instead of reusing its
+              # upstream package with an embedded vulnerable Bun.
+              programs.hunk.package = (hunk.packages.${system}.default.override {
+                bun = pkgs.bun;
+                bun2nix = pkgs.bun2nix;
+              });
+            }
+          ];
         };
 
     in {
